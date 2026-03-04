@@ -1122,7 +1122,7 @@ function hourToSceneKey(h){
 }
 
 // ════ STATE ════
-let days,tasks,meta,cfg,timerData,gridData,xpData,notes,priorityData;
+let days,tasks,meta,cfg,timerData,gridData,xpData,notes,priorityData,loopData;
 let seaChartData,buffData,unlocksData,achievementsData,missionsData,bossData,freezeData;
 let ambienceNode=null,ambiencePlaying=false,ambienceType="";
 let activeDay=0,editMode=false,currentSection="tasks",statsRange=7;
@@ -1158,6 +1158,7 @@ function load(){
   try{const ms=localStorage.getItem("sp_missions");missionsData=ms?JSON.parse(ms):{date:"",missionId:"",claimed:false};}catch(e){missionsData={date:"",missionId:"",claimed:false};}
   try{const bs=localStorage.getItem("sp_boss");bossData=bs?JSON.parse(bs):{defeated:[],current:0};}catch(e){bossData={defeated:[],current:0};}
   try{const fz=localStorage.getItem("sp_freeze");freezeData=fz?JSON.parse(fz):{tokens:1,lastRefill:"",used:[]};}catch(e){freezeData={tokens:1,lastRefill:"",used:[]};}
+  try{const lp=localStorage.getItem("sp_loop");loopData=lp?JSON.parse(lp):{subjects:[],lastApplied:"",enabled:true};}catch(e){loopData={subjects:[],lastApplied:"",enabled:true};}
 }
 let saveTimer=null;
 function save(){
@@ -1187,6 +1188,7 @@ function saveAchievements(){try{localStorage.setItem("sp_achievements",JSON.stri
 function saveMissions(){try{localStorage.setItem("sp_missions",JSON.stringify(missionsData));}catch(e){}}
 function saveBoss(){try{localStorage.setItem("sp_boss",JSON.stringify(bossData));}catch(e){}}
 function saveFreeze(){try{localStorage.setItem("sp_freeze",JSON.stringify(freezeData));}catch(e){}}
+function saveLoop(){try{localStorage.setItem("sp_loop",JSON.stringify(loopData));}catch(e){}}
 function showSaving(){const el=document.getElementById("save-indicator");if(el)el.innerHTML='<span class="save-dot" style="background:var(--ac);animation:pulse 1s infinite;"></span><span style="font-size:8px;color:var(--ac);letter-spacing:1px;">SAVING…</span>';}
 function showSaved(){const el=document.getElementById("save-indicator");if(el)el.innerHTML='<span class="save-dot" style="background:var(--green);"></span><span style="font-size:8px;color:var(--green);letter-spacing:1px;">SAVED ✓</span>';}
 
@@ -2602,7 +2604,13 @@ function renderMainContent(){
   // Footer
   const hcLabel=cfg.hardcoreMode?"💀 HARDCORE: ON":"☠️ ENABLE HARDCORE";
   const hcClass=cfg.hardcoreMode?" active":"";
-  html+=`<div class="footer"><span>Study Tracker PRO v4 • One Piece ⚓</span>`+`<button class="reset-btn" onclick="resetDayConfirm()">RESET DAY</button>`+`<button class="hc-toggle-btn${hcClass}" onclick="toggleHardcore()">${hcLabel}</button></div>`;
+  const loopEnabled=loopData.enabled;
+  const loopCount=loopData.subjects.length;
+  html+=`<div class="footer"><span>Study Tracker PRO v4 • One Piece ⚓</span>`
+    +`<button class="reset-btn" onclick="resetDayConfirm()">RESET DAY</button>`
+    +`<button class="reset-btn" onclick="resetLoopTasksNow()" style="background:rgba(78,205,196,.12);border:1px solid rgba(78,205,196,.35);color:${loopCount?"var(--teal)":"rgba(255,255,255,.3)"};${!loopCount?"opacity:.5;":""}">🔄 NEW DAY</button>`
+    +`<button class="reset-btn" onclick="toggleLoopEnabled()" style="background:${loopEnabled?"rgba(78,205,196,.15)":"rgba(255,255,255,.05)"};border:1px solid ${loopEnabled?"rgba(78,205,196,.4)":"rgba(255,255,255,.15)"};color:${loopEnabled?"var(--teal)":"rgba(255,255,255,.3)"};" title="${loopEnabled?"Daily loop is ON — click to pause":"Daily loop paused — click to enable"}">${loopEnabled?"🔄 LOOP ON":"⏸ LOOP OFF"}${loopCount?" ("+loopCount+" subjects)":""}</button>`
+    +`<button class="hc-toggle-btn${hcClass}" onclick="toggleHardcore()">${hcLabel}</button></div>`;
   mc.innerHTML=html;
   // Attach long-press priority
   mc.querySelectorAll(".chip[data-tid]").forEach(el=>{
@@ -2626,6 +2634,9 @@ function renderCard(sub,si,day,faded){
   html+=`<button class="play-btn${timerSub===sub&&timerRunning?" running":""}" data-sub="${encodeURIComponent(sub)}" onclick="playSubTimer(decodeURIComponent(this.dataset.sub))">${timerSub===sub&&timerRunning?"⏸ STOP":"▶ TIME"}</button>`;
   if(timerData.totals&&timerData.totals[sub]){html+=`<span class="timer-badge has-time">${fmtMin(timerData.totals[sub])}</span>`;}
   if(editMode)html+=`<button class="card-del-btn" data-sub="${encodeURIComponent(sub)}" onclick="delSub(decodeURIComponent(this.dataset.sub))">🗑</button>`;
+  const isLooped=loopData.subjects.includes(sub);
+  if(editMode)html+=`<button class="card-del-btn" data-sub="${encodeURIComponent(sub)}" onclick="toggleSubjectLoop(decodeURIComponent(this.dataset.sub))" title="${isLooped?'Remove from daily loop':'Set as daily loop'}" style="background:${isLooped?"rgba(78,205,196,.25)":"rgba(255,255,255,.06)"};border-color:${isLooped?"var(--teal)":"rgba(255,255,255,.18)"};color:${isLooped?"var(--teal)":"rgba(255,255,255,.4)"};">🔄</button>`;
+  if(!editMode&&isLooped)html+=`<span style="font-size:8px;color:var(--teal);letter-spacing:1px;padding:2px 6px;background:rgba(78,205,196,.12);border:1px solid rgba(78,205,196,.3);border-radius:6px;">🔄 LOOP</span>`;
   html+="</div></div>";
   html+='<div class="card-tasks">';
   tks.forEach((tk,ti)=>{
@@ -2649,32 +2660,101 @@ function togglePriority(id){priorityData[id]=!priorityData[id];savePriority();re
 // ════ EDIT HELPERS ════
 function startEdit(id){editingTask=id;render();setTimeout(()=>{const el=document.getElementById("edit-chip-"+id);if(el){el.focus();el.select();}},30);}
 let pendingDelete=false;
+// ════ SYNC TODAY → FUTURE DAYS ════
+// When you edit today's tasks, all future days instantly mirror the same structure
+// but stay unchecked so you can tick them when that day comes.
+function syncTodayToFutureDays(){
+  const todayIdx=studyDayNum();
+  if(activeDay!==todayIdx)return; // only sync when editing TODAY
+  const todayDay=days[todayIdx];
+  let synced=0;
+  for(let i=todayIdx+1;i<days.length;i++){
+    const futureDay=days[i];
+    // ── Remove subjects deleted from today ──
+    Object.keys(futureDay.tasks).forEach(sub=>{
+      if(!todayDay.tasks[sub]){delete futureDay.tasks[sub];synced++;}
+    });
+    // ── Sync each subject's task list ──
+    Object.entries(todayDay.tasks).forEach(([sub,todayTasks])=>{
+      if(!futureDay.tasks[sub])futureDay.tasks[sub]=[];
+      const futureTasks=futureDay.tasks[sub];
+      const todayLabels=todayTasks.map(t=>t.l);
+      // Remove tasks deleted from today (only if not already completed in future)
+      futureDay.tasks[sub]=futureTasks.filter(tk=>{
+        if(todayLabels.includes(tk.l))return true;
+        if(tasks[tk.id]===S.D)return true; // keep already-done tasks
+        synced++;return false;
+      });
+      // Add new tasks that exist in today but not in this future day
+      const futureLabelsNow=futureDay.tasks[sub].map(t=>t.l);
+      todayTasks.forEach(tk=>{
+        if(!futureLabelsNow.includes(tk.l)){
+          futureDay.tasks[sub].push({id:uid(),l:tk.l});
+          synced++;
+        }
+      });
+    });
+  }
+  return synced;
+}
+
 function commitEdit(){
   if(!editingTask)return;
-  if(pendingDelete){editingTask=null;return;}// delete button mousedown happened, let click handle it
+  if(pendingDelete){editingTask=null;return;}
   const el=document.getElementById("edit-chip-"+editingTask);if(!el)return;
   const newLabel=el.value.trim();if(!newLabel){editingTask=null;render();return;}
+  const todayIdx=studyDayNum();
   const day=days[activeDay];
-  for(const sub of Object.keys(day.tasks)){const tk=day.tasks[sub].find(t=>t.id===editingTask);if(tk){tk.l=newLabel;break;}}
-  editingTask=null;save();render();
+  let oldLabel="";
+  for(const sub of Object.keys(day.tasks)){const tk=day.tasks[sub].find(t=>t.id===editingTask);if(tk){oldLabel=tk.l;tk.l=newLabel;break;}}
+  // Sync rename to all future days
+  if(activeDay===todayIdx&&oldLabel&&oldLabel!==newLabel){
+    for(let i=todayIdx+1;i<days.length;i++){
+      Object.values(days[i].tasks).forEach(tks=>{
+        const tk=tks.find(t=>t.l===oldLabel);
+        if(tk&&tasks[tk.id]!==S.D)tk.l=newLabel; // rename if not already done
+      });
+    }
+    toast("✏️ Task renamed + synced to all future days!");
+  }
+  editingTask=null;
+  syncTodayToFutureDays();
+  save();render();
 }
 function deleteTask(id,sub){
-  const day=days[activeDay];day.tasks[sub]=(day.tasks[sub]||[]).filter(t=>t.id!==id);
-  editingTask=null;save();render();
+  const day=days[activeDay];
+  day.tasks[sub]=(day.tasks[sub]||[]).filter(t=>t.id!==id);
+  editingTask=null;
+  const n=syncTodayToFutureDays();
+  save();render();
+  if(n>0)toast("🗑️ Task deleted from today + future days synced!");
 }
 function addTask(sub){
   const day=days[activeDay];const newId=uid();
   (day.tasks[sub]=day.tasks[sub]||[]).push({id:newId,l:"New Task"});
   save();editingTask=newId;render();
   setTimeout(()=>{const el=document.getElementById("edit-chip-"+newId);if(el){el.focus();el.select();}},30);
+  // Sync after user finishes typing (commitEdit will handle it)
 }
 function startSubRename(si,sub){editingSub=sub;render();setTimeout(()=>{const el=document.getElementById("sub-rename-"+si);if(el){el.focus();el.select();}},30);}
 function commitSubRename(si,oldSub){
   const el=document.getElementById("sub-rename-"+si);if(!el)return;
   const newSub=el.value.trim();if(!newSub||newSub===oldSub){editingSub=null;render();return;}
+  const todayIdx=studyDayNum();
   const day=days[activeDay];const tasks2=day.tasks[oldSub];delete day.tasks[oldSub];day.tasks[newSub]=tasks2;
   if(timerSub===oldSub)timerSub=newSub;
   if(timerData.totals&&timerData.totals[oldSub]){timerData.totals[newSub]=timerData.totals[oldSub];delete timerData.totals[oldSub];}
+  // Sync subject rename to all future days
+  if(activeDay===todayIdx){
+    for(let i=todayIdx+1;i<days.length;i++){
+      const fd=days[i];
+      if(fd.tasks[oldSub]!==undefined){fd.tasks[newSub]=fd.tasks[oldSub];delete fd.tasks[oldSub];}
+    }
+    // Also update loop tracking
+    const li=loopData.subjects.indexOf(oldSub);
+    if(li>-1){loopData.subjects[li]=newSub;saveLoop();}
+    toast("✏️ Subject renamed + synced to all future days!");
+  }
   editingSub=null;save();render();
 }
 // ════ MOBILE CONFIRM ════
@@ -2722,13 +2802,29 @@ function delSub(sub){
     if(!ok)return;
     const day=days[activeDay];delete day.tasks[sub];
     if(focusSub===sub){focusSub=null;focusActive=false;}
-    save();render();toast(`🗑️ "${sub}" deleted`);
+    const todayIdx=studyDayNum();
+    if(activeDay===todayIdx){
+      // Remove this subject from all future days too
+      for(let i=todayIdx+1;i<days.length;i++){delete days[i].tasks[sub];}
+      const li=loopData.subjects.indexOf(sub);if(li>-1){loopData.subjects.splice(li,1);saveLoop();}
+      save();render();toast(`🗑️ "${sub}" deleted from today + all future days`);
+    } else {
+      save();render();toast(`🗑️ "${sub}" deleted`);
+    }
   });
 }
 function addSub(){
   mobileInput("New subject name:","e.g. Maths","📚").then(name=>{
     if(!name)return;
-    const day=days[activeDay];day.tasks[name]=[];save();render();
+    const todayIdx=studyDayNum();
+    const day=days[activeDay];day.tasks[name]=[];
+    if(activeDay===todayIdx){
+      // Add this subject to all future days too (empty)
+      for(let i=todayIdx+1;i<days.length;i++){if(!days[i].tasks[name])days[i].tasks[name]=[];}
+      save();render();toast(`📚 "${name}" added to today + all future days! Add tasks in EDIT mode.`);
+    } else {
+      save();render();
+    }
   });
 }
 function addDay(){
@@ -3007,6 +3103,61 @@ function pickChar(i){
 }
 function unpinChar(){cfg.pinnedChar=null;applyAccent();saveCfg();renderBgSection();}
 
+// ════ DAILY LOOP SYSTEM ════
+function checkDailyLoopReset(){
+  if(!loopData.enabled||!loopData.subjects.length)return;
+  const todayStr=todayKey();
+  if(loopData.lastApplied===todayStr)return;
+  const dayIdx=studyDayNum();
+  if(dayIdx<0||dayIdx>=days.length)return;
+  const day=days[dayIdx];
+  let count=0;
+  Object.entries(day.tasks).forEach(([sub,tks])=>{
+    if(loopData.subjects.includes(sub)){
+      tks.forEach(tk=>{if(tasks[tk.id]){delete tasks[tk.id];count++;}});
+    }
+  });
+  loopData.lastApplied=todayStr;saveLoop();
+  if(count>0){save();toast("🔄 "+count+" loop tasks reset for new day! Set sail! ⚓");}
+}
+function toggleSubjectLoop(sub){
+  const idx=loopData.subjects.indexOf(sub);
+  if(idx>-1){loopData.subjects.splice(idx,1);toast("❌ "+sub+" removed from daily loop");}
+  else{loopData.subjects.push(sub);toast("🔄 "+sub+" added to daily loop! Tasks reset each new day");}
+  saveLoop();render();
+}
+function resetLoopTasksNow(){
+  if(!loopData.subjects.length){toast("⚠️ No loop subjects set! Enable 🔄 on subjects in EDIT mode.");return;}
+  mobileConfirm("Reset all loop tasks to unchecked? (Simulates a new day)","🔄","RESET").then(ok=>{
+    if(!ok)return;
+    const dayIdx=studyDayNum();
+    if(dayIdx<0||dayIdx>=days.length){toast("⚠️ Not on today's day!");return;}
+    const day=days[dayIdx];
+    let count=0;
+    Object.entries(day.tasks).forEach(([sub,tks])=>{
+      if(loopData.subjects.includes(sub)){tks.forEach(tk=>{if(tasks[tk.id]){delete tasks[tk.id];count++;}});}
+    });
+    // Also clear the day-complete celebration so it can be earned again
+    delete tasks["celebrated_"+day.id];
+    loopData.lastApplied=todayKey();saveLoop();
+    if(count>0){save();render();updateWaveProgress();toast("🔄 "+count+" loop tasks reset! Fresh start! 🏴‍☠️");}
+    else toast("ℹ️ Nothing to reset — tasks are already unchecked!");
+  });
+}
+function toggleLoopEnabled(){
+  loopData.enabled=!loopData.enabled;saveLoop();
+  toast(loopData.enabled?"🔄 Daily Loop ON — tasks auto-reset each day!":"⏸ Daily Loop paused");
+  render();
+}
+function scheduleLoopMidnightCheck(){
+  const now=new Date();
+  const msTill=(new Date(now.getFullYear(),now.getMonth(),now.getDate()+1,0,0,5)-now);
+  setTimeout(()=>{
+    checkDailyLoopReset();render();
+    setInterval(()=>{checkDailyLoopReset();render();},86400000);
+  },msTill);
+}
+
 // ════ INIT ════
 function init(){
   load();
@@ -3027,6 +3178,8 @@ function init(){
   refillStreakFreeze();
   checkCharAutoChange();
   autoGenerateDays();
+  checkDailyLoopReset();
+  scheduleLoopMidnightCheck();
   render();updateRankHUD();updateTimerPanel();
   setInterval(updateBanner,30000);
   setInterval(()=>{checkAchievements();checkBossDefeated();checkIslandUnlock();},60000);
@@ -3093,6 +3246,7 @@ document.addEventListener("visibilitychange",()=>{
   if(document.visibilityState==="visible"){
     if(timerRunning&&timerStart){timerTick();updateBanner();}
     else{restoreLiveTimer();}
+    checkDailyLoopReset();
     // pomodoro removed
   } else if(document.visibilityState==="hidden"){
     if(timerRunning&&timerStart&&timerSub){
