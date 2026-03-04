@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
-<title>Study Tracker PRO v4</title>
+<title>Study Tracker PRO ⚓</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Catamaran:wght@400;600;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <link id="pwa-manifest" rel="manifest"/>
 <style>
@@ -20,7 +20,112 @@ html{height:100%;}
 body{min-height:100%;padding-bottom:80px;color:var(--txt);font-family:var(--font);-webkit-tap-highlight-color:transparent;background:#0a0a18;transition:box-shadow .5s;}
 body.buff-active{animation:buff-pulse 2s ease-in-out infinite;}
 @keyframes buff-pulse{0%,100%{box-shadow:inset 0 0 0 4px rgba(255,215,0,.7),0 0 60px rgba(255,215,0,.4);}50%{box-shadow:inset 0 0 0 4px rgba(255,165,0,.9),0 0 100px rgba(255,165,0,.6);}}
-#scene{position:fixed;inset:0;z-index:0;transition:background 2.5s ease;background:linear-gradient(180deg,#0f172a 0%,#020617 100%);}
+/* ══════════════════════════════════════════════════
+   ONE PIECE SCENE BACKGROUNDS — Rich CSS Art
+   ══════════════════════════════════════════════════ */
+#scene{position:fixed;inset:0;z-index:0;transition:background 2.5s ease,background-image 2.5s ease;}
+
+/* East Blue — Dawn teal ocean */
+body.scene-eb #scene{background:linear-gradient(170deg,#0d4f52 0%,#0d9488 18%,#0e7490 38%,#164e63 62%,#0c2233 82%,#061018 100%);}
+body.scene-eb #scene::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 120% 40% at 50% 0%,rgba(255,220,100,.12) 0%,transparent 60%),radial-gradient(circle at 80% 25%,rgba(255,240,150,.18) 0%,transparent 35%);}
+body.scene-eb #scene::after{content:'☀️';position:absolute;top:8%;right:15%;font-size:48px;filter:drop-shadow(0 0 30px rgba(255,220,80,.8));}
+
+/* Grand Line — Epic red storm */
+body.scene-op #scene{background:linear-gradient(170deg,#7c2d12 0%,#9a3412 15%,#c2410c 28%,#431407 55%,#1c0a09 78%,#0c0609 100%);}
+body.scene-op #scene::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 70%,rgba(255,100,30,.15) 0%,transparent 70%),radial-gradient(circle at 20% 40%,rgba(255,150,50,.1) 0%,transparent 40%);}
+body.scene-op #scene::after{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:repeating-linear-gradient(105deg,transparent 0%,transparent 8%,rgba(255,100,30,.04) 8%,rgba(255,100,30,.04) 9%);}
+
+/* Night Voyage — Deep starry night */
+body.scene-ngt #scene{background:linear-gradient(180deg,#000000 0%,#00020a 20%,#020614 45%,#080c25 68%,#0d0a2e 85%,#06040f 100%);}
+body.scene-ngt #scene::before{content:'🌕';position:absolute;top:6%;right:10%;font-size:64px;filter:drop-shadow(0 0 40px rgba(255,240,100,.6)) drop-shadow(0 0 80px rgba(255,220,80,.3));}
+body.scene-ngt #scene::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% 9%,rgba(255,240,120,.08) 0%,transparent 30%);}
+
+/* Grand Line Storm — Violent purple sky */
+body.scene-gl #scene{background:linear-gradient(180deg,#0f0020 0%,#1a004a 18%,#2e1065 35%,#1a0050 55%,#0a0030 75%,#050010 100%);}
+body.scene-gl #scene::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0%,transparent 15%,rgba(120,50,255,.04) 15%,rgba(120,50,255,.04) 16%);}
+body.scene-gl #scene::after{content:'⚡';position:absolute;top:15%;left:30%;font-size:80px;opacity:.25;filter:blur(1px) drop-shadow(0 0 20px rgba(160,100,255,.8));}
+
+/* Wano Kuni — Crimson samurai night */
+body.scene-wno #scene{background:linear-gradient(180deg,#3a0010 0%,#4a0010 12%,#2d0036 35%,#1c0101 65%,#050000 85%,#030000 100%);}
+body.scene-wno #scene::before{content:'⛩️';position:absolute;bottom:12%;right:6%;font-size:88px;opacity:.18;filter:drop-shadow(0 0 20px rgba(255,50,50,.5));}
+body.scene-wno #scene::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 100% 30% at 50% 100%,rgba(180,0,20,.2) 0%,transparent 60%);}
+
+/* Skypiea — Golden clouds in the sky */
+body.scene-sky #scene{background:linear-gradient(170deg,#2563eb 0%,#3b82f6 18%,#60a5fa 32%,#bfdbfe 50%,#fef9c3 65%,#fde68a 80%,#fbbf24 92%,#d97706 100%);}
+body.scene-sky #scene::before{content:'☀️';position:absolute;top:5%;left:50%;transform:translateX(-50%);font-size:72px;filter:drop-shadow(0 0 40px rgba(255,220,50,.9));}
+body.scene-sky #scene::after{content:'';position:absolute;bottom:25%;left:0;right:0;height:120px;background:linear-gradient(90deg,rgba(255,255,255,.3) 0%,rgba(255,255,255,.5) 25%,rgba(255,255,255,.2) 50%,rgba(255,255,255,.55) 75%,rgba(255,255,255,.25) 100%);border-radius:50%;filter:blur(20px);}
+
+/* Fishman Island — Deep underwater */
+body.scene-fi #scene{background:linear-gradient(180deg,#020015 0%,#0a0040 18%,#1a0a5e 35%,#0f3060 55%,#0a4a7a 70%,#042038 88%,#021020 100%);}
+body.scene-fi #scene::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 80%,rgba(0,100,200,.25) 0%,transparent 60%),radial-gradient(circle at 30% 50%,rgba(0,150,255,.1) 0%,transparent 40%);}
+body.scene-fi #scene::after{content:'🐠';position:absolute;top:30%;right:15%;font-size:40px;opacity:.5;animation:fish-swim 8s ease-in-out infinite alternate;}
+
+/* Marineford — Battle-red war sky */
+body.scene-mf #scene{background:linear-gradient(180deg,#3b0000 0%,#5c0000 15%,#8b0000 30%,#4a0000 55%,#1a0000 78%,#080000 100%);}
+body.scene-mf #scene::before{content:'⚔️';position:absolute;top:10%;left:50%;transform:translateX(-50%);font-size:64px;opacity:.2;filter:drop-shadow(0 0 20px rgba(255,50,50,.8));}
+body.scene-mf #scene::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0%,transparent 20%,rgba(180,0,0,.03) 20%,rgba(180,0,0,.03) 21%);}
+
+/* Whole Cake Island — Pastel candy kingdom */
+body.scene-wci #scene{background:linear-gradient(170deg,#fce7f3 0%,#f9a8d4 15%,#e879f9 30%,#c084fc 50%,#a78bfa 68%,#fda4af 82%,#fde68a 100%);}
+body.scene-wci #scene::before{content:'🎂';position:absolute;top:8%;left:50%;transform:translateX(-50%);font-size:80px;filter:drop-shadow(0 0 30px rgba(249,168,212,.9));}
+body.scene-wci #scene::after{content:'';position:absolute;bottom:10%;left:0;right:0;height:100px;background:linear-gradient(90deg,rgba(255,255,255,.4),rgba(249,168,212,.4),rgba(196,132,252,.4),rgba(255,255,255,.4));border-radius:50%;filter:blur(25px);}
+
+/* Amazon Lily — Lush jungle */
+body.scene-al #scene{background:linear-gradient(170deg,#022c22 0%,#052e16 15%,#14532d 32%,#166534 55%,#15803d 70%,#052e16 88%,#011a0c 100%);}
+body.scene-al #scene::before{content:'🌺';position:absolute;top:15%;right:12%;font-size:64px;opacity:.45;filter:drop-shadow(0 0 20px rgba(244,114,182,.6));}
+body.scene-al #scene::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 100% 40% at 50% 100%,rgba(0,80,20,.4) 0%,transparent 60%);}
+
+/* Alabasta — Blazing desert */
+body.scene-abl #scene{background:linear-gradient(170deg,#92400e 0%,#b45309 18%,#d97706 32%,#b45309 55%,#78350f 75%,#1c0f00 90%,#100800 100%);}
+body.scene-abl #scene::before{content:'☀️';position:absolute;top:5%;left:50%;transform:translateX(-50%);font-size:72px;filter:drop-shadow(0 0 60px rgba(255,150,30,1)) drop-shadow(0 0 120px rgba(255,100,0,.6));}
+body.scene-abl #scene::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(0deg,rgba(200,140,40,.3),transparent);filter:blur(15px);}
+
+/* Thriller Bark — Gothic fog night */
+body.scene-tb #scene{background:linear-gradient(180deg,#030008 0%,#0a001a 22%,#1a0030 42%,#0d001a 65%,#05000c 85%,#000000 100%);}
+body.scene-tb #scene::before{content:'🌕';position:absolute;top:5%;left:50%;transform:translateX(-50%);font-size:88px;filter:drop-shadow(0 0 50px rgba(255,240,100,.5));}
+body.scene-tb #scene::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 8%,rgba(255,240,100,.07) 0%,transparent 40%);}
+
+/* Dressrosa — Fiery colosseum */
+body.scene-dr #scene{background:linear-gradient(170deg,#450a0a 0%,#7f1d1d 20%,#dc2626 35%,#b45309 55%,#92400e 72%,#3b0000 88%,#1c0505 100%);}
+body.scene-dr #scene::before{content:'🌹';position:absolute;top:10%;right:12%;font-size:56px;opacity:.5;filter:drop-shadow(0 0 20px rgba(220,38,38,.8));}
+body.scene-dr #scene::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 60%,rgba(255,80,0,.1) 0%,transparent 60%);}
+
+/* Water 7 — Venice-like waterways */
+body.scene-w7 #scene{background:linear-gradient(170deg,#0c1a3f 0%,#1e3a5f 18%,#1d4ed8 35%,#2563eb 50%,#0369a1 68%,#0c4a6e 85%,#051228 100%);}
+body.scene-w7 #scene::before{content:'🚂';position:absolute;bottom:20%;right:8%;font-size:52px;opacity:.35;filter:drop-shadow(0 0 15px rgba(100,150,255,.6));}
+body.scene-w7 #scene::after{content:'';position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(180deg,transparent,rgba(0,50,150,.4));filter:blur(8px);}
+
+/* Punk Hazard — Split fire and ice */
+body.scene-ph #scene{background:linear-gradient(90deg,#0a1628 0%,#1e3a5f 30%,#0f172a 48%,#450a0a 52%,#7f1d1d 70%,#3b0000 100%);}
+body.scene-ph #scene::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:4px;background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,100,50,.6));box-shadow:0 0 20px rgba(200,200,255,.5),0 0 20px rgba(255,100,50,.5);}
+body.scene-ph #scene::after{content:'🔥';position:absolute;top:15%;right:15%;font-size:64px;opacity:.5;filter:drop-shadow(0 0 30px rgba(255,100,50,.8));}
+
+/* Zou — Living elephant island */
+body.scene-zh #scene{background:linear-gradient(170deg,#022c1e 0%,#064e3b 18%,#065f46 35%,#1a3a1a 60%,#0a1a0a 82%,#040c04 100%);}
+body.scene-zh #scene::before{content:'🐘';position:absolute;bottom:12%;right:5%;font-size:80px;opacity:.2;filter:drop-shadow(0 0 20px rgba(100,200,100,.4));}
+body.scene-zh #scene::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 30% at 50% 100%,rgba(0,100,40,.2) 0%,transparent 60%);}
+
+/* Egghead — Futuristic sci-fi */
+body.scene-eg #scene{background:linear-gradient(170deg,#1e1b4b 0%,#3730a3 20%,#1d4ed8 38%,#0ea5e9 60%,#06b6d4 78%,#0c4a6e 90%,#051228 100%);}
+body.scene-eg #scene::before{content:'🤖';position:absolute;top:10%;right:12%;font-size:64px;opacity:.35;filter:drop-shadow(0 0 30px rgba(14,165,233,.8));}
+body.scene-eg #scene::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0%,transparent 40px,rgba(14,165,233,.02) 40px,rgba(14,165,233,.02) 41px);}
+
+/* Impel Down — Hellish underground prison */
+body.scene-id #scene{background:linear-gradient(180deg,#000000 0%,#1a0000 18%,#5c0000 35%,#8b0000 50%,#3b0000 70%,#0a0000 88%,#000000 100%);}
+body.scene-id #scene::before{content:'🔱';position:absolute;top:8%;left:50%;transform:translateX(-50%);font-size:64px;opacity:.2;filter:drop-shadow(0 0 30px rgba(220,38,38,.8));}
+body.scene-id #scene::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(200,0,0,.06) 0%,transparent 70%);}
+
+/* Sabaody — Bubble-tree grove */
+body.scene-sb #scene{background:linear-gradient(170deg,#0d2c2c 0%,#134e4a 18%,#0d9488 35%,#5b21b6 60%,#3730a3 78%,#1e1b4b 92%,#0c0a1e 100%);}
+body.scene-sb #scene::before{content:'🫧';position:absolute;top:20%;left:20%;font-size:48px;opacity:.4;animation:bubble-float 4s ease-in-out infinite alternate;}
+body.scene-sb #scene::after{content:'🫧';position:absolute;top:40%;right:18%;font-size:36px;opacity:.35;animation:bubble-float 5s ease-in-out infinite alternate-reverse;}
+
+/* Catamaran Dawn — Sunrise at sea */
+body.scene-ct #scene{background:linear-gradient(170deg,#f97316 0%,#fb923c 12%,#fbbf24 25%,#fdba74 40%,#fed7aa 55%,#7dd3fc 75%,#0284c7 88%,#0c4a6e 100%);}
+body.scene-ct #scene::before{content:'⛵';position:absolute;bottom:20%;left:50%;transform:translateX(-50%);font-size:64px;filter:drop-shadow(0 5px 20px rgba(255,150,50,.5));}
+body.scene-ct #scene::after{content:'';position:absolute;top:5%;left:50%;transform:translateX(-50%);width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,rgba(255,220,80,.9),rgba(255,150,50,.5) 40%,transparent 70%);filter:blur(8px);}
+
+@keyframes fish-swim{from{transform:translateX(0) scaleX(1);}to{transform:translateX(-60px) scaleX(-1);}}
 #scene-fx,#scene-mid,#scene-top{position:fixed;inset:0;pointer-events:none;overflow:hidden;}
 #scene-fx{z-index:1;}#scene-mid{z-index:2;}#scene-top{z-index:3;}
 #loading,#app{position:relative;z-index:5;}
@@ -519,8 +624,20 @@ main{max-width:980px;margin:0 auto;padding:16px 16px 60px;position:relative;z-in
 .play-btn.running{background:rgba(78,205,196,.2)!important;border-color:var(--teal)!important;color:var(--teal)!important;box-shadow:0 0 10px rgba(78,205,196,.3)!important;animation:run-pulse 1.5s ease-in-out infinite;}
 @keyframes run-pulse{0%,100%{box-shadow:0 0 8px rgba(78,205,196,.3);}50%{box-shadow:0 0 18px rgba(78,205,196,.6);}}
 
-/* Toast polish */
-#toast{border-radius:14px!important;font-size:12px!important;padding:10px 18px!important;box-shadow:0 8px 30px rgba(0,0,0,.5)!important;}
+/* ── V7 POLISH ── */
+@keyframes card-slide-in{from{opacity:0;transform:translateY(16px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.card{animation:card-slide-in .25s cubic-bezier(.175,.885,.32,1.275) both;}
+.sc-island{transition:transform .25s cubic-bezier(.175,.885,.32,1.275),filter .2s;}
+.sc-island:hover,.sc-island:active{transform:translateY(-8px) scale(1.04)!important;}
+.sc-island.pulsing{animation:island-pulse 2s ease-in-out infinite;}
+@keyframes island-pulse{0%,100%{filter:drop-shadow(0 0 6px rgba(255,50,50,.5));}50%{filter:drop-shadow(0 0 20px rgba(255,50,50,.9));}}
+#sc-outer{background:linear-gradient(180deg,#061428 0%,#071828 40%,#040e1c 100%);}
+#achievements-grid>div{transition:transform .2s,box-shadow .2s;}
+#achievements-grid>div:hover{transform:translateY(-3px);box-shadow:0 4px 16px rgba(0,0,0,.4);}
+.section.active{animation:sec-fade .3s ease both;}
+@keyframes sec-fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+#goal-bar-fill{box-shadow:0 0 8px rgba(78,205,196,.5);}
+#pk-bar{box-shadow:0 0 12px rgba(201,168,76,.6);}
 </style>
 </head>
 <body>
@@ -579,8 +696,6 @@ main{max-width:980px;margin:0 auto;padding:16px 16px 60px;position:relative;z-in
     <div class="banner-block"><div class="banner-label">📅 STUDY DAY</div><div class="banner-val" id="studyday-display"></div></div>
     <div class="banner-divider"></div>
     <div class="banner-block"><div class="banner-label">⏱ TODAY</div><div id="today-time-display" style="font-size:14px;font-weight:700;color:var(--txt2);line-height:1.4;font-family:var(--head);"></div></div>
-    <div class="banner-divider"></div>
-    <div class="banner-block"><div class="banner-label">🕐 CLOCK</div><div id="live-clock">00:00</div></div>
     <div style="margin-left:auto;display:flex;align-items:center;gap:8px;"><div id="save-indicator"><span class="save-dot" style="background:var(--green);"></span><span style="font-size:8px;color:var(--green);letter-spacing:1px;">SAVED</span></div></div>
   </div></div>
   <div id="buff-banner"><div class="buff-banner-inner"><span style="font-size:16px;" id="buff-banner-emoji">🍎</span><span class="buff-banner-txt" id="buff-banner-txt">⚡ DEVIL FRUIT ACTIVE</span><span class="buff-timer" id="buff-timer">30:00</span><span class="buff-banner-txt">— 2× XP</span></div></div>
@@ -589,10 +704,10 @@ main{max-width:980px;margin:0 auto;padding:16px 16px 60px;position:relative;z-in
     <div class="rank-xp-wrap"><div class="bounty-amount" id="bounty-amount">฿0</div><div class="rank-xp-bar-bg"><div class="rank-xp-bar-fill" id="rank-xp-fill" style="width:0%;"></div></div><div class="rank-xp-label" id="rank-xp-label">0 XP</div></div>
     <div style="flex-shrink:0;text-align:center;"><div class="marine-hq">MARINE HEADQUARTERS</div><div class="rank-xp-total" id="rank-xp-total">0 XP</div></div>
   </div></div>
-  <div id="quote-bar" onclick="cycleQuote()"><span id="quote-text"></span><span class="quote-tap-hint">→ tap</span></div>
+  <div id="quote-bar" onclick="cycleQuote()"><span id="quote-char-badge" style="font-size:8px;letter-spacing:1.5px;border:1px solid;padding:2px 7px;border-radius:20px;flex-shrink:0;font-family:var(--font);">GOLD ROGER</span><span id="quote-text"></span><span class="quote-tap-hint">→ tap</span></div>
   <div id="header"><div class="header-inner">
     <div class="header-top">
-      <div style="flex:1;"><div class="brand-title">Study PRO v4 ⚓</div><div class="brand-sub" id="header-date"></div></div>
+      <div style="flex:1;"><div class="brand-title">Study PRO ⚓</div><div class="brand-sub" id="header-date"></div></div>
 
       <div class="ring-wrap"><svg width="50" height="50" viewBox="0 0 56 56"><circle cx="28" cy="28" r="22" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle id="ring-circle" cx="28" cy="28" r="22" fill="none" stroke="var(--ac)" stroke-width="6" stroke-dasharray="138.23" stroke-dashoffset="138.23" stroke-linecap="round" transform="rotate(-90 28 28)" style="transition:stroke-dashoffset .5s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 0 4px var(--ac));"/><text id="ring-text" x="28" y="32" text-anchor="middle" fill="var(--ac)" font-size="10" font-weight="700" font-family="DM Mono">0%</text></svg><span class="ring-label">OVERALL</span></div>
       <button class="icon-btn" id="sound-btn" onclick="toggleSound()">🔊</button>
@@ -602,37 +717,32 @@ main{max-width:980px;margin:0 auto;padding:16px 16px 60px;position:relative;z-in
     <div class="nav-tabs">
       <button class="nav-tab active" onclick="switchSec('tasks',this)">📋 TASKS</button>
       <button class="nav-tab" onclick="switchSec('timer',this)">⏱️ TIMER</button>
+      <button class="nav-tab" onclick="switchSec('missions',this)">⚔️ MISSIONS</button>
       <button class="nav-tab" onclick="switchSec('seachart',this)">🗺️ SEA CHART</button>
-      <button class="nav-tab" onclick="switchSec('stats',this)">📈 STATS</button>
+      <button class="nav-tab" onclick="switchSec('voyage',this)">⚓ VOYAGE</button>
       <button class="nav-tab" onclick="switchSec('backgrounds',this)">🌊 SCENE</button>
     </div>
     <div class="tabs-wrap" id="tabs-wrap"></div>
-    <div class="tabs-wrap" id="subj-tabs-wrap" style="margin-top:4px;"></div>
   </div></div>
   <div id="strip"><div class="strip-inner">
     <div class="strip-bar-wrap"><div class="strip-bar-labels"><span>TODAY'S PROGRESS</span><span id="strip-label" style="color:var(--ac);">0/0 · 0%</span></div><div class="strip-bar"><div class="strip-bar-fill" id="strip-fill" style="width:0%;"></div></div></div>
     <div class="strip-stats"><span style="color:var(--teal);" id="stat-done">✅ 0</span><span style="color:var(--red);" id="stat-skip">❌ 0</span><span style="color:rgba(255,255,255,.3);" id="stat-left">⬜ 0</span></div>
-    <button id="focus-btn" onclick="toggleFocusMode()">🎯 FOCUS</button>
     <span id="edit-badge">✏️ EDIT ON</span>
   </div></div>
   <main>
-    <section id="sec-tasks" class="section active"><div id="main-content"></div></section>
+    <section id="sec-tasks" class="section active"><div id="mini-countdown-bar" style="margin-bottom:8px;"></div><div id="main-content"></div></section>
     <section id="sec-timer" class="section">
-      <div style="display:flex;gap:8px;margin-bottom:12px;"><button class="tbtn primary" id="timer-mode-btn" onclick="toggleTimerMode()">🍅 POMODORO MODE</button></div>
       <div id="regular-timer-section">
         <div class="glass-panel"><div class="timer-hero"><div class="timer-clock" id="timer-clock">00:00:00</div><div class="timer-subject-lbl" id="timer-sub-lbl">NO SUBJECT RUNNING</div><div class="timer-btns"><button class="tbtn primary" onclick="timerStartStop()">⏯ START / PAUSE</button><button class="tbtn danger" onclick="timerReset()">↺ RESET</button></div></div></div>
         <div class="today-total-bar"><span style="font-size:10px;color:var(--txt4);letter-spacing:1px;">⏱ TODAY'S TOTAL STUDY TIME</span><span id="today-total-lbl" style="font-size:16px;font-weight:700;color:var(--ac);font-family:var(--head);">0m</span></div>
+        <div class="glass-panel" style="margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-size:9px;color:var(--txt4);letter-spacing:1px;">🎯 DAILY 16HR GOAL</span><span id="goal-bar-lbl" style="font-size:9px;color:var(--ac);">0% of 16hr goal</span></div>
+          <div style="height:8px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;"><div id="goal-bar-fill" style="height:100%;width:0%;background:linear-gradient(90deg,var(--teal),var(--ac));border-radius:4px;transition:width .5s ease;"></div></div>
+        </div>
         <div class="bar-chart-title" style="margin-bottom:10px;">ALL SUBJECTS</div>
         <div class="timer-grid" id="timer-grid"></div>
         <div class="session-log"><div class="session-log-head">SESSION LOG — LAST 30</div><div id="session-list"></div></div>
       </div>
-      <div id="pomo-section"><div class="glass-panel">
-        <div class="pomo-ring-wrap">
-          <svg class="pomo-ring-svg" width="180" height="180" viewBox="0 0 180 180"><circle cx="90" cy="90" r="78" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="10"/><circle id="pomo-arc" cx="90" cy="90" r="78" fill="none" stroke="var(--ac)" stroke-width="10" stroke-dasharray="490.09" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 90 90)" style="transition:stroke-dashoffset .8s linear;filter:drop-shadow(0 0 8px var(--ac));"/><text id="pomo-time-text" x="90" y="86" text-anchor="middle" fill="var(--ac)" font-size="32" font-weight="900" font-family="Playfair Display">25:00</text><text id="pomo-phase-text" x="90" y="108" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="11" font-family="DM Mono">FOCUS</text></svg>
-          <div class="pomo-dots" id="pomo-dots"></div><div class="pomo-cycle-count" id="pomo-cycle-count">SET 1 — CYCLE 1/4</div>
-        </div>
-        <div class="timer-btns"><button class="tbtn primary" id="pomo-start-btn" onclick="pomoStartStop()">▶ START</button><button class="tbtn danger" onclick="pomoReset()">↺ RESET</button><button class="tbtn" onclick="pomoSkipPhase()">⏭ SKIP</button></div>
-      </div></div>
     </section>
     <section id="sec-seachart" class="section">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
@@ -647,36 +757,83 @@ main{max-width:980px;margin:0 auto;padding:16px 16px 60px;position:relative;z-in
       <div class="glass-panel"><div style="font-size:8px;color:var(--txt5);letter-spacing:2px;margin-bottom:8px;">URGENCY LEGEND</div><div style="display:flex;gap:14px;flex-wrap:wrap;"><span style="font-size:9px;color:#26de81;">● &gt;60d</span><span style="font-size:9px;color:#FFD700;">● 30–60d</span><span style="font-size:9px;color:#FF9F43;">● 15–30d</span><span style="font-size:9px;color:#FF6B6B;">● &lt;15d</span><span style="font-size:9px;color:#ff2020;">● &lt;7d pulse</span><span style="font-size:9px;color:rgba(255,255,255,.3);">🌫 &gt;120d fog</span></div></div>
       <div class="glass-panel" style="margin-top:4px;"><div style="font-size:8px;color:var(--txt5);letter-spacing:2px;margin-bottom:12px;">⚔️ UPCOMING EXAM VOYAGE</div><div id="upcoming-exams-list"></div></div>
     </section>
-    <section id="sec-stats" class="section">
-      <div class="section-title">⚓ VOYAGE ANALYTICS</div>
-      <!-- Range Toggle -->
-      <div class="stats-toggle"><button class="st-btn active" onclick="setStatRange(7,this)">7 DAYS</button><button class="st-btn" onclick="setStatRange(30,this)">30 DAYS</button><button class="st-btn" onclick="setStatRange(90,this)">90 DAYS</button></div>
-      <!-- Summary Cards Row -->
-      <div class="stats-cards" id="stats-cards"></div>
-      <!-- Weekly Summary Banner -->
-      <div class="glass-panel" id="weekly-summary-panel"></div>
-      <!-- SVG Line Chart: Daily Completion -->
-      <div class="glass-panel">
-        <div class="chart-header"><span class="bar-chart-title">📈 DAILY COMPLETION %</span><span class="chart-sub" id="chart-avg-label"></span></div>
-        <div id="line-chart-body"></div>
+    <section id="sec-voyage" class="section">
+      <div class="section-title">⚓ VOYAGE — Stats &amp; Log</div>
+      <!-- Sub-tabs -->
+      <div style="display:flex;gap:6px;margin-bottom:14px;">
+        <button class="st-btn active" id="voy-stats-btn" onclick="switchVoyage('stats',this)">📈 ANALYTICS</button>
+        <button class="st-btn" id="voy-log-btn" onclick="switchVoyage('log',this)">🗓️ DAILY LOG</button>
       </div>
-      <!-- Study Time per Subject -->
-      <div class="glass-panel">
-        <div class="chart-header"><span class="bar-chart-title">⏱ STUDY TIME PER SUBJECT</span></div>
-        <div id="time-bars-body"></div>
+      <!-- STATS panel -->
+      <div id="voy-stats-panel">
+        <div class="stats-toggle"><button class="st-btn active" onclick="setStatRange(7,this)">7 DAYS</button><button class="st-btn" onclick="setStatRange(30,this)">30 DAYS</button><button class="st-btn" onclick="setStatRange(90,this)">90 DAYS</button></div>
+        <div class="stats-cards" id="stats-cards"></div>
+        <div class="glass-panel" id="weekly-summary-panel"></div>
+        <div class="glass-panel">
+          <div class="chart-header"><span class="bar-chart-title">📈 DAILY COMPLETION %</span><span class="chart-sub" id="chart-avg-label"></span></div>
+          <div id="line-chart-body"></div>
+        </div>
+        <div class="glass-panel">
+          <div class="chart-header"><span class="bar-chart-title">⏱ STUDY TIME PER SUBJECT</span></div>
+          <div id="time-bars-body"></div>
+        </div>
+        <div class="glass-panel">
+          <div class="chart-header"><span class="bar-chart-title">📚 SUBJECT COMPLETION RATE</span></div>
+          <div id="subj-bars-body"></div>
+        </div>
+        <div class="glass-panel"><div class="bar-chart-title">🗓 STUDY HEATMAP</div><div id="heatmap-body"></div></div>
       </div>
-      <!-- Subject Completion Rate -->
-      <div class="glass-panel">
-        <div class="chart-header"><span class="bar-chart-title">📚 SUBJECT COMPLETION RATE</span></div>
-        <div id="subj-bars-body"></div>
+      <!-- LOG panel -->
+      <div id="voy-log-panel" style="display:none;">
+        <div class="section-title" style="font-size:15px;margin-bottom:12px;">🗓️ VOYAGE LOG</div>
+        <div id="voyage-log-content"></div>
       </div>
-      <!-- Heatmap -->
-      <div class="glass-panel"><div class="bar-chart-title">🗓 STUDY HEATMAP</div><div id="heatmap-body"></div></div>
+    </section>
+    <section id="sec-missions" class="section">
+      <div class="section-title">⚔️ MISSIONS & ACHIEVEMENTS</div>
+      <!-- Big Exam Countdown -->
+      <div id="big-countdown-panel" class="glass-panel" style="text-align:center;background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(201,168,76,.04));border-color:rgba(201,168,76,.3);"></div>
+      <!-- Today Target vs Actual -->
+      <div class="glass-panel" id="target-actual-panel"></div>
+      <!-- Pirate King Progress -->
+      <div class="glass-panel">
+        <div style="font-size:9px;color:var(--ac);letter-spacing:2px;margin-bottom:8px;">👑 ROAD TO PIRATE KING — 6 MONTH VOYAGE</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+          <span style="font-size:11px;color:var(--txt2);">Day <span id="pk-day">1</span> / 180</span>
+          <div style="flex:1;height:10px;background:rgba(255,255,255,.08);border-radius:5px;overflow:hidden;">
+            <div id="pk-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#C9A84C,#ffd700);border-radius:5px;transition:width .6s ease;box-shadow:0 0 10px rgba(201,168,76,.5);"></div>
+          </div>
+          <span style="font-size:11px;color:var(--ac);font-weight:700;" id="pk-pct">0%</span>
+        </div>
+        <div id="pk-rank-label" style="font-size:9px;color:var(--txt4);letter-spacing:1px;"></div>
+      </div>
+      <!-- Wanted Poster -->
+      <div class="glass-panel" id="wanted-poster-panel"></div>
+      <!-- Daily Mission -->
+      <div class="glass-panel" id="daily-mission-panel"></div>
+      <!-- Streak Freeze -->
+      <div class="glass-panel" id="streak-freeze-panel"></div>
+      <!-- Boss Battle -->
+      <div class="glass-panel" id="boss-battle-panel"></div>
+      <!-- Devil Fruit Shop -->
+      <div class="glass-panel" id="df-shop-panel"></div>
+      <!-- Achievements -->
+      <div class="glass-panel">
+        <div style="font-size:9px;color:var(--txt5);letter-spacing:2px;margin-bottom:12px;">🎖️ ACHIEVEMENTS</div>
+        <div id="achievements-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;"></div>
+      </div>
+      <!-- Poneglyph -->
+      <div class="glass-panel" id="poneglyph-panel"></div>
+      <!-- Ambience Music -->
+      <div class="glass-panel" id="ambience-panel"></div>
+    </section>
+    <section id="sec-log" class="section" style="display:none;">
+      <div id="voyage-log-content-old"></div>
     </section>
     <section id="sec-backgrounds" class="section">
-      <div class="section-title">Scene &amp; Character</div>
+      <div class="section-title">🌊 Scene &amp; Character</div>
       <div class="glass-panel" id="bg-header-panel"></div>
-      <div class="sec-label">🌊 BACKGROUND SCENES</div><div class="bg-grid" id="bg-grid"></div>
+      <div class="sec-label">🌊 BACKGROUND SCENES — AUTO-CHANGES BY HOUR</div><div class="bg-grid" id="bg-grid"></div>
       <div class="sec-label">⚔️ CHARACTER ACCENT — AUTO-CHANGES DAILY</div>
       <div id="char-auto-info" style="margin-bottom:12px;"></div>
       <div class="char-grid" id="char-grid"></div>
@@ -745,11 +902,60 @@ function loadSubjectColors(){
 const ICONS={"N.S":"🔢","G.S":"🌏","Reasoning":"🧠","English":"📝","Maths":"📐","Science / C.A":"🔬"};
 const S={P:"p",D:"d",X:"x"};
 const RANKS=[
-  {name:"Cabin Boy",xp:0,emoji:"⚓"},{name:"Deckhand",xp:100,emoji:"🪢"},{name:"Helmsman",xp:250,emoji:"🧭"},
-  {name:"First Mate",xp:500,emoji:"⚔️"},{name:"Ship Captain",xp:900,emoji:"🚢"},{name:"Warlord of the Sea",xp:1500,emoji:"🏴‍☠️"},
-  {name:"Yonko Commander",xp:2500,emoji:"👥"},{name:"Emperor",xp:4000,emoji:"👑"},{name:"PIRATE KING",xp:6000,emoji:"🏆"},
+  {name:"Cabin Boy",xp:0,emoji:"⚓"},{name:"Deckhand",xp:500,emoji:"🪢"},{name:"Helmsman",xp:1200,emoji:"🧭"},
+  {name:"First Mate",xp:2500,emoji:"⚔️"},{name:"Ship Captain",xp:4000,emoji:"🚢"},{name:"Warlord of the Sea",xp:6500,emoji:"🏴‍☠️"},
+  {name:"Yonko Commander",xp:9500,emoji:"👥"},{name:"Emperor",xp:13000,emoji:"👑"},{name:"PIRATE KING",xp:17000,emoji:"🏆"},
 ];
-const MILESTONES={10:{name:"Day 10 — First Step!",icon:"🏅"},25:{name:"Day 25 — Quarter Way!",icon:"🏅"},50:{name:"Day 50 — Halfway!",icon:"🏅"},75:{name:"Day 75 — Almost There!",icon:"🏅"},100:{name:"Day 100 — LEGEND!",icon:"🏆"}};
+const MILESTONES={10:{name:"Day 10 — First Step!",icon:"🏅"},25:{name:"Day 25 — Quarter Way!",icon:"🏅"},50:{name:"Day 50 — Halfway!",icon:"🏅"},75:{name:"Day 75 — Almost There!",icon:"🏅"},100:{name:"Day 100 — LEGEND!",icon:"🏆"},180:{name:"Day 180 — PIRATE KING!",icon:"👑"}};
+const ACHIEVEMENTS=[
+  {id:"first_task",name:"First Step",desc:"Complete your first task",icon:"🌊",check:()=>xpData.total>=2},
+  {id:"streak_3",name:"3 Day Streak",desc:"Study 3 days in a row",icon:"🔥",check:()=>streakCount()>=3},
+  {id:"streak_7",name:"Week Warrior",desc:"7 day streak",icon:"⚔️",check:()=>streakCount()>=7},
+  {id:"streak_30",name:"Iron Will",desc:"30 day streak",icon:"💎",check:()=>streakCount()>=30},
+  {id:"tasks_50",name:"Task Hunter",desc:"Complete 50 tasks",icon:"🎯",check:()=>getTotalDone()>=50},
+  {id:"tasks_200",name:"Task Master",desc:"Complete 200 tasks",icon:"🏆",check:()=>getTotalDone()>=200},
+  {id:"tasks_500",name:"Nakama",desc:"Complete 500 tasks",icon:"🏴‍☠️",check:()=>getTotalDone()>=500},
+  {id:"study_1hr",name:"Early Bird",desc:"Study 1hr in a day",icon:"⏱️",check:()=>todayStudySecs()>=3600},
+  {id:"study_8hr",name:"Half Day",desc:"Study 8hrs in a day",icon:"📚",check:()=>todayStudySecs()>=28800},
+  {id:"study_16hr",name:"Gear 5",desc:"Hit 16hr daily goal!",icon:"⚡",check:()=>todayStudySecs()>=57600},
+  {id:"xp_1000",name:"Rising Pirate",desc:"Earn 1000 XP",icon:"💰",check:()=>xpData.total>=1000},
+  {id:"xp_5000",name:"Warlord",desc:"Earn 5000 XP",icon:"⚔️",check:()=>xpData.total>=5000},
+  {id:"xp_17000",name:"Pirate King",desc:"Reach max rank!",icon:"👑",check:()=>xpData.total>=17000},
+  {id:"day_complete",name:"Perfect Day",desc:"Complete all tasks in a day",icon:"✅",check:()=>false},// set dynamically
+  {id:"devil_fruit",name:"Devil Fruit",desc:"Find your first Devil Fruit",icon:"🍎",check:()=>buffData.active||false},
+];
+const DAILY_MISSIONS=[
+  {id:"m1",desc:"Complete 5 tasks today",icon:"📋",target:5,type:"tasks",reward:15},
+  {id:"m2",desc:"Complete 10 tasks today",icon:"⚡",target:10,type:"tasks",reward:25},
+  {id:"m3",desc:"Study for 2 hours today",icon:"⏱️",target:7200,type:"timer",reward:20},
+  {id:"m4",desc:"Study for 4 hours today",icon:"🔥",target:14400,type:"timer",reward:35},
+  {id:"m5",desc:"Study for 8 hours today",icon:"💪",target:28800,type:"timer",reward:60},
+  {id:"m6",desc:"Complete all tasks in one subject",icon:"📚",target:1,type:"subject_complete",reward:20},
+  {id:"m7",desc:"Get a 3+ day streak",icon:"🌊",target:3,type:"streak",reward:30},
+  {id:"m8",desc:"Complete 15 tasks today",icon:"🏴‍☠️",target:15,type:"tasks",reward:40},
+];
+const BOSS_BATTLES=[
+  {name:"Arlong",emoji:"🦈",week:1,desc:"Complete 70% of tasks this week",target:70,type:"weekly_pct",reward:100},
+  {name:"Crocodile",emoji:"🏜️",week:2,desc:"Study 30hrs this week",target:108000,type:"weekly_timer",reward:120},
+  {name:"Enel",emoji:"⚡",week:3,desc:"Complete 80% of tasks this week",target:80,type:"weekly_pct",reward:150},
+  {name:"Rob Lucci",emoji:"🐆",week:4,desc:"Study 40hrs this week",target:144000,type:"weekly_timer",reward:180},
+  {name:"Moria",emoji:"👻",week:5,desc:"Complete 90% of tasks this week",target:90,type:"weekly_pct",reward:200},
+  {name:"Kizaru",emoji:"💡",week:6,desc:"7 day streak",target:7,type:"streak",reward:250},
+  {name:"Akainu",emoji:"🌋",week:7,desc:"Study 50hrs this week",target:180000,type:"weekly_timer",reward:300},
+  {name:"Big Mom",emoji:"🎂",week:8,desc:"Complete 100% tasks for 3 days",target:3,type:"perfect_days",reward:350},
+  {name:"Kaido",emoji:"🐉",week:12,desc:"Study 16hrs/day for 5 days",target:5,type:"goal_days",reward:500},
+  {name:"Im-sama",emoji:"👑",week:24,desc:"Reach Emperor rank",target:13000,type:"xp",reward:1000},
+];
+const PONEGLYPHS=[
+  {id:"p1",xp:500,text:"\"The will of D. carries on. Those who seek knowledge never truly stop.\""},
+  {id:"p2",xp:1200,text:"\"Joy Boy made a promise to this land. Your promise is to your future self.\""},
+  {id:"p3",xp:2500,text:"\"The Void Century holds secrets. Your study log holds yours — never miss a day.\""},
+  {id:"p4",xp:4000,text:"\"The Ancient Weapons sleep. Your potential is the greatest weapon of all.\""},
+  {id:"p5",xp:6500,text:"\"Im sits on the Empty Throne. The throne of your exam awaits only you.\""},
+  {id:"p6",xp:9500,text:"\"Laugh Tale is real. So is your goal. Keep sailing.\""},
+  {id:"p7",xp:13000,text:"\"The One Piece exists. And so does your success — at the end of 180 days.\""},
+  {id:"p8",xp:17000,text:"\"I'm not going to be the one who finds it. You already did. — Roger\""},
+];
 const CHARS=[
   {name:"Gold Roger",color:"#C9A84C",emoji:"👑",unlockXP:0,quote:"Inherited will, the destiny of the age — these will not be stopped."},
   {name:"Luffy",color:"#FF6B6B",emoji:"🍖",unlockXP:0,quote:"I'm going to be King of the Pirates!"},
@@ -771,6 +977,19 @@ const DEVIL_FRUITS=[
   {name:"Hie Hie no Mi",effect:"Ice Power"},{name:"Ope Ope no Mi",effect:"Room Ability"},
   {name:"Gura Gura no Mi",effect:"Tremor Power"},{name:"Yami Yami no Mi",effect:"Dark Force"},
   {name:"Pika Pika no Mi",effect:"Light Speed"},{name:"Magu Magu no Mi",effect:"Magma Body"},
+];
+const DF_SHOP=[
+  {id:"xp2x",name:"2× XP Boost",icon:"⚡",desc:"Double XP for 1 hour",cost:50,effect:"xp2x",duration:3600000},
+  {id:"freeze_extra",name:"Extra Freeze Token",icon:"❄️",desc:"Get 1 extra streak freeze",cost:80,effect:"freeze"},
+  {id:"skip_forgive",name:"Skip Forgive",icon:"🏳️",desc:"Remove 3 skip marks from today",cost:60,effect:"skip_forgive"},
+  {id:"bounty_boost",name:"Bounty Boost",icon:"💰",desc:"Add 500 XP instantly",cost:120,effect:"bounty_500"},
+];
+const AMBIENCE_TRACKS=[
+  {id:"ocean",name:"Ocean Waves",icon:"🌊",desc:"Calm sea ambience"},
+  {id:"rain",name:"Grand Line Rain",icon:"🌧️",desc:"Stormy rain sounds"},
+  {id:"tavern",name:"Baratie Tavern",icon:"🍺",desc:"Busy tavern background"},
+  {id:"wind",name:"Sailing Wind",icon:"💨",desc:"Wind in the sails"},
+  {id:"underwater",name:"Fishman Island",icon:"🐠",desc:"Underwater ambience"},
 ];
 const FRUIT_EMOJIS=["🍎","🍊","🍋","🍇","🍓","🫐","🍑","🍒"];
 const CHAR_TUNES=[
@@ -904,7 +1123,8 @@ function hourToSceneKey(h){
 
 // ════ STATE ════
 let days,tasks,meta,cfg,timerData,gridData,xpData,notes,priorityData;
-let seaChartData,buffData,unlocksData;
+let seaChartData,buffData,unlocksData,achievementsData,missionsData,bossData,freezeData;
+let ambienceNode=null,ambiencePlaying=false,ambienceType="";
 let activeDay=0,editMode=false,currentSection="tasks",statsRange=7;
 let editingTask=null,editingSub=null,editingLbl=null,addingTask=null,addingSub=null;
 let timerRunning=false,timerSub=null,timerStart=null,timerAccum=0,timerInterval=null;
@@ -934,6 +1154,10 @@ function load(){
   }catch(e){seaChartData={islands:defaultIslands()};}
   try{const bf=localStorage.getItem("sp_buff");buffData=bf?JSON.parse(bf):{active:false,fruitName:"",expiresAt:0,fruitEmoji:"🍎"};}catch(e){buffData={active:false,fruitName:"",expiresAt:0,fruitEmoji:"🍎"};}
   try{const ul=localStorage.getItem("sp_unlocks");unlocksData=ul?JSON.parse(ul):{unlocked:{}};}catch(e){unlocksData={unlocked:{}};}
+  try{const ac=localStorage.getItem("sp_achievements");achievementsData=ac?JSON.parse(ac):{earned:{}};}catch(e){achievementsData={earned:{}};}
+  try{const ms=localStorage.getItem("sp_missions");missionsData=ms?JSON.parse(ms):{date:"",missionId:"",claimed:false};}catch(e){missionsData={date:"",missionId:"",claimed:false};}
+  try{const bs=localStorage.getItem("sp_boss");bossData=bs?JSON.parse(bs):{defeated:[],current:0};}catch(e){bossData={defeated:[],current:0};}
+  try{const fz=localStorage.getItem("sp_freeze");freezeData=fz?JSON.parse(fz):{tokens:1,lastRefill:"",used:[]};}catch(e){freezeData={tokens:1,lastRefill:"",used:[]};}
 }
 let saveTimer=null;
 function save(){
@@ -959,6 +1183,10 @@ function savePriority(){try{localStorage.setItem("sp_priority",JSON.stringify(pr
 function saveSeaChart(){try{localStorage.setItem("sp_seachart",JSON.stringify(seaChartData));}catch(e){}}
 function saveBuff(){try{localStorage.setItem("sp_buff",JSON.stringify(buffData));}catch(e){}}
 function saveUnlocks(){try{localStorage.setItem("sp_unlocks",JSON.stringify(unlocksData));}catch(e){}}
+function saveAchievements(){try{localStorage.setItem("sp_achievements",JSON.stringify(achievementsData));}catch(e){}}
+function saveMissions(){try{localStorage.setItem("sp_missions",JSON.stringify(missionsData));}catch(e){}}
+function saveBoss(){try{localStorage.setItem("sp_boss",JSON.stringify(bossData));}catch(e){}}
+function saveFreeze(){try{localStorage.setItem("sp_freeze",JSON.stringify(freezeData));}catch(e){}}
 function showSaving(){const el=document.getElementById("save-indicator");if(el)el.innerHTML='<span class="save-dot" style="background:var(--ac);animation:pulse 1s infinite;"></span><span style="font-size:8px;color:var(--ac);letter-spacing:1px;">SAVING…</span>';}
 function showSaved(){const el=document.getElementById("save-indicator");if(el)el.innerHTML='<span class="save-dot" style="background:var(--green);"></span><span style="font-size:8px;color:var(--green);letter-spacing:1px;">SAVED ✓</span>';}
 
@@ -1000,7 +1228,7 @@ function showDayBanner(){const b=document.getElementById("day-banner");b.style.t
 
 // ════ XP & RANK (WANTED POSTER) ════
 function getCurrentRankIdx(xp){let idx=0;for(let i=0;i<RANKS.length;i++)if(xp>=RANKS[i].xp)idx=i;return idx;}
-function fmtBounty(xp){return"฿"+(xp*1000000).toLocaleString("en-IN");}
+function fmtBounty(xp){return"₹"+(xp*1000000).toLocaleString("en-IN");}
 function addXP(amount){
   const xpMul=buffData.active&&Date.now()<buffData.expiresAt&&amount>0?2:1;
   const finalAmt=amount>0?amount*xpMul:amount;
@@ -1105,13 +1333,13 @@ function gs(id){return tasks[id]||S.P;}
 function toggle(id){
   if(editMode)return;const prev=gs(id);const next=prev===S.P?S.D:prev===S.D?S.X:S.P;
   tasks[id]=next;
-  if(prev===S.P&&next===S.D){addXP(10);soundDone();checkDevilFruit();}
-  else if(prev===S.D&&next===S.X){addXP(-10);addXP(-3);soundSkip();}
+  if(prev===S.P&&next===S.D){addXP(2);soundDone();checkDevilFruit();checkSeaKingDefeat();}
+  else if(prev===S.D&&next===S.X){addXP(-2);soundSkip();triggerSeaKingAttack();}
   checkDayComplete();save();render();updateWaveProgress();
 }
 function checkDayComplete(){
   const day=days[activeDay];const allT=Object.values(day.tasks).flat();const doneT=allT.filter(t=>gs(t.id)===S.D).length;
-  if(allT.length>0&&doneT===allT.length){const key="celebrated_"+days[activeDay].id;if(!tasks[key]){tasks[key]="yes";addXP(50);launchConfetti();gear5Flash();showDayBanner();toast("🎉 DAY COMPLETE! +50 XP BONUS! ⚡");}}
+  if(allT.length>0&&doneT===allT.length){const key="celebrated_"+days[activeDay].id;if(!tasks[key]){tasks[key]="yes";addXP(10);launchConfetti();gear5Flash();showDayBanner();checkMilestone();toast("🎉 DAY COMPLETE! +10 XP BONUS! ⚡");}}
 }
 function colorFor(i,sub){if(sub)return getSubjectColor(sub);return COLORS[i%COLORS.length];}
 function fmtSecs(s){const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),ss=s%60;if(h>0)return`${h}:${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;return`${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;}
@@ -1126,8 +1354,60 @@ function streakCount(){
 function todayStudySecs(){const tk=todayKey();return(timerData.sessions||[]).filter(s=>s.date===tk).reduce((a,s)=>a+s.dur,0);}
 function fmtTimeMM(secs){const m=Math.floor(secs/60),s=secs%60;return`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;}
 function updateClock(){const now=new Date();const el=document.getElementById("live-clock");if(el)el.textContent=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;}
-function renderQuote(){const el=document.getElementById("quote-text");if(el)el.textContent=`"${QUOTES[quoteIdx]}"` ;}
-function cycleQuote(){quoteIdx=(quoteIdx+1)%QUOTES.length;renderQuote();}
+// ════ AUTO CHARACTER QUOTES WITH VOICE ════
+// Auto-cycle: new character quote every 60 seconds
+let autoQuoteInterval=null;
+function getCharQuotes(){
+  // Build quotes attributed to current character + general quotes
+  const ci=currentCharIdx();
+  const ch=CHARS[ci];
+  // Character-specific quotes first, then general pool
+  const charSpecific=[
+    ch.quote,
+    // Additional quotes per char
+    ...QUOTES.map((q,i)=>i%CHARS.length===ci?q:null).filter(Boolean)
+  ];
+  return [...charSpecific,...QUOTES];
+}
+function renderQuote(){
+  const el=document.getElementById("quote-text");if(!el)return;
+  const ci=currentCharIdx();
+  const ch=CHARS[ci];
+  const allQ=[ch.quote,...QUOTES];
+  el.textContent=`${ch.emoji} "${allQ[quoteIdx%allQ.length]}"`;
+  // Show character name badge
+  const bar=document.getElementById("quote-bar");
+  if(bar){
+    bar.style.borderBottom=`1px solid ${ch.color}44`;
+    const badge=document.getElementById("quote-char-badge");
+    if(badge){badge.textContent=ch.name;badge.style.color=ch.color;badge.style.borderColor=ch.color+'44';}
+  }
+}
+function cycleQuote(){
+  const ci=currentCharIdx();const ch=CHARS[ci];
+  const allQ=[ch.quote,...QUOTES];
+  quoteIdx=(quoteIdx+1)%allQ.length;
+  renderQuote();
+  playCharVoice(ci);
+}
+function playCharVoice(ci){
+  if(!soundEnabled)return;
+  const tune=CHAR_TUNES[ci%CHAR_TUNES.length];
+  tune.forEach((n,i)=>playTone(n.f,n.t,n.d,.18,i*.08));
+}
+function startAutoQuote(){
+  clearInterval(autoQuoteInterval);
+  autoQuoteInterval=setInterval(()=>{cycleQuote();},60000);
+}
+// Auto-change character accent every day at midnight
+function startAutoAccent(){
+  const now=new Date();
+  const msToMidnight=(new Date(now.getFullYear(),now.getMonth(),now.getDate()+1)-now);
+  setTimeout(()=>{
+    if(!cfg.pinnedChar){applyAccent();renderQuote();}
+    setInterval(()=>{if(!cfg.pinnedChar){applyAccent();renderQuote();}},86400000);
+  },msToMidnight);
+}
 function dismissArcPopup(){document.getElementById("arc-popup").classList.remove("show");clearTimeout(arcPopupTimer);}
 function showArcPopup(key){
   const lore=ARC_LORE[key]||{name:"Grand Line",icon:"🌊",lore:"The sea calls..."};
@@ -1185,8 +1465,12 @@ function triggerSceneTransition(key){
   }
 }
 function setScene(key,manual){
-  const prev=cfg.bg;  // capture BEFORE overwriting
+  const prev=cfg.bg;
   cfg.bg=key;const sc=SCENES.find(s=>s.key===key)||SCENES[0];
+  // Apply via body class for rich CSS backgrounds
+  SCENES.forEach(s=>document.body.classList.remove('scene-'+s.key));
+  document.body.classList.add('scene-'+key);
+  // Fallback gradient also set
   document.getElementById("scene").style.background=sc.grad;
   if(prev!==key)triggerSceneTransition(key);
   buildSceneFx(sc.fx);
@@ -1306,9 +1590,35 @@ function buildSceneFx(fx){
   }
 }
 
-// ════ SCENE ART (thumbnail for bg grid) ════
+// ════ SCENE ART (rich SVG thumbnails for bg grid) ════
+const SCENE_THUMBS={
+  eb:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-eb" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0d9488"/><stop offset="55%" stop-color="#164e63"/><stop offset="100%" stop-color="#0c2233"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-eb)"/><circle cx="110" cy="14" r="9" fill="#fde68a" opacity=".9"/><circle cx="110" cy="14" r="6" fill="#fbbf24"/><rect y="52" width="140" height="28" fill="#0d4f52" opacity=".8"/><path d="M0,52 Q70,44 140,52" fill="#0e7490" opacity=".6"/><path d="M10,60 Q45,54 80,60 Q110,66 130,60" stroke="rgba(255,255,255,.3)" stroke-width="1.5" fill="none"/><text x="8" y="18" fill="rgba(255,255,255,.7)" font-size="10">🌊</text></svg>`,
+  op:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-op" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c2410c"/><stop offset="40%" stop-color="#9a3412"/><stop offset="100%" stop-color="#0c0609"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-op)"/><path d="M0,0 L140,0 L140,80" fill="rgba(255,80,20,.08)"/><rect y="56" width="140" height="24" fill="#1c0a09" opacity=".9"/><path d="M0,56 Q70,48 140,56" fill="#431407" opacity=".6"/><text x="8" y="18" fill="rgba(255,200,100,.8)" font-size="10">⚡</text><text x="100" y="22" fill="rgba(255,100,30,.6)" font-size="18">🌊</text></svg>`,
+  ngt:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-ngt" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#000000"/><stop offset="100%" stop-color="#0d0a2e"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-ngt)"/><circle cx="110" cy="14" r="12" fill="#fffde0" opacity=".9"/><circle cx="110" cy="14" r="9" fill="#fde68a" opacity=".8"/><circle cx="104" cy="11" r="3" fill="rgba(0,0,0,.3)"/><circle cx="20" cy="10" r="1.5" fill="white" opacity=".9"/><circle cx="40" cy="6" r="1" fill="white" opacity=".8"/><circle cx="60" cy="12" r="1.5" fill="white" opacity=".9"/><circle cx="80" cy="5" r="1" fill="white"/><circle cx="15" cy="25" r="1" fill="white" opacity=".7"/><circle cx="55" cy="30" r="1.5" fill="white" opacity=".8"/><circle cx="35" cy="42" r="1" fill="white" opacity=".6"/><rect y="58" width="140" height="22" fill="#020614" opacity=".95"/><text x="8" y="74" fill="rgba(255,240,100,.4)" font-size="7">🌙 NIGHT VOYAGE</text></svg>`,
+  gl:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-gl" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0f0020"/><stop offset="50%" stop-color="#2e1065"/><stop offset="100%" stop-color="#050010"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-gl)"/><text x="58" y="36" font-size="28" opacity=".35">⚡</text><circle cx="20" cy="12" r="1" fill="white" opacity=".8"/><circle cx="45" cy="8" r="1.5" fill="white" opacity=".9"/><circle cx="70" cy="15" r="1" fill="rgba(160,100,255,.9)"/><circle cx="100" cy="6" r="1.5" fill="white" opacity=".7"/><rect y="62" width="140" height="18" fill="#050010" opacity=".9"/><text x="8" y="74" fill="rgba(140,80,255,.5)" font-size="7">⚡ GRAND LINE STORM</text></svg>`,
+  wno:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-wno" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a0010"/><stop offset="60%" stop-color="#2d0036"/><stop offset="100%" stop-color="#030000"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-wno)"/><rect x="60" y="30" width="20" height="32" fill="rgba(80,0,40,.9)"/><rect x="52" y="24" width="36" height="8" fill="rgba(100,0,50,.9)"/><rect x="44" y="18" width="52" height="8" fill="rgba(80,0,40,.85)"/><polygon points="70,6 52,18 88,18" fill="rgba(130,0,65,.9)"/><rect x="64" y="30" width="12" height="14" fill="rgba(255,200,120,.1)"/><text x="8" y="18" fill="rgba(255,100,100,.5)" font-size="10">⛩️</text><circle cx="110" cy="15" r="1" fill="rgba(255,150,150,.6)"/><circle cx="120" cy="8" r="1.5" fill="rgba(255,150,150,.7)"/></svg>`,
+  sky:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3b82f6"/><stop offset="45%" stop-color="#7dd3fc"/><stop offset="75%" stop-color="#fef9c3"/><stop offset="100%" stop-color="#fbbf24"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-sky)"/><circle cx="70" cy="12" r="12" fill="#fde68a" opacity=".95"/><circle cx="70" cy="12" r="8" fill="#fbbf24"/><ellipse cx="22" cy="44" rx="28" ry="12" fill="white" opacity=".85"/><ellipse cx="22" cy="40" rx="20" ry="10" fill="white"/><ellipse cx="105" cy="38" rx="24" ry="10" fill="white" opacity=".8"/><ellipse cx="105" cy="34" rx="18" ry="9" fill="white" opacity=".9"/><text x="8" y="74" fill="rgba(59,130,246,.6)" font-size="7">☁️ SKYPIEA</text></svg>`,
+  fi:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-fi" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#020015"/><stop offset="45%" stop-color="#1a0a5e"/><stop offset="100%" stop-color="#042038"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-fi)"/><circle cx="25" cy="20" r="5" fill="rgba(0,180,255,.4)" opacity=".7"/><circle cx="60" cy="14" r="3" fill="rgba(0,150,255,.35)"/><circle cx="95" cy="22" r="4" fill="rgba(100,200,255,.3)"/><circle cx="115" cy="12" r="3" fill="rgba(0,180,255,.4)"/><text x="60" y="50" font-size="20" opacity=".5">🐠</text><text x="8" y="74" fill="rgba(0,150,255,.5)" font-size="7">🌊 FISHMAN ISLAND</text></svg>`,
+  mf:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-mf" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5c0000"/><stop offset="50%" stop-color="#8b0000"/><stop offset="100%" stop-color="#080000"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-mf)"/><rect x="8" y="28" width="22" height="24" fill="#1c0000" rx="2"/><rect x="58" y="18" width="24" height="34" fill="#120000" rx="2"/><rect x="100" y="24" width="18" height="28" fill="#1a0000" rx="2"/><circle cx="70" cy="8" r="10" fill="#dc2626" opacity=".4"/><text x="55" y="14" font-size="12" opacity=".4">⚔️</text><text x="8" y="74" fill="rgba(220,38,38,.5)" font-size="7">⚔️ MARINEFORD</text></svg>`,
+  wci:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-wci" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fce7f3"/><stop offset="50%" stop-color="#e879f9"/><stop offset="100%" stop-color="#fda4af"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-wci)"/><circle cx="70" cy="14" r="14" fill="#fbbf24" opacity=".9"/><text x="60" y="20" font-size="16">🎂</text><ellipse cx="30" cy="55" rx="20" ry="10" fill="rgba(255,255,255,.5)"/><ellipse cx="100" cy="52" rx="18" ry="9" fill="rgba(255,255,255,.45)"/><text x="8" y="74" fill="rgba(192,38,211,.6)" font-size="7">🎂 WHOLE CAKE</text></svg>`,
+  al:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-al" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#052e16"/><stop offset="55%" stop-color="#166534"/><stop offset="100%" stop-color="#052e16"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-al)"/><ellipse cx="25" cy="42" rx="28" ry="20" fill="#15803d" opacity=".9"/><ellipse cx="100" cy="46" rx="24" ry="18" fill="#16a34a" opacity=".8"/><ellipse cx="65" cy="50" rx="36" ry="22" fill="#15803d"/><circle cx="30" cy="32" r="4" fill="#4ade80" opacity=".7"/><circle cx="90" cy="36" r="3" fill="#86efac" opacity=".8"/><text x="55" y="30" font-size="16" opacity=".6">🌺</text><text x="8" y="74" fill="rgba(74,222,128,.5)" font-size="7">🌿 AMAZON LILY</text></svg>`,
+  abl:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-abl" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f97316"/><stop offset="55%" stop-color="#b45309"/><stop offset="100%" stop-color="#1c0f00"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-abl)"/><circle cx="70" cy="10" r="14" fill="#fde68a" opacity=".95"/><circle cx="70" cy="10" r="10" fill="#fbbf24"/><polygon points="20,64 35,30 48,64" fill="#d97706"/><polygon points="90,64 108,22 124,64" fill="#b45309"/><rect y="62" width="140" height="18" fill="#78350f"/><text x="8" y="74" fill="rgba(251,191,36,.5)" font-size="7">🏜️ ALABASTA</text></svg>`,
+  tb:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-tb" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#030008"/><stop offset="50%" stop-color="#1a0030"/><stop offset="100%" stop-color="#000000"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-tb)"/><circle cx="70" cy="12" r="14" fill="#fffde0" opacity=".85"/><circle cx="70" cy="12" r="10" fill="#fde68a"/><circle cx="63" cy="9" r="4" fill="rgba(0,0,0,.3)"/><text x="8" y="38" font-size="14" opacity=".3">💀</text><rect x="10" y="50" width="5" height="22" fill="rgba(20,0,10,.8)"/><rect x="120" y="46" width="5" height="26" fill="rgba(20,0,10,.8)"/><text x="8" y="74" fill="rgba(140,0,200,.4)" font-size="7">💀 THRILLER BARK</text></svg>`,
+  dr:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-dr" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f97316"/><stop offset="40%" stop-color="#dc2626"/><stop offset="100%" stop-color="#1c0505"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-dr)"/><rect x="25" y="28" width="90" height="36" fill="#991b1b" rx="5"/><rect x="18" y="22" width="104" height="8" fill="#b91c1c" rx="2"/><rect x="36" y="34" width="14" height="20" fill="rgba(255,200,150,.2)" rx="1"/><rect x="64" y="34" width="14" height="20" fill="rgba(255,200,150,.25)" rx="1"/><text x="55" y="20" font-size="10" opacity=".6">🌹</text><text x="8" y="74" fill="rgba(239,68,68,.5)" font-size="7">🌹 DRESSROSA</text></svg>`,
+  w7:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-w7" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1e3a5f"/><stop offset="55%" stop-color="#1d4ed8"/><stop offset="100%" stop-color="#051228"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-w7)"/><rect x="10" y="34" width="30" height="28" fill="#1e3a8a" rx="3"/><rect x="55" y="26" width="30" height="36" fill="#1e40af" rx="3"/><rect x="100" y="30" width="24" height="32" fill="#1e3a8a" rx="3"/><rect y="60" width="140" height="20" fill="#0c2a5e" opacity=".9"/><path d="M0,60 Q70,54 140,60" fill="#1d4ed8" opacity=".5"/><text x="55" y="22" font-size="10" opacity=".5">🚂</text><text x="8" y="74" fill="rgba(99,102,241,.5)" font-size="7">🚂 WATER 7</text></svg>`,
+  ph:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><rect width="70" height="80" fill="#1e3a5f"/><rect x="70" width="70" height="80" fill="#7f1d1d"/><line x1="70" y1="0" x2="70" y2="80" stroke="white" stroke-width="2" opacity=".4"/><text x="14" y="44" font-size="20" opacity=".5">❄️</text><text x="85" y="44" font-size="20" opacity=".5">🔥</text><text x="8" y="74" fill="rgba(100,150,255,.5)" font-size="7">🔥 PUNK HAZARD</text></svg>`,
+  zh:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-zh" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#052e16"/><stop offset="55%" stop-color="#065f46"/><stop offset="100%" stop-color="#022c1e"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-zh)"/><text x="50" y="46" font-size="32" opacity=".25">🐘</text><ellipse cx="70" cy="68" rx="60" ry="10" fill="#022c1e" opacity=".7"/><text x="8" y="74" fill="rgba(74,222,128,.4)" font-size="7">🐘 ZOU</text></svg>`,
+  eg:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1e1b4b"/><stop offset="45%" stop-color="#0ea5e9"/><stop offset="100%" stop-color="#051228"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-eg)"/><rect x="32" y="24" width="76" height="38" fill="rgba(14,165,233,.25)" rx="6" stroke="rgba(14,165,233,.5)" stroke-width="1.5"/><circle cx="70" cy="43" r="14" fill="rgba(14,165,233,.2)" stroke="rgba(14,165,233,.6)" stroke-width="1.5"/><text x="58" y="48" font-size="14" opacity=".7">🤖</text><text x="8" y="74" fill="rgba(14,165,233,.5)" font-size="7">🤖 EGGHEAD</text></svg>`,
+  id:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-id" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a0000"/><stop offset="50%" stop-color="#8b0000"/><stop offset="100%" stop-color="#000000"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-id)"/><text x="56" y="18" font-size="12" opacity=".3">🔱</text><rect x="20" y="30" width="100" height="32" fill="rgba(180,0,0,.2)" stroke="rgba(220,38,38,.3)" stroke-width="1" rx="3"/><text x="50" y="52" font-size="20" opacity=".4">🔒</text><text x="8" y="74" fill="rgba(220,38,38,.4)" font-size="7">🔱 IMPEL DOWN</text></svg>`,
+  sb:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-sb" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0d4f52"/><stop offset="45%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#1e1b4b"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-sb)"/><circle cx="30" cy="28" r="8" fill="rgba(100,200,255,.2)" stroke="rgba(125,211,252,.4)" stroke-width="1.5"/><circle cx="70" cy="20" r="10" fill="rgba(100,200,255,.18)" stroke="rgba(125,211,252,.35)" stroke-width="1.5"/><circle cx="105" cy="32" r="7" fill="rgba(100,200,255,.2)" stroke="rgba(125,211,252,.4)" stroke-width="1.5"/><circle cx="50" cy="46" r="6" fill="rgba(167,139,250,.2)" stroke="rgba(167,139,250,.4)" stroke-width="1.5"/><text x="8" y="74" fill="rgba(125,211,252,.5)" font-size="7">🫧 SABAODY</text></svg>`,
+  ct:`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="t-ct" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f97316"/><stop offset="35%" stop-color="#fbbf24"/><stop offset="65%" stop-color="#7dd3fc"/><stop offset="100%" stop-color="#0284c7"/></linearGradient></defs><rect width="140" height="80" fill="url(#t-ct)"/><circle cx="70" cy="16" r="14" fill="rgba(255,220,80,.8)"/><circle cx="70" cy="16" r="10" fill="#fde68a" opacity=".9"/><text x="55" y="56" font-size="20" opacity=".6">⛵</text><rect y="62" width="140" height="18" fill="#0369a1" opacity=".8"/><text x="8" y="74" fill="rgba(251,191,36,.6)" font-size="7">⛵ CATAMARAN DAWN</text></svg>`,
+};
 function scenePreviewStyle(key){
+  // Returns inline style for bg-card-preview div — not used anymore, we use innerHTML
   const sc=SCENES.find(s=>s.key===key)||SCENES[0];return`background:${sc.grad};`;
+}
+function scenePreviewHTML(key){
+  return SCENE_THUMBS[key]||`<svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg"><rect width="140" height="80" fill="#0c1a2e" rx="0"/><text x="50" y="46" fill="rgba(255,255,255,.4)" font-size="22">🌊</text></svg>`;
 }
 
 // ════ SEA CHART ISLAND ART ════
@@ -1593,52 +1903,627 @@ function toggleEdit(){
   if(!editMode&&editingTask){commitEdit();}
   render();
 }
-function toggleFocusMode(){
-  focusActive=!focusActive;
-  if(!focusActive)focusSub=null;
-  document.getElementById("focus-btn").classList.toggle("active",focusActive);
-  render();
-}
-function toggleEdit2(subName){if(!focusActive){focusSub=subName;focusActive=true;}else if(focusSub===subName){focusSub=null;focusActive=false;}else{focusSub=subName;}document.getElementById("focus-btn").classList.toggle("active",focusActive);render();}
+function toggleFocusMode(){/* removed */}
+function toggleEdit2(subName){render();}
 
-// ════ NAVIGATION ════
+// ════ HELPER: total tasks done all time ════
+function getTotalDone(){return Object.values(tasks).filter(v=>v===S.D).length;}
+
+// ════ MILESTONE CHECK ════
+function checkMilestone(){
+  const day=studyDayNum()+1;
+  const m=MILESTONES[day];
+  if(m&&!tasks["milestone_"+day]){
+    tasks["milestone_"+day]="done";save();
+    toast(m.icon+" "+m.name);launchConfetti();
+    setTimeout(()=>{
+      const ov=document.getElementById("rankup-overlay");
+      const inner=document.getElementById("rankup-popup-inner");
+      document.getElementById("rankup-emoji").textContent=m.icon;
+      document.getElementById("rankup-title").textContent=m.name.toUpperCase();
+      document.getElementById("rankup-sub").textContent="⚓ MILESTONE REACHED!";
+      document.getElementById("rankup-bounty").textContent="Day "+day+" of 180";
+      ov.style.display="flex";ov.classList.add("show");
+      inner.style.transform="scale(0) rotate(-8deg)";
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{inner.style.transition="transform .5s cubic-bezier(.175,.885,.32,1.275)";inner.style.transform="scale(1) rotate(0deg)";}));
+      setTimeout(()=>{inner.style.transform="scale(0) rotate(8deg)";setTimeout(()=>{ov.classList.remove("show");ov.style.display="none";inner.style.transform="";inner.style.transition="";},500);},3800);
+    },500);
+  }
+}
+
+// ════ XP DECAY ════
+function checkXPDecay(){
+  const today=todayKey();
+  if((meta.lastDecayCheck||"")===today)return;
+  meta.lastDecayCheck=today;
+  const yesterday=new Date();yesterday.setDate(yesterday.getDate()-1);
+  const yKey=yesterday.toISOString().slice(0,10);
+  const dayBefore=new Date();dayBefore.setDate(dayBefore.getDate()-2);
+  const dKey=dayBefore.toISOString().slice(0,10);
+  // Check if studied at all in last 2 days
+  const sessions=timerData.sessions||[];
+  const recent=sessions.filter(s=>s.date===yKey||s.date===dKey);
+  if(!recent.length&&xpData.total>0){
+    addXP(-10);
+    setTimeout(()=>toast("📉 -10 XP: No study detected in 2 days!"),1000);
+  }
+  save();
+}
+
+// ════ STREAK FREEZE ════
+function refillStreakFreeze(){
+  const today=todayKey();
+  const weekNum=Math.floor(studyDayNum()/7);
+  const weekKey="week_"+weekNum;
+  if(freezeData.lastRefill!==weekKey){freezeData.lastRefill=weekKey;freezeData.tokens=1;saveFreeze();}
+}
+function useStreakFreeze(){
+  refillStreakFreeze();
+  if(freezeData.tokens<=0){toast("❄️ No freeze tokens left this week!");return;}
+  const today=todayKey();
+  if(freezeData.used.includes(today)){toast("❄️ Already used freeze today!");return;}
+  freezeData.tokens--;freezeData.used.push(today);saveFreeze();
+  toast("❄️ Streak Freeze used! Streak protected for today!");
+  renderMissions();
+}
+
+// ════ DAILY MISSION ════
+function getDailyMission(){
+  const today=todayKey();
+  if(missionsData.date!==today){
+    // Pick a random mission for today
+    const idx=Math.floor(Math.abs(today.split("-").join("")*7%DAILY_MISSIONS.length));
+    missionsData={date:today,missionId:DAILY_MISSIONS[idx].id,claimed:false};
+    saveMissions();
+  }
+  return DAILY_MISSIONS.find(m=>m.id===missionsData.missionId)||DAILY_MISSIONS[0];
+}
+function getMissionProgress(mission){
+  if(mission.type==="tasks"){
+    const today=studyDayNum();
+    if(today<0||today>=days.length)return 0;
+    return Object.values(days[today].tasks).flat().filter(t=>gs(t.id)===S.D).length;
+  }
+  if(mission.type==="timer")return todayStudySecs();
+  if(mission.type==="streak")return streakCount();
+  if(mission.type==="subject_complete"){
+    const today=studyDayNum();if(today<0||today>=days.length)return 0;
+    return Object.entries(days[today].tasks).filter(([,tks])=>tks.length>0&&tks.every(t=>gs(t.id)===S.D)).length;
+  }
+  return 0;
+}
+function claimMission(){
+  const mission=getDailyMission();
+  const prog=getMissionProgress(mission);
+  if(prog<mission.target){toast("⚠️ Mission not complete yet!");return;}
+  if(missionsData.claimed){toast("✅ Already claimed today!");return;}
+  missionsData.claimed=true;saveMissions();
+  addXP(mission.reward);launchConfetti();
+  toast("🎉 Mission Complete! +"+mission.reward+" XP!");
+  renderMissions();
+}
+
+// ════ BOSS BATTLE ════
+function getCurrentBoss(){
+  const weekNum=Math.floor(studyDayNum()/7)+1;
+  // Find the latest boss that applies to current week
+  const applicable=BOSS_BATTLES.filter(b=>b.week<=weekNum&&!bossData.defeated.includes(b.name));
+  return applicable[applicable.length-1]||null;
+}
+function getBossProgress(boss){
+  if(!boss)return 0;
+  if(boss.type==="weekly_pct"){
+    const weekStart=Math.floor(studyDayNum()/7)*7;
+    let done=0,total=0;
+    for(let i=weekStart;i<weekStart+7&&i<days.length;i++){const tks=Object.values(days[i].tasks).flat();total+=tks.length;done+=tks.filter(t=>gs(t.id)===S.D).length;}
+    return total?Math.round(done/total*100):0;
+  }
+  if(boss.type==="weekly_timer"){
+    const weekStart=Math.floor(studyDayNum()/7)*7;
+    const weekDates=[];for(let i=0;i<7;i++){const d=new Date(meta.startDate);d.setDate(d.getDate()+weekStart+i);weekDates.push(d.toISOString().slice(0,10));}
+    return (timerData.sessions||[]).filter(s=>weekDates.includes(s.date)).reduce((a,s)=>a+s.dur,0);
+  }
+  if(boss.type==="streak")return streakCount();
+  if(boss.type==="xp")return xpData.total;
+  return 0;
+}
+function checkBossDefeated(){
+  const boss=getCurrentBoss();if(!boss)return;
+  const prog=getBossProgress(boss);
+  if(prog>=boss.target&&!bossData.defeated.includes(boss.name)){
+    bossData.defeated.push(boss.name);saveBoss();
+    addXP(boss.reward);launchConfetti();
+    toast("⚔️ BOSS DEFEATED: "+boss.name+"! +"+boss.reward+" XP!");
+  }
+}
+
+// ════ ACHIEVEMENTS ════
+function checkAchievements(){
+  let anyNew=false;
+  ACHIEVEMENTS.forEach(a=>{
+    if(achievementsData.earned[a.id])return;
+    if(a.check&&a.check()){
+      achievementsData.earned[a.id]=true;anyNew=true;
+      toast("🎖️ Achievement Unlocked: "+a.name+"!");
+      soundUnlock();
+    }
+  });
+  if(anyNew){saveAchievements();if(currentSection==="missions")renderMissions();}
+}
+
+// ════ SEA KING ATTACK / DEFEAT ════
+function triggerSeaKingAttack(){
+  const sk=document.getElementById("sea-king");if(!sk)return;
+  const emojis=["🦑","🐙","🦈","🐋","🦀"];
+  sk.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+  sk.style.filter="drop-shadow(0 0 20px rgba(255,50,50,.8))";
+  sk.style.left=Math.random()*70+5+"%";
+  sk.style.animation="none";
+  requestAnimationFrame(()=>{sk.style.animation="sk-rise 6s ease-in-out";});
+  setTimeout(()=>{sk.style.filter="drop-shadow(0 0 20px rgba(0,200,200,.5))";},6000);
+}
+function checkSeaKingDefeat(){checkBossDefeated();checkAchievements();}
+
+// ════ AUTO GENERATE DAYS 4→180 ════
+function autoGenerateDays(){
+  if(days.length>=180)return;
+  // Use day1-3 as template, cycle through them
+  const templates=[days[0],days[1]||days[0],days[2]||days[0]];
+  const needed=180-days.length;
+  const isFirst=days.length<=3;
+  for(let i=0;i<needed;i++){
+    const template=templates[(days.length)%templates.length];
+    const newDay={id:uid(),label:"DAY "+(days.length+1),tasks:{}};
+    // Deep copy tasks with new IDs
+    Object.entries(template.tasks).forEach(([sub,tks])=>{
+      newDay.tasks[sub]=tks.map(tk=>({id:uid(),l:tk.l}));
+    });
+    days.push(newDay);
+  }
+  save();
+  if(isFirst)toast("📅 180 days auto-generated! Your 6-month voyage begins! 🏴‍☠️");
+}
+
+// ════ VOYAGE LOG ════
+function renderVoyageLog(){
+  const el=document.getElementById("voyage-log-content");if(!el)return;
+  const today=studyDayNum();
+  const sdt=new Date(meta.startDate);
+  let html="";
+  // Show last 30 days in reverse
+  const start=Math.max(0,today-29);
+  for(let i=today;i>=start;i--){
+    if(i>=days.length)continue;
+    const day=days[i];
+    const allT=Object.values(day.tasks).flat();
+    const done=allT.filter(t=>gs(t.id)===S.D).length;
+    const skip=allT.filter(t=>gs(t.id)===S.X).length;
+    const pct=allT.length?Math.round(done/allT.length*100):0;
+    const d=new Date(sdt);d.setDate(d.getDate()+i);
+    const dateStr=d.toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short"});
+    const isToday2=i===today;
+    const barColor=pct>=80?"var(--green)":pct>=50?"var(--ac)":"var(--red)";
+    const tk2=d.toISOString().slice(0,10);
+    const studySecs=(timerData.sessions||[]).filter(s=>s.date===tk2).reduce((a,s)=>a+s.dur,0);
+    html+=`<div class="glass-panel" style="margin-bottom:8px;${isToday2?"border-color:var(--ac);":""}">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <div>
+          <span style="font-size:9px;color:var(--ac);letter-spacing:1px;">${isToday2?"TODAY — ":""}${day.label}</span>
+          <div style="font-size:8px;color:var(--txt5);">${dateStr}</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:20px;font-weight:900;font-family:var(--head);color:${barColor};">${pct}%</div>
+          <div style="font-size:8px;color:var(--txt5);">${fmtMin(studySecs)||"0m"} studied</div>
+        </div>
+      </div>
+      <div style="height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;">
+        <div style="height:100%;width:${pct}%;background:${barColor};border-radius:3px;transition:width .4s;"></div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:6px;font-size:9px;color:var(--txt4);">
+        <span>✅ ${done}</span><span>❌ ${skip}</span><span>⬜ ${allT.length-done-skip}</span>
+      </div>
+    </div>`;
+  }
+  if(!html)html='<div class="empty-state">Start studying to fill your voyage log! ⚓</div>';
+  el.innerHTML=html;
+}
+
+// ════ PIRATE KING PROGRESS BAR ════
+function updatePKBar(){
+  const el=document.getElementById("pk-bar");const pct=document.getElementById("pk-pct");
+  const dayEl=document.getElementById("pk-day");const lbl=document.getElementById("pk-rank-label");
+  if(!el)return;
+  const day=Math.min(180,studyDayNum()+1);
+  const p=Math.round(day/180*100);
+  if(el)el.style.width=p+"%";
+  if(pct)pct.textContent=p+"%";
+  if(dayEl)dayEl.textContent=day;
+  const ridx=getCurrentRankIdx(xpData.total);
+  if(lbl)lbl.textContent=RANKS[ridx].emoji+" "+RANKS[ridx].name+" — "+xpData.total+" XP";
+}
+
+// ════ WANTED POSTER ════
+function renderWantedPoster(container){
+  if(!container)return;
+  const ch=CHARS[currentCharIdx()];
+  const ridx=getCurrentRankIdx(xpData.total);
+  const rank=RANKS[ridx];
+  const streak=streakCount();
+  const totalDone=getTotalDone();
+  const totalStudyMins=Math.round(Object.entries(timerData.totals||{}).filter(([k])=>!k.startsWith("day_")).reduce((a,[,v])=>a+v,0)/60);
+  container.innerHTML=`
+  <div style="font-size:9px;color:var(--ac);letter-spacing:2px;margin-bottom:10px;">🏴‍☠️ YOUR WANTED POSTER</div>
+  <div style="background:linear-gradient(145deg,#2a1a00,#1a0f00);border:3px solid #C9A84C;border-radius:12px;padding:16px;text-align:center;box-shadow:0 0 30px rgba(201,168,76,.3),inset 0 0 40px rgba(0,0,0,.5);">
+    <div style="font-size:9px;color:#C9A84C;letter-spacing:4px;margin-bottom:8px;border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:6px;">WANTED — DEAD OR ALIVE</div>
+    <div style="font-size:64px;margin:10px 0;filter:drop-shadow(0 4px 12px rgba(0,0,0,.8));">${ch.emoji}</div>
+    <div style="font-family:var(--head);font-size:22px;font-weight:900;color:#ffffff;letter-spacing:2px;text-shadow:0 2px 8px rgba(0,0,0,.9);">${ch.name.toUpperCase()}</div>
+    <div style="font-size:9px;color:#C9A84C;letter-spacing:2px;margin:4px 0 12px;">${rank.emoji} ${rank.name.toUpperCase()}</div>
+    <div style="background:rgba(0,0,0,.4);border-radius:8px;padding:10px;margin-bottom:10px;">
+      <div style="font-size:11px;color:rgba(201,168,76,.6);letter-spacing:1px;margin-bottom:4px;">BOUNTY</div>
+      <div style="font-family:var(--head);font-size:26px;font-weight:900;color:#C9A84C;text-shadow:0 0 20px rgba(201,168,76,.6);">${fmtBounty(xpData.total)}</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;font-size:9px;">
+      <div style="background:rgba(0,0,0,.3);border-radius:6px;padding:6px;"><div style="color:#C9A84C;font-size:14px;font-weight:700;">${streak}</div><div style="color:rgba(255,255,255,.5);">STREAK🔥</div></div>
+      <div style="background:rgba(0,0,0,.3);border-radius:6px;padding:6px;"><div style="color:#C9A84C;font-size:14px;font-weight:700;">${totalDone}</div><div style="color:rgba(255,255,255,.5);">TASKS ✅</div></div>
+      <div style="background:rgba(0,0,0,.3);border-radius:6px;padding:6px;"><div style="color:#C9A84C;font-size:14px;font-weight:700;">${totalStudyMins>60?Math.round(totalStudyMins/60)+"h":totalStudyMins+"m"}</div><div style="color:rgba(255,255,255,.5);">STUDIED ⏱</div></div>
+    </div>
+    <div style="font-size:8px;color:rgba(201,168,76,.4);margin-top:10px;letter-spacing:2px;border-top:1px solid rgba(201,168,76,.2);padding-top:6px;">ISSUED BY THE WORLD GOVERNMENT</div>
+  </div>`;
+}
+
+// ════ BIG EXAM COUNTDOWN ════
+function renderBigCountdown(container){
+  if(!container)return;
+  const upcoming=(seaChartData.islands||[]).filter(i=>!i.conquered).map(i=>{
+    const d=new Date(i.date);d.setHours(0,0,0,0);
+    const today=new Date();today.setHours(0,0,0,0);
+    return{...i,dLeft:Math.round((d-today)/86400000)};
+  }).filter(i=>i.dLeft>=0).sort((a,b)=>a.dLeft-b.dLeft);
+  if(!upcoming.length){
+    // Fall back to meta examDate
+    const dl=daysLeft();
+    if(dl===null){container.innerHTML='<div style="text-align:center;font-size:10px;color:var(--txt5);">Set exam date in ⚓ header to see countdown</div>';return;}
+    upcoming.push({examName:"Main Exam",dLeft:dl});
+  }
+  const next=upcoming[0];
+  const urgency=next.dLeft<7?"var(--red,#ef4444)":next.dLeft<30?"var(--orange)":next.dLeft<60?"#FFD700":"var(--green)";
+  container.innerHTML=`
+  <div style="text-align:center;">
+    <div style="font-size:9px;color:var(--ac);letter-spacing:2px;margin-bottom:8px;">📅 NEXT EXAM COUNTDOWN</div>
+    <div style="font-size:12px;color:var(--txt2);font-weight:600;margin-bottom:6px;">${next.examName}</div>
+    <div style="font-family:var(--head);font-size:52px;font-weight:900;color:${urgency};line-height:1;text-shadow:0 0 20px ${urgency};">${next.dLeft}</div>
+    <div style="font-size:11px;color:var(--txt3);margin-top:4px;">DAYS REMAINING</div>
+    ${next.dLeft<7?'<div style="font-size:10px;color:var(--red,#ef4444);margin-top:6px;animation:pulse 1s infinite;">⚠️ BATTLE STATIONS!</div>':
+      next.dLeft<30?'<div style="font-size:10px;color:var(--orange);margin-top:6px;">⚡ FINAL STRETCH!</div>':
+      '<div style="font-size:10px;color:var(--txt4);margin-top:6px;">Keep sailing ⛵</div>'}
+    ${upcoming.length>1?`<div style="font-size:8px;color:var(--txt5);margin-top:8px;">${upcoming.length-1} more exam${upcoming.length>2?"s":""} ahead</div>`:""}
+  </div>`;
+}
+
+// ════ TARGET VS ACTUAL ════
+function renderTargetActual(container){
+  if(!container)return;
+  const today=studyDayNum();
+  if(today<0||today>=days.length){container.innerHTML="";return;}
+  const day=days[today];
+  const allT=Object.values(day.tasks).flat();
+  const done=allT.filter(t=>gs(t.id)===S.D).length;
+  const skipped=allT.filter(t=>gs(t.id)===S.X).length;
+  const total=allT.length;
+  const target=total;
+  const pct=total?Math.round(done/total*100):0;
+  const studySecs=todayStudySecs();
+  const goalSecs=16*3600;
+  const timePct=Math.min(100,Math.round(studySecs/goalSecs*100));
+  const grade=pct>=90&&timePct>=80?"S":pct>=75&&timePct>=60?"A":pct>=60?"B":pct>=40?"C":"D";
+  const gradeColor=grade==="S"?"#ffd700":grade==="A"?"var(--green)":grade==="B"?"var(--teal)":grade==="C"?"var(--orange)":"var(--red,#ef4444)";
+  container.innerHTML=`
+  <div style="font-size:9px;color:var(--ac);letter-spacing:2px;margin-bottom:10px;">🎯 TODAY: TARGET VS ACTUAL</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+    <div style="flex:1;">
+      <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--txt4);margin-bottom:3px;"><span>TASKS</span><span>${done}/${target}</span></div>
+      <div style="height:7px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;margin-bottom:8px;">
+        <div style="height:100%;width:${pct}%;background:${pct>=80?"var(--green)":pct>=50?"var(--ac)":"var(--orange)"};border-radius:4px;transition:width .5s;"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--txt4);margin-bottom:3px;"><span>STUDY TIME</span><span>${fmtMin(studySecs)} / 16h</span></div>
+      <div style="height:7px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:${timePct}%;background:linear-gradient(90deg,var(--teal),var(--ac));border-radius:4px;transition:width .5s;"></div>
+      </div>
+    </div>
+    <div style="text-align:center;padding-left:16px;min-width:60px;">
+      <div style="font-family:var(--head);font-size:36px;font-weight:900;color:${gradeColor};text-shadow:0 0 16px ${gradeColor};">${grade}</div>
+      <div style="font-size:7px;color:var(--txt5);letter-spacing:1px;">TODAY</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;font-size:9px;">
+    <div style="flex:1;background:rgba(78,205,196,.08);border:1px solid rgba(78,205,196,.2);border-radius:8px;padding:7px;text-align:center;"><div style="color:var(--teal);font-size:16px;font-weight:700;">${done}</div><div style="color:var(--txt5);">Done ✅</div></div>
+    <div style="flex:1;background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);border-radius:8px;padding:7px;text-align:center;"><div style="color:#FF6B6B;font-size:16px;font-weight:700;">${skipped}</div><div style="color:var(--txt5);">Skipped ❌</div></div>
+    <div style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:7px;text-align:center;"><div style="color:var(--txt3);font-size:16px;font-weight:700;">${total-done-skipped}</div><div style="color:var(--txt5);">Left ⬜</div></div>
+  </div>`;
+}
+
+// ════ DEVIL FRUIT SHOP ════
+function renderDFShop(container){
+  if(!container)return;
+  container.innerHTML=`
+  <div style="font-size:9px;color:var(--ac);letter-spacing:2px;margin-bottom:10px;">⚡ DEVIL FRUIT SHOP</div>
+  <div style="font-size:10px;color:var(--txt3);margin-bottom:10px;">Balance: <span style="color:var(--ac);font-weight:700;">${xpData.total} XP</span></div>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+  ${DF_SHOP.map(item=>{
+    const canAfford=xpData.total>=item.cost;
+    return`<div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px;">
+      <div style="font-size:28px;">${item.icon}</div>
+      <div style="flex:1;">
+        <div style="font-size:11px;font-weight:600;color:var(--txt2);">${item.name}</div>
+        <div style="font-size:9px;color:var(--txt4);margin-top:2px;">${item.desc}</div>
+      </div>
+      <button onclick="buyDFItem('${item.id}')" ${canAfford?"":"disabled"} style="background:${canAfford?"rgba(201,168,76,.18)":"rgba(255,255,255,.05)"};border:1.5px solid ${canAfford?"var(--ac)":"var(--bdr)"};color:${canAfford?"var(--ac)":"var(--txt5)"};border-radius:8px;padding:6px 12px;cursor:${canAfford?"pointer":"not-allowed"};font-family:var(--font);font-size:10px;font-weight:700;white-space:nowrap;">${item.cost} XP</button>
+    </div>`;
+  }).join("")}
+  </div>`;
+}
+function buyDFItem(id){
+  const item=DF_SHOP.find(i=>i.id===id);if(!item)return;
+  if(xpData.total<item.cost){toast("❌ Not enough XP!");return;}
+  addXP(-item.cost);
+  if(item.effect==="xp2x"){
+    buffData={active:true,fruitName:item.name,fruitEmoji:item.icon,expiresAt:Date.now()+item.duration};
+    saveBuff();startBuffUI();toast("⚡ 2× XP Boost activated for 1 hour!");
+  } else if(item.effect==="freeze"){
+    freezeData.tokens=Math.min(3,freezeData.tokens+1);saveFreeze();toast("❄️ Streak freeze token added!");
+  } else if(item.effect==="skip_forgive"){
+    const today=studyDayNum();if(today>=0&&today<days.length){
+      let fixed=0;
+      Object.values(days[today].tasks).flat().forEach(t=>{if(gs(t.id)===S.X&&fixed<3){tasks[t.id]=S.P;fixed++;}});
+      save();render();toast("🏳️ "+fixed+" skips forgiven!");
+    }
+  } else if(item.effect==="bounty_500"){
+    addXP(500);toast("💰 +500 XP Bounty Boost!");
+  }
+  renderMissions();
+}
+
+// ════ AMBIENCE MUSIC (Web Audio API synthesized) ════
+let ambienceCtx=null,ambienceNodes=[];
+function stopAmbience(){
+  ambienceNodes.forEach(n=>{try{n.stop();}catch(e){}});
+  ambienceNodes=[];ambiencePlaying=false;ambienceType="";
+}
+function playAmbience(type){
+  if(ambiencePlaying&&ambienceType===type){stopAmbience();renderAmbiencePanel(document.getElementById("ambience-panel"));return;}
+  stopAmbience();
+  try{
+    if(!ambienceCtx)ambienceCtx=new(window.AudioContext||window.webkitAudioContext)();
+    const ctx=ambienceCtx;
+    if(type==="ocean"){
+      // White noise filtered to ocean sound
+      const bufSize=ctx.sampleRate*4;const buf=ctx.createBuffer(1,bufSize,ctx.sampleRate);const data=buf.getChannelData(0);
+      for(let i=0;i<bufSize;i++)data[i]=(Math.random()*2-1)*0.3;
+      const src=ctx.createBufferSource();src.buffer=buf;src.loop=true;
+      const filter=ctx.createBiquadFilter();filter.type="lowpass";filter.frequency.value=400;
+      const gain=ctx.createGain();gain.gain.value=0.4;
+      src.connect(filter);filter.connect(gain);gain.connect(ctx.destination);src.start();
+      ambienceNodes=[src];
+    } else if(type==="rain"){
+      const bufSize=ctx.sampleRate*2;const buf=ctx.createBuffer(1,bufSize,ctx.sampleRate);const data=buf.getChannelData(0);
+      for(let i=0;i<bufSize;i++)data[i]=(Math.random()*2-1)*0.15;
+      const src=ctx.createBufferSource();src.buffer=buf;src.loop=true;
+      const f1=ctx.createBiquadFilter();f1.type="bandpass";f1.frequency.value=1200;f1.Q.value=0.5;
+      const gain=ctx.createGain();gain.gain.value=0.5;
+      src.connect(f1);f1.connect(gain);gain.connect(ctx.destination);src.start();
+      ambienceNodes=[src];
+    } else if(type==="wind"){
+      const bufSize=ctx.sampleRate*3;const buf=ctx.createBuffer(1,bufSize,ctx.sampleRate);const data=buf.getChannelData(0);
+      for(let i=0;i<bufSize;i++)data[i]=(Math.random()*2-1)*0.12;
+      const src=ctx.createBufferSource();src.buffer=buf;src.loop=true;
+      const f1=ctx.createBiquadFilter();f1.type="bandpass";f1.frequency.value=200;f1.Q.value=0.3;
+      const lfo=ctx.createOscillator();const lfoGain=ctx.createGain();lfo.frequency.value=0.1;lfoGain.gain.value=80;
+      lfo.connect(lfoGain);lfoGain.connect(f1.frequency);lfo.start();
+      const gain=ctx.createGain();gain.gain.value=0.35;
+      src.connect(f1);f1.connect(gain);gain.connect(ctx.destination);src.start();
+      ambienceNodes=[src,lfo];
+    } else if(type==="underwater"){
+      const bufSize=ctx.sampleRate*3;const buf=ctx.createBuffer(1,bufSize,ctx.sampleRate);const data=buf.getChannelData(0);
+      for(let i=0;i<bufSize;i++)data[i]=(Math.random()*2-1)*0.08;
+      const src=ctx.createBufferSource();src.buffer=buf;src.loop=true;
+      const f1=ctx.createBiquadFilter();f1.type="lowpass";f1.frequency.value=150;
+      const gain=ctx.createGain();gain.gain.value=0.3;
+      // Add slow bubbles via oscillator
+      const osc=ctx.createOscillator();osc.frequency.value=120;osc.type="sine";
+      const oscGain=ctx.createGain();oscGain.gain.value=0.05;
+      osc.connect(oscGain);oscGain.connect(ctx.destination);osc.start();
+      src.connect(f1);f1.connect(gain);gain.connect(ctx.destination);src.start();
+      ambienceNodes=[src,osc];
+    } else if(type==="tavern"){
+      // Layered tones for tavern feel
+      const freqs=[130,196,261,330];
+      const nodes=freqs.map(f=>{
+        const osc=ctx.createOscillator();osc.frequency.value=f;osc.type="triangle";
+        const gain=ctx.createGain();gain.gain.value=0.02;
+        osc.connect(gain);gain.connect(ctx.destination);osc.start();return osc;
+      });
+      ambienceNodes=nodes;
+    }
+    ambiencePlaying=true;ambienceType=type;
+    toast("🎵 "+AMBIENCE_TRACKS.find(t=>t.id===type)?.name+" playing");
+  }catch(e){toast("🔇 Audio not available");}
+  renderAmbiencePanel(document.getElementById("ambience-panel"));
+}
+function renderAmbiencePanel(container){
+  if(!container)return;
+  container.innerHTML=`
+  <div style="font-size:9px;color:var(--ac);letter-spacing:2px;margin-bottom:10px;">🎵 AMBIENCE MUSIC</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+  ${AMBIENCE_TRACKS.map(t=>{
+    const active=ambiencePlaying&&ambienceType===t.id;
+    return`<div onclick="playAmbience('${t.id}')" style="cursor:pointer;background:${active?"rgba(201,168,76,.15)":"rgba(255,255,255,.04)"};border:1.5px solid ${active?"var(--ac)":"rgba(255,255,255,.1)"};border-radius:10px;padding:10px;text-align:center;transition:all .2s;">
+      <div style="font-size:24px;">${t.icon}</div>
+      <div style="font-size:9px;font-weight:700;color:${active?"var(--ac)":"var(--txt2)"};margin-top:4px;">${t.name}</div>
+      <div style="font-size:7px;color:var(--txt5);margin-top:2px;">${active?"▶ PLAYING":"tap to play"}</div>
+    </div>`;
+  }).join("")}
+  </div>
+  ${ambiencePlaying?`<button onclick="stopAmbience();renderAmbiencePanel(document.getElementById('ambience-panel'))" style="width:100%;margin-top:10px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#FF6B6B;border-radius:8px;padding:8px;cursor:pointer;font-family:var(--font);font-size:10px;">⏹ STOP MUSIC</button>`:""}`;
+}
+
+// ════ SEA CHART ISLAND UNLOCK ════
+function checkIslandUnlock(){
+  const xp=xpData.total;
+  const ISLAND_UNLOCK_XP=[0,200,500,1000,2000,3500,5000,7000,10000];
+  const islands=seaChartData.islands||[];
+  let changed=false;
+  islands.forEach((isl,i)=>{
+    const needed=ISLAND_UNLOCK_XP[Math.min(i,ISLAND_UNLOCK_XP.length-1)];
+    const wasLocked=isl.locked===true;
+    const shouldBeLocked=xp<needed;
+    if(wasLocked&&!shouldBeLocked){
+      isl.locked=false;changed=true;
+      toast("🏝️ Island unlocked: "+isl.name+"! ⚓");
+    } else if(!wasLocked&&shouldBeLocked&&i>0){
+      isl.locked=true;changed=true; // re-lock if XP dropped (decay)
+    }
+  });
+  if(changed)saveSeaChart();
+}
+
+// ════ CHAR AUTO-CHANGE CHECK ════
+function checkCharAutoChange(){
+  if(cfg.pinnedChar!==null&&cfg.pinnedChar!==undefined)return;// pinned, skip
+  // Auto changes every day based on date — already handled by currentCharIdx()
+  // Just make sure accent color is applied
+  applyAccent();
+}
+function renderMissions(){
+  updatePKBar();
+  renderBigCountdown(document.getElementById("big-countdown-panel"));
+  renderTargetActual(document.getElementById("target-actual-panel"));
+  renderWantedPoster(document.getElementById("wanted-poster-panel"));
+  renderDFShop(document.getElementById("df-shop-panel"));
+  renderAmbiencePanel(document.getElementById("ambience-panel"));
+  // Daily mission
+  const mp=document.getElementById("daily-mission-panel");
+  if(mp){
+    const mission=getDailyMission();
+    const prog=getMissionProgress(mission);
+    const pct=Math.min(100,Math.round(prog/mission.target*100));
+    const claimed=missionsData.claimed;
+    mp.innerHTML=`<div style="font-size:9px;color:var(--ac);letter-spacing:2px;margin-bottom:10px;">📜 TODAY'S DAILY MISSION</div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+      <div style="font-size:32px;">${mission.icon}</div>
+      <div style="flex:1;">
+        <div style="font-size:12px;color:var(--txt2);font-weight:600;">${mission.desc}</div>
+        <div style="font-size:9px;color:var(--txt4);margin-top:3px;">Reward: +${mission.reward} XP</div>
+      </div>
+      <div style="font-size:18px;font-weight:900;color:${pct>=100?"var(--green)":"var(--ac)"};">${pct}%</div>
+    </div>
+    <div style="height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;margin-bottom:10px;">
+      <div style="height:100%;width:${pct}%;background:${pct>=100?"var(--green)":"var(--ac)"};border-radius:3px;transition:width .4s;"></div>
+    </div>
+    ${claimed?'<div style="text-align:center;font-size:11px;color:var(--teal);">✅ CLAIMED!</div>':`<button onclick="claimMission()" style="width:100%;background:${pct>=100?"rgba(38,222,129,.15)":"rgba(255,255,255,.05)"};border:1.5px solid ${pct>=100?"var(--green)":"var(--bdr2)"};color:${pct>=100?"var(--green)":"var(--txt4)"};border-radius:8px;padding:9px;cursor:pointer;font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:1px;">${pct>=100?"🎉 CLAIM REWARD":"🔒 COMPLETE TO CLAIM"}</button>`}`;
+  }
+  // Streak freeze
+  const fp=document.getElementById("streak-freeze-panel");
+  if(fp){
+    refillStreakFreeze();
+    const today=todayKey();const used=freezeData.used.includes(today);
+    fp.innerHTML=`<div style="font-size:9px;color:var(--ac);letter-spacing:2px;margin-bottom:8px;">❄️ STREAK FREEZE</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-size:12px;color:var(--txt2);">Tokens: <span style="color:var(--ac);font-weight:700;">${freezeData.tokens}</span> / 1 this week</div>
+        <div style="font-size:9px;color:var(--txt4);margin-top:2px;">Protects your streak if you miss a day</div>
+      </div>
+      <button onclick="useStreakFreeze()" ${used||freezeData.tokens<=0?"disabled":""} style="background:rgba(100,180,255,.12);border:1.5px solid rgba(100,180,255,.4);color:#7dd3fc;border-radius:8px;padding:7px 14px;cursor:pointer;font-family:var(--font);font-size:10px;font-weight:700;${used||freezeData.tokens<=0?"opacity:.4;":""}">${used?"USED":"USE ❄️"}</button>
+    </div>`;
+  }
+  // Boss battle
+  const bp=document.getElementById("boss-battle-panel");
+  if(bp){
+    const boss=getCurrentBoss();
+    if(boss){
+      const prog=getBossProgress(boss);
+      const pct=Math.min(100,Math.round(prog/boss.target*100));
+      const isDefeated=bossData.defeated.includes(boss.name);
+      bp.innerHTML=`<div style="font-size:9px;color:#ef4444;letter-spacing:2px;margin-bottom:10px;">⚔️ BOSS BATTLE — WEEK ${boss.week}</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+        <div style="font-size:44px;${isDefeated?"filter:grayscale(1);opacity:.4":""}">${boss.emoji}</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:900;color:#ffffff;font-family:var(--head);">${boss.name}</div>
+          <div style="font-size:10px;color:var(--txt3);margin-top:2px;">${boss.desc}</div>
+          <div style="font-size:9px;color:var(--ac);margin-top:2px;">Reward: +${boss.reward} XP</div>
+        </div>
+      </div>
+      <div style="height:8px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;margin-bottom:6px;">
+        <div style="height:100%;width:${pct}%;background:${isDefeated?"var(--teal)":pct>=70?"var(--green)":pct>=40?"var(--orange)":"#ef4444"};border-radius:4px;transition:width .5s;box-shadow:0 0 8px currentColor;"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--txt4);">
+        <span>${isDefeated?"✅ DEFEATED!":"Progress: "+pct+"%"}</span>
+        <span>${boss.type==="weekly_timer"?fmtMin(prog)+"/"+fmtMin(boss.target):prog+"/"+boss.target}</span>
+      </div>`;
+    } else {
+      bp.innerHTML=`<div style="text-align:center;padding:16px;font-size:11px;color:var(--txt5);">⚔️ All bosses defeated! You are unstoppable! 👑</div>`;
+    }
+  }
+  // Achievements
+  const ag=document.getElementById("achievements-grid");
+  if(ag){
+    const earned=Object.keys(achievementsData.earned).length;
+    ag.innerHTML=`<div style="grid-column:1/-1;font-size:9px;color:var(--txt5);letter-spacing:1px;margin-bottom:4px;">${earned}/${ACHIEVEMENTS.length} UNLOCKED</div>`+
+    ACHIEVEMENTS.map(a=>{
+      const got=achievementsData.earned[a.id];
+      return`<div style="background:${got?"rgba(201,168,76,.12)":"rgba(255,255,255,.03)"};border:1.5px solid ${got?"rgba(201,168,76,.4)":"rgba(255,255,255,.08)"};border-radius:10px;padding:10px 6px;text-align:center;transition:all .2s;">
+        <div style="font-size:24px;${got?"":"filter:grayscale(1);opacity:.3;"}">${a.icon}</div>
+        <div style="font-size:8px;font-weight:700;color:${got?"var(--ac)":"var(--txt5)"};margin-top:4px;letter-spacing:.5px;">${a.name}</div>
+        <div style="font-size:7px;color:var(--txt5);margin-top:2px;line-height:1.3;">${a.desc}</div>
+      </div>`;
+    }).join("");
+  }
+  // Poneglyph
+  const pp=document.getElementById("poneglyph-panel");
+  if(pp){
+    const unlocked=PONEGLYPHS.filter(p=>xpData.total>=p.xp);
+    const next=PONEGLYPHS.find(p=>xpData.total<p.xp);
+    let pgHtml='<div style="font-size:9px;color:var(--ac);letter-spacing:2px;margin-bottom:10px;">📜 PONEGLYPHS — '+unlocked.length+'/'+PONEGLYPHS.length+' DECODED</div>';
+    if(unlocked.length){
+      pgHtml+='<div style="font-size:11px;color:rgba(255,255,255,.75);font-style:italic;line-height:1.6;padding:12px;background:rgba(201,168,76,.06);border-radius:8px;border-left:3px solid var(--ac);">'+unlocked[unlocked.length-1].text+'</div>';
+    } else {
+      pgHtml+='<div style="font-size:10px;color:var(--txt5);">Earn 500 XP to decode your first Poneglyph...</div>';
+    }
+    if(next){
+      pgHtml+='<div style="font-size:9px;color:var(--txt5);margin-top:8px;">🔒 Next at '+next.xp+' XP — '+Math.max(0,next.xp-xpData.total)+' more XP needed</div>';
+    } else {
+      pgHtml+='<div style="font-size:9px;color:var(--teal);margin-top:8px;">👑 ALL PONEGLYPHS DECODED! You found Laugh Tale!</div>';
+    }
+    pp.innerHTML=pgHtml;
+  }
+}
+
+// ════ SWITCH SECTION ════
 function switchSec(sec,btn){
-  const sw2=document.getElementById('subj-tabs-wrap');if(sw2)sw2.style.display=sec==='tasks'?'flex':'none';
   document.querySelectorAll(".nav-tab").forEach(t=>t.classList.remove("active"));
   if(btn)btn.classList.add("active");
   document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-  document.getElementById("sec-"+sec).classList.add("active");
+  const el=document.getElementById("sec-"+sec);
+  if(el)el.classList.add("active");
   currentSection=sec;
   if(sec==="seachart")renderSeaChart();
   if(sec==="stats")renderStats();
+  if(sec==="voyage"){renderStats();renderVoyageLog();}
   if(sec==="backgrounds")renderBgSection();
+  if(sec==="missions"){renderMissions();updatePKBar();}
+  if(sec==="log")renderVoyageLog();
+}
+function switchVoyage(tab,btn){
+  document.querySelectorAll("#sec-voyage .st-btn").forEach(b=>b.classList.remove("active"));
+  if(btn)btn.classList.add("active");
+  document.getElementById("voy-stats-panel").style.display=tab==="stats"?"block":"none";
+  document.getElementById("voy-log-panel").style.display=tab==="log"?"block":"none";
+  if(tab==="stats")renderStats();
+  if(tab==="log")renderVoyageLog();
 }
 
-// ════ TABS (DAY SUBJECTS) ════
-function renderTabs(){
-  const w=document.getElementById("subj-tabs-wrap");if(!w)return;
-  if(currentSection!=='tasks'){w.style.display='none';return;}w.style.display='flex';
-  const day=days[activeDay];const allSubs=Object.keys(day.tasks);
-  let html="";
-  allSubs.forEach((sub,i)=>{
-    const tks=day.tasks[sub]||[];const done=tks.filter(t=>gs(t.id)===S.D).length;const pct=tks.length?Math.round(done/tks.length*100):0;
-    const c=colorFor(i);const isActive=focusActive&&focusSub===sub;
-    html+=`<div class="tab-outer"><div class="tab-btn${isActive?" active":""}" style="--tab-color:${c};--tab-bg:rgba(${hexToRgb(c)},.14);" onclick="setFocusSub('${esc(sub)}')">`;
-    html+=`<span style="font-size:16px;">${ICONS[sub]||"📚"}</span><span style="font-size:9px;">${sub}</span>`;
-    html+=`<div class="tab-pbar"><div class="tab-pbar-fill" style="width:${pct}%;background:${c};"></div></div>`;
-    if(editMode)html+=`</div><button class="tab-del" data-sub="${encodeURIComponent(sub)}" onclick="delSub(decodeURIComponent(this.dataset.sub))">✕</button>`;
-    else html+=`</div>`;
-    html+=`</div>`;
-  });
-  if(editMode)html+=`<button class="add-tab-btn" onclick="addSub()">＋</button>`;
-  w.innerHTML=html;
-}
-function setFocusSub(sub){
-  if(focusActive&&focusSub===sub){focusActive=false;focusSub=null;}
-  else{focusActive=true;focusSub=sub;}
-  document.getElementById("focus-btn").classList.toggle("active",focusActive);
-  render();
-}
+// ════ TABS (DAY SUBJECTS) — removed, subjects shown in cards ════
+function renderTabs(){} // subject tabs removed
+function setFocusSub(sub){}
 function hexToRgb(hex){const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return`${r},${g},${b}`;}
 function esc(s){return(s+"").replace(/'/g,"\\'");}
 
@@ -1681,7 +2566,21 @@ function setDay(i){activeDay=i;render();}
 
 // ════ TASKS RENDER ════
 function render(){
-  updateBanner();updateStrip();renderDayTabs();renderTabs();renderMainContent();
+  updateBanner();updateStrip();renderDayTabs();renderTabs();renderMainContent();renderMiniCountdown();
+}
+function renderMiniCountdown(){
+  const el=document.getElementById("mini-countdown-bar");if(!el)return;
+  const upcoming=(seaChartData.islands||[]).filter(i=>!i.conquered).map(i=>{
+    const d=new Date(i.date);d.setHours(0,0,0,0);const today=new Date();today.setHours(0,0,0,0);
+    return{...i,dLeft:Math.round((d-today)/86400000)};
+  }).filter(i=>i.dLeft>=0).sort((a,b)=>a.dLeft-b.dLeft);
+  if(!upcoming.length){el.innerHTML="";return;}
+  const next=upcoming[0];
+  const urgency=next.dLeft<7?"#ef4444":next.dLeft<30?"var(--orange)":"var(--ac)";
+  el.innerHTML=`<div onclick="switchSec('missions',null)" style="cursor:pointer;background:rgba(0,0,0,.3);border:1px solid ${urgency};border-radius:10px;padding:8px 14px;display:flex;align-items:center;justify-content:space-between;">
+    <span style="font-size:9px;color:var(--txt4);">📅 ${next.examName}</span>
+    <span style="font-family:var(--head);font-size:16px;font-weight:900;color:${urgency};">${next.dLeft}d ${next.dLeft<7?"⚠️":"left"}</span>
+  </div>`;
 }
 function renderSubjectTabs(){renderTabs();}
 function renderMainContent(){
@@ -1695,7 +2594,8 @@ function renderMainContent(){
   html+="</div>";
   // Subject cards
   subs.forEach((sub,si)=>{
-    if(focusActive&&focusSub&&focusSub!==sub){html+=renderCard(sub,si,day,true);return;}
+    // focus mode removed
+    const faded=false;
     html+=renderCard(sub,si,day,false);
   });
   if(editMode){html+=`<button class="add-sub-btn" onclick="addSub()"><span style="font-size:18px;">＋</span> ADD SUBJECT</button>`;}
@@ -1877,7 +2777,7 @@ function timerStartStop(){
       timerData.totals[timerSub]=(timerData.totals[timerSub]||0)+elapsed;
       const tk2=todayKey();
       timerData.totals["day_"+tk2]=(timerData.totals["day_"+tk2]||0)+elapsed;
-      saveTimer2();addXP(Math.floor(elapsed/60));
+      saveTimer2();addXP(Math.floor(elapsed/1800));checkAchievements();
     }
   }
   updateTimerPanel();updateBanner();
@@ -1891,55 +2791,41 @@ function playSubTimer(sub){
 function updateTimerPanel(){
   const grid=document.getElementById("timer-grid");if(!grid)return;
   const day=days[activeDay];const subs=Object.keys(day.tasks);
-  grid.innerHTML=subs.map(sub=>{const t=timerData.totals&&timerData.totals[sub]||0;return`<div class="timer-card"><div class="timer-card-sub">${ICONS[sub]||"📚"} ${sub}</div><div class="timer-card-time${t?" has":""}">${fmtMin(t)||"0m"}</div></div>`;}).join("");
-  const tk2=todayKey();const todayTotal=timerData.totals&&timerData.totals["day_"+tk2]||0;
+  const tk2=todayKey();
+  // Build today's per-subject totals from sessions
+  const todaySubs={};
+  (timerData.sessions||[]).filter(s=>s.date===tk2).forEach(s=>{todaySubs[s.sub]=(todaySubs[s.sub]||0)+s.dur;});
+  // If timer currently running, add live elapsed
+  if(timerRunning&&timerStart&&timerSub){
+    const live=Math.floor((Date.now()-timerStart)/1000);
+    todaySubs[timerSub]=(todaySubs[timerSub]||0)+timerAccum+live;
+  }
+  grid.innerHTML=subs.map(sub=>{const t=todaySubs[sub]||0;return`<div class="timer-card"><div class="timer-card-sub">${ICONS[sub]||"📚"} ${sub}</div><div class="timer-card-time${t?" has":""}">${fmtMin(t)||"0m"}<div style="font-size:7px;color:var(--txt5);margin-top:2px;">TODAY</div></div></div>`;}).join("");
+  const todayTotal=timerData.totals&&timerData.totals["day_"+tk2]||0;
   const ttl=document.getElementById("today-total-lbl");if(ttl)ttl.textContent=fmtMin(todayTotal)||"0m";
-  const sl=document.getElementById("session-list");if(sl){const sessions=(timerData.sessions||[]).slice(-30).reverse();sl.innerHTML=sessions.map(s=>`<div class="session-item"><span class="session-sub">${ICONS[s.sub]||"📚"} ${s.sub}</span><span class="session-date">${s.date}</span><span class="session-dur">${fmtMin(s.dur)}</span></div>`).join("")||'<div style="padding:12px 14px;font-size:10px;color:var(--txt5);">No sessions yet.</div>';}
+  // 16hr goal progress
+  const goalSecs=16*3600;const goalPct=Math.min(100,Math.round(todayTotal/goalSecs*100));
+  const goalEl=document.getElementById("goal-bar-fill");const goalLbl=document.getElementById("goal-bar-lbl");
+  if(goalEl)goalEl.style.width=goalPct+"%";
+  if(goalLbl)goalLbl.textContent=goalPct+"% of 16hr goal";
+  const sl=document.getElementById("session-list");if(sl){const sessions=(timerData.sessions||[]).filter(s=>s.date===tk2).slice(-30).reverse();sl.innerHTML=sessions.map(s=>`<div class="session-item"><span class="session-sub">${ICONS[s.sub]||"📚"} ${s.sub}</span><span class="session-date">${s.date}</span><span class="session-dur">${fmtMin(s.dur)}</span></div>`).join("")||'<div style="padding:12px 14px;font-size:10px;color:var(--txt5);">No sessions today.</div>';}
   document.getElementById("timer-sub-lbl").textContent=timerSub?(timerRunning?"TIMING: ":"SUBJECT: ")+timerSub.toUpperCase():"NO SUBJECT RUNNING";
 }
-function toggleTimerMode(){
-  pomodoroMode=!pomodoroMode;
-  document.getElementById("regular-timer-section").style.display=pomodoroMode?"none":"block";
-  document.getElementById("pomo-section").style.display=pomodoroMode?"block":"none";
-  document.getElementById("timer-mode-btn").textContent=pomodoroMode?"⏱ REGULAR TIMER":"🍅 POMODORO MODE";
-  document.getElementById("timer-mode-btn").classList.toggle("pomo-active",pomodoroMode);
-  if(pomodoroMode)initPomo();
-}
-// POMODORO
-const POMO_WORK=25*60,POMO_SHORT=5*60,POMO_LONG=15*60,POMO_CYCLES=4;
-function initPomo(){pomoPhase="work";pomoSecsLeft=POMO_WORK;pomoCycle=0;pomoSet=0;updatePomoUI();}
-function pomoStartStop(){
-  if(pomoRunning){pomoRunning=false;clearInterval(pomoInterval);document.getElementById("pomo-start-btn").textContent="▶ START";}
-  else{pomoRunning=true;pomoInterval=setInterval(pomoTick,1000);document.getElementById("pomo-start-btn").textContent="⏸ PAUSE";}
-}
-function pomoTick(){
-  if(pomoSecsLeft<=0){advancePomoPhase();return;}
-  pomoSecsLeft--;updatePomoUI();
-}
-function advancePomoPhase(){
-  pomoRunning=false;clearInterval(pomoInterval);soundBell();
-  if(pomoPhase==="work"){pomoCycle++;if(pomoCycle>=POMO_CYCLES){pomoCycle=0;pomoSet++;pomoPhase="long";pomoSecsLeft=POMO_LONG;toast("✅ Long break time! Well done!");}else{pomoPhase="short";pomoSecsLeft=POMO_SHORT;toast("✅ Short break time!");}}
-  else{pomoPhase="work";pomoSecsLeft=POMO_WORK;toast("🍅 Back to focus!");}
-  document.getElementById("pomo-start-btn").textContent="▶ START";updatePomoUI();
-}
-function pomoReset(){pomoRunning=false;clearInterval(pomoInterval);initPomo();}
-function pomoSkipPhase(){advancePomoPhase();}
-function updatePomoUI(){
-  const m=Math.floor(pomoSecsLeft/60),s=pomoSecsLeft%60;
-  const el=document.getElementById("pomo-time-text");if(el)el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  const phEl=document.getElementById("pomo-phase-text");if(phEl)phEl.textContent=pomoPhase==="work"?"FOCUS":pomoPhase==="short"?"SHORT BREAK":"LONG BREAK";
-  const total=pomoPhase==="work"?POMO_WORK:pomoPhase==="short"?POMO_SHORT:POMO_LONG;
-  const arc=document.getElementById("pomo-arc");if(arc){const dash=490.09;arc.setAttribute("stroke-dashoffset",dash*(pomoSecsLeft/total));arc.style.stroke=pomoPhase==="work"?"var(--ac)":pomoPhase==="short"?"var(--teal)":"var(--purple)";}
-  const dotsEl=document.getElementById("pomo-dots");if(dotsEl){let dhtml="";for(let i=0;i<POMO_CYCLES;i++){dhtml+=`<div class="pomo-dot${i<pomoCycle?" done":i===pomoCycle&&pomoPhase==="work"?" active":""}"></div>`;}dotsEl.innerHTML=dhtml;}
-  const cc=document.getElementById("pomo-cycle-count");if(cc)cc.textContent=`SET ${pomoSet+1} — CYCLE ${pomoCycle+1}/${POMO_CYCLES}`;
-  if(pomoPhase==="work"&&timerSub){const sec=POMO_WORK-pomoSecsLeft;if(sec>0&&sec%60===0){timerData.sessions=timerData.sessions||[];const lastS=timerData.sessions[timerData.sessions.length-1];if(lastS&&lastS.sub===timerSub&&Date.now()-lastS.ts<70000){lastS.dur+=60;}else{timerData.sessions.push({sub:timerSub,dur:60,date:todayKey(),ts:Date.now()});}timerData.totals=timerData.totals||{};timerData.totals[timerSub]=(timerData.totals[timerSub]||0)+60;saveTimer2();addXP(1);}}
-}
+function toggleTimerMode(){}
+function initPomo(){}
+function pomoStartStop(){}
+function pomoTick(){}
+function advancePomoPhase(){}
+function restorePomo(){}
+function pomoReset(){}
+function pomoSkipPhase(){}
+function updatePomoUI(){}
 
 // ════ STATS ════
 function setStatRange(n,btn){statsRange=n;document.querySelectorAll(".st-btn").forEach(b=>b.classList.remove("active"));if(btn)btn.classList.add("active");renderStats();}
 
 function renderStats(){
-  if(currentSection!=="stats")return;
+  if(currentSection!=="stats"&&currentSection!=="voyage")return;
   const today=new Date();today.setHours(0,0,0,0);
   const sdt=new Date(meta.startDate);sdt.setHours(0,0,0,0);
   const rangeData=[];
@@ -2096,8 +2982,15 @@ function renderBgSection(){
   const bg=document.getElementById("bg-grid");if(bg){
     bg.innerHTML=SCENES.map(sc=>{
       const isSelected=cfg.bg===sc.key;const isPinned=cfg.pinnedBg&&isSelected;
-      return`<div class="bg-card${isSelected?" selected":""}" onclick="toggleScenePin('${sc.key}')"><div class="bg-card-preview" style="${scenePreviewStyle(sc.key)}"></div><div class="bg-card-body"><div class="bg-card-name">${sc.name}</div><div class="bg-time-hint">Auto: ${sc.time}h</div><div style="margin-top:4px;">${isPinned?'<span class="bg-badge pinned">📍 PINNED</span>':isSelected?'<span class="bg-badge auto">▶ ACTIVE</span>':''}</div></div></div>`;
+      return`<div class="bg-card${isSelected?" selected":""}" onclick="toggleScenePin('${sc.key}')"><div class="bg-card-preview">${scenePreviewHTML(sc.key)}</div><div class="bg-card-body"><div class="bg-card-name">${sc.name}</div><div class="bg-time-hint">${sc.time==="Manual"?"Manual":"⏰ "+sc.time+"h"}</div><div style="margin-top:4px;">${isPinned?'<span class="bg-badge pinned">📍 PINNED</span>':isSelected?'<span class="bg-badge auto">▶ NOW ACTIVE</span>':''}</div></div></div>`;
     }).join("");
+  }
+  // char-auto-info
+  const cai=document.getElementById("char-auto-info");
+  if(cai){
+    const ch=CHARS[currentCharIdx()];
+    const autoTxt=cfg.pinnedChar===null?'<span style="color:var(--teal);font-size:9px;letter-spacing:1px;">⏰ AUTO — changes every day</span>':'<span style="color:var(--ac);font-size:9px;letter-spacing:1px;">📍 PINNED — tap again to unpin</span>';
+    cai.innerHTML=`<div style="background:rgba(0,0,0,.2);border:1px solid var(--bdr);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:28px;">${ch.emoji}</span><div><div style="font-size:12px;font-weight:700;color:${ch.color};">${ch.name}</div><div style="font-size:10px;color:var(--txt4);font-style:italic;margin-top:1px;">"${ch.quote}"</div><div style="margin-top:4px;">${autoTxt}</div></div></div>`;
   }
   // Char grid
   const cg=document.getElementById("char-grid");if(cg){
@@ -2118,25 +3011,25 @@ function unpinChar(){cfg.pinnedChar=null;applyAccent();saveCfg();renderBgSection
 function init(){
   load();
   applyDark();applyAccent();
-  // Scene
   autoScene();setInterval(autoScene,60*1000);
-  // Buff check
   if(buffData.active&&Date.now()<buffData.expiresAt)startBuffUI();else{buffData.active=false;saveBuff();}
-  // Unlock check (no popup on init)
   const xp=xpData.total;CHARS.forEach((ch,i)=>{if(ch.unlockXP===0)return;const key="char_"+i;if(xp>=ch.unlockXP&&!unlocksData.unlocked[key]){unlocksData.unlocked[key]=true;}});saveUnlocks();
-  // Quote
   quoteIdx=Math.floor(Math.random()*QUOTES.length);renderQuote();
-  // Today auto-select
+  startAutoQuote();startAutoAccent();
   const today=studyDayNum();if(today>=0&&today<days.length)activeDay=today;else activeDay=0;
-  // Render
   loadSubjectColors();
   restoreLiveTimer();
   setTimeout(updateWaveProgress,500);
   checkHardcorePenalty();updateHardcoreBanner();
+  checkXPDecay();
+  checkAchievements();
+  checkIslandUnlock();
+  refillStreakFreeze();
+  checkCharAutoChange();
+  autoGenerateDays();
   render();updateRankHUD();updateTimerPanel();
-  // Clock
-  updateClock();setInterval(updateClock,1000);setInterval(updateBanner,30000);
-  // Hide loading
+  setInterval(updateBanner,30000);
+  setInterval(()=>{checkAchievements();checkBossDefeated();checkIslandUnlock();},60000);
   document.getElementById("loading").style.display="none";
   document.getElementById("app").style.display="block";
 }
@@ -2198,14 +3091,10 @@ function restoreLiveTimer(){
 }
 document.addEventListener("visibilitychange",()=>{
   if(document.visibilityState==="visible"){
-    if(timerRunning&&timerStart){
-      // Just update the display — timer was always counting via timestamp diff
-      timerTick();updateBanner();
-    } else {
-      restoreLiveTimer();
-    }
+    if(timerRunning&&timerStart){timerTick();updateBanner();}
+    else{restoreLiveTimer();}
+    // pomodoro removed
   } else if(document.visibilityState==="hidden"){
-    // Save current state when leaving
     if(timerRunning&&timerStart&&timerSub){
       try{localStorage.setItem("sp_timer_live",JSON.stringify({sub:timerSub,start:timerStart,accum:timerAccum,date:todayKey()}));}catch(e){}
     }
@@ -2251,8 +3140,8 @@ function checkHardcorePenalty(){
   if(!allT.length)return;
   const doneT=allT.filter(t=>gs(t.id)===S.D).length;
   if(doneT/allT.length<0.5){
-    addXP(-50);
-    setTimeout(()=>toast("💀 HARDCORE: -50 XP! You slacked yesterday!"),1500);
+    addXP(-20);
+    setTimeout(()=>toast("💀 HARDCORE: -20 XP! You slacked yesterday!"),1500);
   }
 }
 
@@ -2372,12 +3261,12 @@ document.addEventListener("DOMContentLoaded",init);
       // Swipe right → DONE
       el.style.transition="transform .25s ease,opacity .25s";
       el.style.transform="translateX(120%)";el.style.opacity="0";
-      setTimeout(()=>{const prev=gs(tid);if(prev!==S.D){tasks[tid]=S.D;if(prev===S.P){addXP(10);soundDone();checkDevilFruit();}checkDayComplete();save();render();updateWaveProgress();}},250);
+      setTimeout(()=>{const prev=gs(tid);if(prev!==S.D){tasks[tid]=S.D;if(prev===S.P){addXP(2);soundDone();checkDevilFruit();checkSeaKingDefeat();}checkDayComplete();save();render();updateWaveProgress();}},250);
     } else if(dx<-THRESH){
       // Swipe left → SKIP
       el.style.transition="transform .25s ease,opacity .25s";
       el.style.transform="translateX(-120%)";el.style.opacity="0";
-      setTimeout(()=>{const prev=gs(tid);if(prev!==S.X){if(prev===S.D){addXP(-10);addXP(-3);}tasks[tid]=S.X;soundSkip();checkDayComplete();save();render();updateWaveProgress();}},250);
+      setTimeout(()=>{const prev=gs(tid);if(prev!==S.X){if(prev===S.D){addXP(-2);}tasks[tid]=S.X;soundSkip();triggerSeaKingAttack();checkDayComplete();save();render();updateWaveProgress();}},250);
     } else {
       el.classList.remove("swiping");
       el.style.transform="";
