@@ -317,10 +317,72 @@ main{max-width:980px;margin:0 auto;padding:16px 16px 60px;position:relative;z-in
 .modal-input::placeholder{color:rgba(255,255,255,.35);}
 .modal-save{width:100%;background:rgba(201,168,76,.22);border:1.5px solid var(--ac);color:var(--ac);border-radius:8px;padding:11px;cursor:pointer;font-family:var(--font);font-size:12px;font-weight:700;margin-bottom:8px;}
 .modal-cancel{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:#aaaaaa;border-radius:8px;padding:10px;cursor:pointer;font-family:var(--font);font-size:11px;}
-#loading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:14px;}
+#loading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:0;background:#030310;position:relative;overflow:hidden;}
+#loading-jolly{font-size:90px;animation:jolly-float 2s ease-in-out infinite;filter:drop-shadow(0 0 40px rgba(201,168,76,.6));margin-bottom:16px;}
+@keyframes jolly-float{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-14px) rotate(3deg);}}
+#loading-title{font-family:var(--head);font-size:28px;font-weight:900;color:#C9A84C;letter-spacing:3px;text-shadow:0 0 30px rgba(201,168,76,.5);margin-bottom:4px;}
+#loading-sub{font-size:9px;color:rgba(255,255,255,.25);letter-spacing:4px;margin-bottom:28px;}
+#loading-crew{display:flex;gap:10px;font-size:22px;margin-bottom:24px;animation:crew-appear 1s ease both .3s;opacity:0;}
+@keyframes crew-appear{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+#loading-bar-wrap{width:220px;height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;}
+#loading-bar-fill{height:100%;width:0%;background:linear-gradient(90deg,#C9A84C,#ffd700);border-radius:2px;transition:width .05s linear;}
+#loading-msg{font-size:9px;color:rgba(255,255,255,.2);letter-spacing:3px;margin-top:10px;}
 .spinner{width:40px;height:40px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--ac);border-radius:50%;animation:spin .8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* ── ONBOARDING OVERLAY ── */
+#onboard-overlay{position:fixed;inset:0;z-index:900;background:linear-gradient(135deg,#030310 0%,#0a0a25 50%,#100a00 100%);display:flex;align-items:center;justify-content:center;padding:20px;}
+#onboard-card{background:linear-gradient(145deg,rgba(20,15,5,.95),rgba(5,5,20,.95));border:2px solid rgba(201,168,76,.4);border-radius:24px;padding:32px 24px;max-width:380px;width:100%;text-align:center;box-shadow:0 0 60px rgba(201,168,76,.2);}
+.onboard-jolly{font-size:72px;animation:jolly-float 3s ease-in-out infinite;filter:drop-shadow(0 0 30px rgba(201,168,76,.5));}
+.onboard-title{font-family:var(--head);font-size:26px;font-weight:900;color:#C9A84C;margin:12px 0 4px;letter-spacing:2px;}
+.onboard-sub{font-size:10px;color:rgba(255,255,255,.4);letter-spacing:2px;margin-bottom:24px;}
+.onboard-label{font-size:9px;color:rgba(255,255,255,.4);letter-spacing:2px;text-align:left;margin-bottom:6px;margin-top:14px;}
+.onboard-input{width:100%;background:rgba(255,255,255,.06);border:1.5px solid rgba(201,168,76,.35);border-radius:10px;padding:12px 14px;color:#fff;font-family:var(--head);font-size:16px;font-weight:700;letter-spacing:1px;text-align:center;}
+.onboard-input:focus{outline:none;border-color:var(--ac);box-shadow:0 0 12px rgba(201,168,76,.25);}
+.onboard-input::placeholder{color:rgba(255,255,255,.2);font-size:13px;font-family:var(--font);font-weight:400;letter-spacing:0;}
+.onboard-btn{width:100%;margin-top:20px;background:linear-gradient(135deg,rgba(201,168,76,.25),rgba(201,168,76,.1));border:2px solid var(--ac);color:var(--ac);border-radius:12px;padding:13px;cursor:pointer;font-family:var(--head);font-size:15px;font-weight:700;letter-spacing:2px;transition:all .2s;}
+.onboard-btn:active{transform:scale(.97);}
+.onboard-crew{display:flex;justify-content:center;gap:8px;font-size:20px;margin:16px 0 0;opacity:.5;}
+
+/* ── GRAND FINALE SCREEN ── */
+#finale-overlay{position:fixed;inset:0;z-index:950;display:none;align-items:center;justify-content:center;background:#000;overflow:hidden;}
+#finale-overlay.active{display:flex;}
+.finale-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(201,168,76,.25) 0%,rgba(255,100,0,.1) 30%,#000 70%);animation:finale-pulse 3s ease-in-out infinite;}
+@keyframes finale-pulse{0%,100%{opacity:.8;}50%{opacity:1;}}
+.finale-inner{position:relative;text-align:center;padding:32px 24px;max-width:400px;width:90%;}
+.finale-jolly{font-size:100px;animation:finale-jolly 1.5s ease-in-out infinite alternate;filter:drop-shadow(0 0 50px rgba(201,168,76,.8));}
+@keyframes finale-jolly{from{transform:scale(1) rotate(-5deg);}to{transform:scale(1.08) rotate(5deg);}}
+.finale-title{font-family:var(--head);font-size:32px;font-weight:900;color:#ffd700;text-shadow:0 0 30px rgba(255,215,0,.8);margin:16px 0 6px;letter-spacing:3px;}
+.finale-name{font-family:var(--head);font-size:22px;color:#fff;margin-bottom:4px;}
+.finale-sub{font-size:10px;color:rgba(255,255,255,.5);letter-spacing:3px;margin-bottom:20px;}
+.finale-quote{font-size:12px;color:rgba(255,255,255,.75);font-style:italic;line-height:1.7;padding:14px;background:rgba(201,168,76,.08);border-radius:12px;border-left:3px solid var(--ac);margin-bottom:20px;}
+.finale-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px;}
+.finale-stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 6px;}
+.finale-stat-val{font-family:var(--head);font-size:22px;font-weight:900;color:#ffd700;}
+.finale-stat-lbl{font-size:8px;color:rgba(255,255,255,.4);letter-spacing:1.5px;margin-top:3px;}
+.finale-close{width:100%;background:linear-gradient(135deg,rgba(201,168,76,.25),rgba(255,150,0,.15));border:2px solid var(--ac);color:var(--ac);border-radius:12px;padding:13px;cursor:pointer;font-family:var(--head);font-size:14px;font-weight:700;letter-spacing:2px;}
+
+/* ── PIRATE NAME IN HEADER ── */
+.pirate-name-badge{font-family:var(--head);font-size:13px;font-weight:900;color:var(--ac);letter-spacing:1.5px;cursor:pointer;padding:3px 8px;border:1px solid rgba(201,168,76,.3);border-radius:8px;background:rgba(201,168,76,.06);}
+
+/* ── BATTLE PLAN CARD ── */
+.battle-plan{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.03));border:1.5px solid rgba(201,168,76,.25);border-radius:12px;padding:11px 14px;margin-bottom:10px;display:flex;align-items:center;gap:12px;}
+.battle-plan-icon{font-size:24px;flex-shrink:0;}
+.battle-plan-txt{flex:1;}
+.battle-plan-title{font-size:10px;font-weight:700;color:var(--ac);letter-spacing:1.5px;}
+.battle-plan-desc{font-size:11px;color:rgba(255,255,255,.8);margin-top:2px;}
+.battle-plan-badge{font-family:var(--head);font-size:18px;font-weight:900;color:#ffd700;flex-shrink:0;}
+
+/* ── NAKAMA REACTION BUBBLE ── */
+.nakama-reaction{position:fixed;z-index:500;pointer-events:none;display:flex;align-items:flex-start;gap:6px;animation:nakama-pop .4s cubic-bezier(.175,.885,.32,1.275) forwards,nakama-fade 2.5s ease forwards 1.2s;}
+@keyframes nakama-pop{from{opacity:0;transform:scale(.5) translateY(10px);}to{opacity:1;transform:scale(1) translateY(0);}}
+@keyframes nakama-fade{from{opacity:1;}to{opacity:0;}}
+.nakama-reaction-emoji{font-size:30px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.6));}
+.nakama-reaction-bubble{background:rgba(10,10,25,.92);border:1.5px solid rgba(201,168,76,.35);border-radius:14px 14px 14px 0;padding:8px 12px;max-width:200px;}
+.nakama-reaction-name{font-size:8px;color:var(--ac);letter-spacing:1.5px;margin-bottom:3px;}
+.nakama-reaction-msg{font-size:10px;color:rgba(255,255,255,.85);line-height:1.4;}
+
 .glass-panel{background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:16px;margin-bottom:14px;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);}
 .timer-hero{text-align:center;padding:24px 0 12px;}
 .timer-clock{font-family:var(--head);font-size:68px;font-weight:900;color:var(--ac);letter-spacing:2px;line-height:1;text-shadow:0 0 40px rgba(201,168,76,.4);}
@@ -514,7 +576,293 @@ main{max-width:980px;margin:0 auto;padding:16px 16px 60px;position:relative;z-in
 @keyframes sk-rise{0%{opacity:0;transform:translateY(0);}15%{opacity:.8;transform:translateY(-60px);}80%{opacity:.8;transform:translateY(-60px);}100%{opacity:0;transform:translateY(0);}}
 /* Bouncy XP particles */
 .xp-particle{position:fixed;pointer-events:none;z-index:500;font-family:var(--font);font-size:14px;font-weight:900;color:#fbbf24;text-shadow:0 0 8px rgba(251,191,36,.8);animation:xp-float 1.5s ease-out forwards;}
-@keyframes xp-float{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-80px) scale(1.4);}}
+@keyframes xp-float{0%{opacity:1;transform:translateY(0) scale(1);}60%{opacity:1;transform:translateY(-60px) scale(1.3);}100%{opacity:0;transform:translateY(-100px) scale(1.5);}}
+
+/* Task tick animation */
+@keyframes chip-tick{
+  0%{transform:scale(1);}
+  30%{transform:scale(1.12);}
+  60%{transform:scale(0.95);}
+  100%{transform:scale(1);}
+}
+@keyframes chip-tick-glow{
+  0%{box-shadow:0 0 0px rgba(78,205,196,0);}
+  40%{box-shadow:0 0 14px rgba(78,205,196,.7);}
+  100%{box-shadow:0 0 0px rgba(78,205,196,0);}
+}
+.chip.tick-anim{animation:chip-tick .35s cubic-bezier(.36,.07,.19,.97),chip-tick-glow .5s ease-out;}
+
+/* Timer glow pulse */
+@keyframes timer-glow-pulse{
+  0%,100%{text-shadow:0 0 20px rgba(201,168,76,.3),0 0 40px rgba(201,168,76,.15);}
+  50%{text-shadow:0 0 30px rgba(201,168,76,.7),0 0 60px rgba(201,168,76,.35),0 0 90px rgba(201,168,76,.15);}
+}
+.timer-clock.running{animation:timer-glow-pulse 2s ease-in-out infinite;}
+
+/* Day tab slide */
+@keyframes tab-slide-in{
+  from{opacity:0;transform:translateY(8px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.main-content-anim{animation:tab-slide-in .22s cubic-bezier(.25,.46,.45,.94);}
+
+/* ═══════════════════════════════════════════════
+   ONE PIECE ANIME ANIMATIONS
+═══════════════════════════════════════════════ */
+
+/* ── CREW MEMBER BADGE on subject cards ── */
+.crew-badge{display:inline-flex;align-items:center;gap:3px;font-size:9px;padding:2px 6px;border-radius:6px;border:1px solid;margin-left:4px;letter-spacing:.5px;font-family:var(--font);}
+
+/* ── SUBJECT MASTERY BADGE ── */
+.mastery-badge{display:inline-flex;align-items:center;gap:3px;font-size:8px;padding:2px 7px;border-radius:10px;font-family:var(--font);letter-spacing:.5px;font-weight:700;border:1px solid;}
+.mastery-0{color:rgba(150,150,180,.8);border-color:rgba(150,150,180,.25);background:rgba(150,150,180,.08);}
+.mastery-1{color:#60a5fa;border-color:rgba(96,165,250,.3);background:rgba(96,165,250,.1);}
+.mastery-2{color:#34d399;border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.1);}
+.mastery-3{color:#fbbf24;border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.1);}
+.mastery-4{color:#f472b6;border-color:rgba(244,114,182,.35);background:rgba(244,114,182,.1);}
+/* Mastery level up flash on card */
+@keyframes mastery-up{0%{transform:scale(1);}30%{transform:scale(1.25);}60%{transform:scale(.95);}100%{transform:scale(1);}}
+.mastery-levelup{animation:mastery-up .5s ease-out;}
+
+/* ── COMBO FLAME BAR ── */
+#combo-bar{position:fixed;bottom:82px;right:12px;z-index:450;pointer-events:none;
+  display:flex;flex-direction:column;align-items:flex-end;gap:2px;
+  transition:opacity .4s;}
+#combo-bar.hidden{opacity:0;}
+.combo-flame{font-size:22px;line-height:1;filter:drop-shadow(0 0 8px rgba(255,150,0,.7));}
+.combo-count{font-family:var(--head);font-size:14px;font-weight:900;color:#ffd700;
+  text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
+  letter-spacing:1px;}
+.combo-label{font-size:7px;color:rgba(255,200,80,.7);letter-spacing:2px;font-family:var(--font);}
+@keyframes combo-pop{0%{transform:scale(1);}40%{transform:scale(1.3);}100%{transform:scale(1);}}
+.combo-pop{animation:combo-pop .3s ease-out;}
+
+/* ── DAILY CHALLENGE CARD ── */
+.challenge-card{background:linear-gradient(135deg,rgba(251,191,36,.08),rgba(201,168,76,.04));
+  border:1px solid rgba(251,191,36,.3);border-radius:14px;padding:14px;margin-bottom:12px;}
+.challenge-title{font-size:9px;color:var(--ac);letter-spacing:2px;margin-bottom:6px;font-family:var(--font);}
+.challenge-desc{font-size:13px;color:var(--txt);font-family:var(--head);font-weight:700;margin-bottom:8px;}
+.challenge-reward{font-size:9px;color:rgba(251,191,36,.8);letter-spacing:1px;}
+.challenge-done{opacity:.5;text-decoration:line-through;}
+.challenge-progress{height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;margin-top:8px;}
+.challenge-progress-fill{height:100%;background:linear-gradient(90deg,#fbbf24,#f59e0b);border-radius:2px;transition:width .5s;}
+
+/* ── ISLAND PREP RING ── */
+.island-prep-ring{position:absolute;top:-8px;right:-8px;z-index:5;}
+.island-prep-label{font-size:7px;color:rgba(255,255,255,.6);letter-spacing:.5px;text-align:center;margin-top:1px;}
+
+/* ── END OF DAY SUMMARY ── */
+#eod-panel{position:fixed;inset:0;z-index:970;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);}
+#eod-panel.active{display:flex;}
+.eod-card{background:linear-gradient(135deg,#0d1b2e,#0a1628);border:1px solid rgba(201,168,76,.4);border-radius:20px;padding:24px;width:min(340px,92vw);text-align:center;}
+.eod-title{font-family:var(--head);font-size:22px;font-weight:900;color:#ffd700;letter-spacing:2px;margin-bottom:4px;}
+.eod-sub{font-size:9px;color:var(--txt4);letter-spacing:2px;margin-bottom:18px;}
+.eod-grade{font-family:var(--head);font-size:56px;font-weight:900;margin:8px 0;}
+.eod-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:11px;}
+.eod-row-lbl{color:var(--txt4);}
+.eod-row-val{color:var(--txt);font-weight:600;}
+.eod-close{margin-top:16px;padding:10px 28px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);border-radius:10px;color:#ffd700;font-family:var(--head);font-size:12px;cursor:pointer;letter-spacing:1px;}
+
+/* ── DEVIL FRUIT POWER effects ── */
+@keyframes df-gomu{0%,100%{transform:scale(1);}30%{transform:scale(1.08) translateX(4px);}60%{transform:scale(.96) translateX(-3px);}}
+@keyframes df-mera{0%,100%{filter:hue-rotate(0deg) brightness(1);}50%{filter:hue-rotate(20deg) brightness(1.3);}}
+@keyframes df-hie{0%,100%{filter:hue-rotate(0deg) brightness(1);}50%{filter:hue-rotate(180deg) brightness(1.2);}}
+@keyframes df-ope{0%,100%{box-shadow:0 0 0 2px transparent;}50%{box-shadow:0 0 12px 3px rgba(61,201,224,.6);}}
+.df-gomu-active .chip{animation:df-gomu .5s ease-out;}
+.df-mera-active .chip.done{animation:df-mera .8s ease-in-out;}
+.df-hie-active .chip.done{animation:df-hie .8s ease-in-out;}
+.df-ope-active .chip{animation:df-ope 1s ease-in-out infinite;}
+
+/* ── SHIP UPGRADES ── */
+@keyframes ship-upgrade-glow{0%,100%{filter:drop-shadow(0 0 6px rgba(201,168,76,.4));}50%{filter:drop-shadow(0 0 18px rgba(201,168,76,.9));}}
+.ship-upgraded{animation:ship-upgrade-glow 2s ease-in-out infinite;}
+
+/* ── MAP WEATHER ── */
+@keyframes weather-rain{0%{background-position:0 0;}100%{background-position:0 100px;}}
+@keyframes weather-lightning{0%,88%,100%{opacity:0;}90%,96%{opacity:.8;}93%,98%{opacity:.1;}}
+.map-weather-overlay{position:absolute;inset:0;pointer-events:none;z-index:3;}
+.weather-sunny{background:radial-gradient(ellipse 60% 30% at 50% 0%,rgba(255,220,80,.12) 0%,transparent 70%);}
+.weather-stormy{background:repeating-linear-gradient(180deg,transparent 0px,transparent 8px,rgba(100,150,255,.04) 8px,rgba(100,150,255,.06) 9px);animation:weather-rain 1.2s linear infinite;}
+.weather-lightning-el{position:absolute;top:0;left:0;right:0;height:100%;pointer-events:none;animation:weather-lightning 2.5s ease-in-out infinite;}
+
+/* ── SEA CREATURES ── */
+@keyframes fish-swim-left{0%{transform:translateX(110%) scaleX(-1);}100%{transform:translateX(-30%) scaleX(-1);}}
+@keyframes fish-swim-right{0%{transform:translateX(-30%);}100%{transform:translateX(110%);}}
+@keyframes whale-swim{0%{transform:translateX(-20%);}100%{transform:translateX(110%);}}
+.sea-creature{position:absolute;pointer-events:none;z-index:2;font-size:28px;}
+
+/* ── CHARACTER UNLOCK ANIMATION ── */
+@keyframes char-unlock-entrance{0%{opacity:0;transform:translate(-50%,-50%) scale(0) rotate(-15deg);}40%{opacity:1;transform:translate(-50%,-50%) scale(1.2) rotate(5deg);}65%{transform:translate(-50%,-50%) scale(.95) rotate(-2deg);}80%{transform:translate(-50%,-50%) scale(1.05) rotate(0);}100%{transform:translate(-50%,-50%) scale(1) rotate(0);}}
+#char-unlock-screen{position:fixed;inset:0;z-index:960;pointer-events:none;display:none;background:rgba(0,0,0,.75);backdrop-filter:blur(4px);}
+#char-unlock-screen.active{display:flex;align-items:center;justify-content:center;}
+.char-unlock-card{text-align:center;animation:char-unlock-entrance .7s cubic-bezier(.175,.885,.32,1.275) both;}
+.char-unlock-emoji-big{font-size:80px;display:block;margin-bottom:8px;filter:drop-shadow(0 0 30px rgba(255,215,0,.8));}
+.char-unlock-label{font-size:10px;color:var(--ac);letter-spacing:3px;font-family:var(--font);}
+.char-unlock-name-big{font-family:var(--head);font-size:36px;font-weight:900;color:#fff;text-shadow:0 0 20px rgba(255,215,0,.6);}
+.char-unlock-quote{font-size:11px;color:var(--txt2);max-width:240px;margin:8px auto 0;font-style:italic;}
+@keyframes char-unlock-ray{from{transform:translate(-50%,-50%) rotate(0deg);}to{transform:translate(-50%,-50%) rotate(360deg);}}
+.char-unlock-rays{position:absolute;left:50%;top:42%;width:300px;height:300px;background:repeating-conic-gradient(rgba(255,215,0,.06) 0deg 10deg,transparent 10deg 20deg);border-radius:50%;animation:char-unlock-ray 8s linear infinite;}
+
+/* ── MANGA PANEL FLASH (task complete) ── */
+#manga-flash{display:none;} /* disabled — replaced by local burst */
+/* Local impact burst ring around chip */
+.chip-burst-ring{position:fixed;pointer-events:none;z-index:810;border-radius:50%;border:2px solid rgba(78,205,196,.9);animation:chip-burst 0.9s ease-out forwards;}
+@keyframes chip-burst{0%{transform:translate(-50%,-50%) scale(0.3);opacity:1;}100%{transform:translate(-50%,-50%) scale(2.8);opacity:0;}}
+/* Manga-style impact star behind shout */
+.impact-star{position:fixed;pointer-events:none;z-index:808;font-size:60px;opacity:0;animation:star-pop 2s ease-out forwards;}
+@keyframes star-pop{0%{opacity:0;transform:translate(-50%,-50%) scale(0) rotate(-15deg);}20%{opacity:.18;transform:translate(-50%,-50%) scale(1.1) rotate(5deg);}55%{opacity:.13;}80%{opacity:.1;}100%{opacity:0;transform:translate(-50%,-50%) scale(1) rotate(0deg);}}
+
+/* ── IMPACT TEXT (GOMU GOMU / YOSH etc) ── */
+.impact-text{position:fixed;pointer-events:none;z-index:910;font-family:var(--head);font-weight:900;color:#fff;
+  text-shadow:-3px -3px 0 #000,3px -3px 0 #000,-3px 3px 0 #000,3px 3px 0 #000,0 0 20px rgba(255,200,0,.8);
+  letter-spacing:2px;text-align:center;line-height:1;
+  animation:impact-pop 1.4s cubic-bezier(.175,.885,.32,1.275) forwards;}
+@keyframes impact-pop{
+  0%  {opacity:0;transform:translate(-50%,-50%) scale(0.1) rotate(-5deg);}
+  15% {opacity:1;transform:translate(-50%,-50%) scale(1.3) rotate(2deg);}
+  28% {transform:translate(-50%,-50%) scale(0.97) rotate(0deg);}
+  40% {opacity:1;transform:translate(-50%,-50%) scale(1.04) rotate(0);}
+  72% {opacity:1;transform:translate(-50%,-50%) scale(1.02) rotate(0);}
+  88% {opacity:.8;}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1) rotate(0);}
+}
+
+/* ── ZORO SLASH (skip task) ── */
+/* ── SKIP = SAD OVERLAY (rain, grey, motivating) ── */
+#skip-sad{position:fixed;inset:0;z-index:895;pointer-events:none;display:none;overflow:hidden;}
+#skip-sad.active{display:block;}
+
+/* Greyscale vignette */
+@keyframes sad-vignette-in{0%{opacity:0;}30%{opacity:1;}80%{opacity:.8;}100%{opacity:0;}}
+.sad-vignette{position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,transparent 35%,rgba(20,20,40,.55) 100%);
+  animation:sad-vignette-in 2.2s ease-out forwards;}
+
+/* Rain drops falling */
+.sad-rain{position:absolute;width:1.5px;border-radius:1px;
+  background:linear-gradient(180deg,transparent,rgba(120,160,255,.5));
+  animation:rain-fall var(--rd,1.2s) var(--rdelay,0s) ease-in forwards;}
+@keyframes rain-fall{0%{transform:translateY(-30px);opacity:0;}15%{opacity:.7;}100%{transform:translateY(100vh);opacity:.1;}}
+
+/* Crew member disappointment bubble */
+.sad-bubble{position:fixed;pointer-events:none;z-index:900;
+  background:rgba(10,10,30,.92);border:1.5px solid rgba(100,120,200,.4);
+  border-radius:14px;padding:10px 14px;max-width:200px;text-align:center;
+  animation:sad-bubble-pop 2.8s cubic-bezier(.25,.46,.45,.94) forwards;}
+@keyframes sad-bubble-pop{
+  0%  {opacity:0;transform:translate(-50%,-50%) scale(0.5);}
+  18% {opacity:1;transform:translate(-50%,-50%) scale(1.05);}
+  30% {transform:translate(-50%,-50%) scale(0.98);}
+  45% {opacity:1;transform:translate(-50%,-50%) scale(1);}
+  75% {opacity:1;transform:translate(-50%,-50%) scale(1);}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(.95) translateY(-12px);}}
+.sad-bubble-emoji{font-size:28px;display:block;margin-bottom:4px;}
+.sad-bubble-msg{font-size:11px;color:rgba(180,200,255,.9);line-height:1.4;font-family:var(--font);}
+.sad-bubble-name{font-size:8px;color:rgba(150,170,220,.6);letter-spacing:1.5px;margin-top:5px;}
+
+/* Grey desaturate chip on skip */
+@keyframes chip-grey-flash{0%{filter:grayscale(0);}40%{filter:grayscale(.8) brightness(.7);}100%{filter:grayscale(0);}}
+.chip.skip-anim{animation:chip-grey-flash 1s ease-out forwards;}
+
+/* ── GEAR 2 STEAM ── */
+.steam-particle{position:absolute;border-radius:50%;background:rgba(200,220,255,.6);pointer-events:none;
+  animation:steam-rise var(--st,2s) ease-out var(--sd,0s) infinite;}
+@keyframes steam-rise{0%{transform:translateY(0) translateX(0) scale(1);opacity:.6;}
+  50%{transform:translateY(-30px) translateX(var(--sx,5px)) scale(1.4);opacity:.3;}
+  100%{transform:translateY(-60px) translateX(var(--sx2,10px)) scale(.6);opacity:0;}}
+#steam-container{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:120px;height:1px;pointer-events:none;z-index:5;}
+
+/* ── HAKI AURA BORDER ── */
+@keyframes haki-crackle{
+  0%,100%{box-shadow:0 0 0 2px rgba(80,0,160,.0),inset 0 0 0 2px rgba(80,0,160,.0);}
+  25%{box-shadow:0 0 12px 3px rgba(120,0,200,.5),inset 0 0 8px 1px rgba(80,0,160,.3);}
+  50%{box-shadow:0 0 20px 5px rgba(160,0,255,.6),inset 0 0 15px 2px rgba(100,0,200,.4);}
+  75%{box-shadow:0 0 8px 2px rgba(80,0,160,.4),inset 0 0 5px 1px rgba(80,0,160,.2);}
+}
+.haki-active{animation:haki-crackle 1.5s ease-in-out infinite!important;border-color:rgba(120,0,200,.5)!important;}
+.haki-spark{position:absolute;pointer-events:none;font-size:10px;animation:spark-fly .6s ease-out forwards;}
+@keyframes spark-fly{0%{opacity:1;transform:translate(0,0) scale(1);}100%{opacity:0;transform:translate(var(--sx,10px),var(--sy,-20px)) scale(.3);}}
+
+/* ── 1HR YOSH EXPLOSION ── */
+#yosh-explosion{position:fixed;inset:0;z-index:920;pointer-events:none;display:none;align-items:center;justify-content:center;}
+#yosh-explosion.active{display:flex;animation:yosh-anim .9s cubic-bezier(.175,.885,.32,1.275) forwards;}
+@keyframes yosh-anim{0%{opacity:0;}10%{opacity:1;}80%{opacity:1;}100%{opacity:0;}}
+.yosh-text{font-family:var(--head);font-size:64px;font-weight:900;color:#ffd700;
+  text-shadow:-4px -4px 0 #000,4px -4px 0 #000,-4px 4px 0 #000,4px 4px 0 #000,0 0 40px rgba(255,200,0,1);
+  animation:yosh-scale .9s cubic-bezier(.175,.885,.32,1.275) forwards;}
+@keyframes yosh-scale{0%{transform:scale(0) rotate(-10deg);}40%{transform:scale(1.3) rotate(4deg);}65%{transform:scale(.95) rotate(-2deg);}80%{transform:scale(1.05) rotate(0);}100%{transform:scale(.8) rotate(0);}}
+.yosh-sub{font-family:var(--font);font-size:16px;color:#fff;letter-spacing:4px;margin-top:8px;
+  text-shadow:-2px -2px 0 #000,2px 2px 0 #000;}
+
+/* ── DAY COMPLETE MANGA TAKEOVER ── */
+#victory-screen{position:fixed;inset:0;z-index:950;pointer-events:none;display:none;overflow:hidden;}
+#victory-screen.active{display:block;}
+.vp{position:absolute;animation:vp-slide var(--vd,.4s) var(--vdl,0s) cubic-bezier(.175,.885,.32,1.275) both;}
+@keyframes vp-slide{from{transform:var(--vs,translateX(-100%));}to{transform:translate(0,0);}}
+@keyframes vp-hide{0%,70%{opacity:1;}100%{opacity:0;}}
+#victory-screen.active{animation:vp-hide 2.8s ease-out forwards;}
+.vp-title{position:absolute;z-index:5;font-family:var(--head);font-weight:900;color:#ffd700;
+  text-shadow:-4px -4px 0 #000,4px -4px 0 #000,-4px 4px 0 #000,4px 4px 0 #000,0 0 30px rgba(255,200,0,.8);
+  letter-spacing:3px;text-align:center;animation:impact-pop .6s .5s both;}
+
+
+/* ══════════════════════════════════════
+   ANIME TASK COMPLETE EFFECTS
+══════════════════════════════════════ */
+/* Speed lines overlay */
+#anime-overlay{position:fixed;inset:0;pointer-events:none;z-index:800;overflow:hidden;}
+.speed-line{position:absolute;transform-origin:left center;background:linear-gradient(90deg,rgba(255,255,255,.9),transparent);height:2px;border-radius:1px;animation:speed-line-fly 0.7s ease-out forwards;}
+@keyframes speed-line-fly{0%{opacity:0;transform:scaleX(0);}25%{opacity:.9;}60%{opacity:.7;transform:scaleX(1);}100%{opacity:0;transform:scaleX(1);}}
+
+/* Aura burst ring */
+.aura-ring{position:fixed;pointer-events:none;z-index:801;border-radius:50%;animation:aura-burst 1.2s ease-out forwards;}
+@keyframes aura-burst{0%{transform:translate(-50%,-50%) scale(0);opacity:.9;}50%{opacity:.8;}100%{transform:translate(-50%,-50%) scale(4);opacity:0;}}
+
+/* Character shout bubble */
+.anime-shout{position:fixed;pointer-events:none;z-index:802;font-family:var(--head);font-weight:900;font-size:24px;color:#fff;text-shadow:0 0 12px rgba(255,200,0,.95),-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000;animation:shout-pop 1.6s cubic-bezier(.36,.07,.19,.97) forwards;}
+@keyframes shout-pop{
+  0%  {opacity:0;transform:translate(-50%,-50%) scale(0.2) rotate(-6deg);}
+  18% {opacity:1;transform:translate(-50%,-50%) scale(1.25) rotate(3deg);}
+  30% {transform:translate(-50%,-50%) scale(0.98) rotate(-1deg);}
+  45% {opacity:1;transform:translate(-50%,-50%) scale(1.05) rotate(0deg);}
+  75% {opacity:1;transform:translate(-50%,-50%) scale(1.03) rotate(0deg);}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1) rotate(0deg) translateY(-10px);}
+}
+
+/* Screen edge flash */
+/* screen-flash removed — was too jarring */
+.screen-flash{display:none!important;}
+@keyframes screen-flash-anim{0%{opacity:0;}100%{opacity:0;}}
+
+/* ══════════════════════════════════════
+   MAP / SEA CHART ANIME EFFECTS
+══════════════════════════════════════ */
+/* Animated ocean waves */
+@keyframes wave-scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+@keyframes wave-scroll2{0%{transform:translateX(-50%);}100%{transform:translateX(0);}}
+.sc-wave-layer{position:absolute;bottom:0;left:0;width:200%;height:60px;pointer-events:none;z-index:0;opacity:.45;}
+.sc-wave-layer.w1{animation:wave-scroll 6s linear infinite;}
+.sc-wave-layer.w2{animation:wave-scroll2 9s linear infinite;opacity:.25;bottom:8px;}
+
+/* Ship bobbing */
+@keyframes ship-bob{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(-6px) rotate(1deg);}}
+.sc-ship-wrap{animation:ship-bob 3s ease-in-out infinite;}
+
+/* Storm lightning flash */
+@keyframes lightning-flash{0%,90%,100%{opacity:0;}92%,96%{opacity:.7;}94%,98%{opacity:.1;}}
+.storm-lightning{animation:lightning-flash 3s ease-in-out infinite;}
+
+/* Island shimmer on hover */
+@keyframes island-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+.sc-island:not(.conquered){transition:transform .25s ease,filter .2s;}
+
+/* Conquest explosion */
+.conq-burst{position:fixed;pointer-events:none;z-index:810;font-size:40px;animation:conq-burst-anim .9s ease-out forwards;}
+@keyframes conq-burst-anim{0%{opacity:1;transform:translate(-50%,-50%) scale(0);}40%{transform:translate(-50%,-50%) scale(1.4);}100%{opacity:0;transform:translate(-50%,-50%) scale(.8) translateY(-60px);}}
+
+/* Sea foam particles */
+@keyframes foam-rise{0%{opacity:.7;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-22px) scale(.4);}}
+.sea-foam{position:absolute;border-radius:50%;background:rgba(255,255,255,.7);pointer-events:none;z-index:1;animation:foam-rise 1.8s ease-out forwards;}
 
 /* HARDCORE MODE */
 #hardcore-banner{display:none;position:fixed;top:0;left:0;right:0;z-index:700;padding:10px 16px;text-align:center;font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:2px;background:linear-gradient(90deg,#450a0a,#7f1d1d,#450a0a);color:#fca5a5;border-bottom:2px solid #dc2626;animation:hc-pulse 2s ease-in-out infinite;}
@@ -626,6 +974,8 @@ main{max-width:980px;margin:0 auto;padding:16px 16px 60px;position:relative;z-in
 
 /* ── V7 POLISH ── */
 @keyframes card-slide-in{from{opacity:0;transform:translateY(16px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes sm-bounce{from{transform:scale(1) rotate(-5deg);}to{transform:scale(1.2) rotate(5deg);}}
+@keyframes streak-glow{0%,100%{text-shadow:0 0 10px #FF6B00,0 0 20px #FF6B00;}50%{text-shadow:0 0 20px #ffd700,0 0 40px #ffd700;}}
 .card{animation:card-slide-in .25s cubic-bezier(.175,.885,.32,1.275) both;}
 .sc-island{transition:transform .25s cubic-bezier(.175,.885,.32,1.275),filter .2s;}
 .sc-island:hover,.sc-island:active{transform:translateY(-8px) scale(1.04)!important;}
@@ -638,6 +988,70 @@ main{max-width:980px;margin:0 auto;padding:16px 16px 60px;position:relative;z-in
 @keyframes sec-fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
 #goal-bar-fill{box-shadow:0 0 8px rgba(78,205,196,.5);}
 #pk-bar{box-shadow:0 0 12px rgba(201,168,76,.6);}
+
+/* ── WEATHER BANNER ── */
+#weather-banner{border-radius:12px;padding:10px 14px;margin-bottom:10px;display:flex;align-items:center;gap:10px;transition:all .4s;border:1.5px solid;}
+#weather-banner.weather-storm{background:rgba(30,10,80,.7);border-color:rgba(139,92,246,.5);color:#c4b5fd;}
+#weather-banner.weather-calm{background:rgba(0,80,60,.6);border-color:rgba(52,211,153,.45);color:#6ee7b7;}
+#weather-banner.weather-treasure{background:rgba(100,70,0,.7);border-color:rgba(251,191,36,.6);color:#fde68a;}
+#weather-banner.weather-fog{background:rgba(30,30,50,.5);border-color:rgba(148,163,184,.25);color:#94a3b8;}
+#weather-banner.weather-monsoon{background:rgba(0,20,60,.7);border-color:rgba(96,165,250,.4);color:#93c5fd;}
+.weather-icon{font-size:24px;flex-shrink:0;}
+.weather-info{flex:1;}
+.weather-title{font-size:11px;font-weight:800;letter-spacing:1.5px;}
+.weather-desc{font-size:9px;opacity:.75;margin-top:2px;}
+.weather-effect{font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;background:rgba(0,0,0,.25);}
+
+/* ── WEAK SPOTS PANEL ── */
+#weak-spots-panel{margin-bottom:10px;}
+.weak-spot-card{background:rgba(239,68,68,.07);border:1.5px solid rgba(239,68,68,.3);border-radius:10px;padding:10px 12px;margin-bottom:6px;}
+.weak-spot-head{font-size:9px;color:#ef4444;letter-spacing:2px;font-weight:700;margin-bottom:8px;}
+.weak-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.4);border-radius:8px;padding:5px 10px;font-size:10px;color:#fca5a5;cursor:pointer;margin:3px;transition:all .15s;}
+.weak-chip:active{transform:scale(.96);}
+.weak-chip-count{font-size:8px;background:rgba(239,68,68,.3);border-radius:10px;padding:1px 5px;color:#fca5a5;}
+
+/* ── BOSS BATTLE ENHANCED ── */
+.boss-arena{border-radius:14px;overflow:hidden;background:linear-gradient(145deg,rgba(10,0,20,.95),rgba(40,0,0,.9));border:2px solid rgba(239,68,68,.35);padding:16px;}
+.boss-name{font-family:var(--head);font-size:20px;font-weight:900;color:#fff;text-shadow:0 0 20px rgba(239,68,68,.8);}
+.boss-emoji-wrap{font-size:60px;text-align:center;position:relative;margin:8px 0;}
+.boss-emoji-wrap.shake{animation:boss-shake .4s ease-out;}
+@keyframes boss-shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-8px) rotate(-3deg);}75%{transform:translateX(8px) rotate(3deg);}}
+.boss-hp-bar-wrap{height:14px;background:rgba(255,255,255,.08);border-radius:7px;overflow:hidden;margin:8px 0;position:relative;}
+.boss-hp-bar{height:100%;border-radius:7px;transition:width .8s cubic-bezier(.4,0,.2,1);position:relative;}
+.boss-hp-bar::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,rgba(255,255,255,.2));animation:hp-shimmer 1.5s linear infinite;}
+@keyframes hp-shimmer{from{transform:translateX(-100%);}to{transform:translateX(100%);}}
+.boss-defeated-badge{background:rgba(52,211,153,.15);border:1.5px solid rgba(52,211,153,.5);border-radius:8px;padding:6px 14px;font-size:10px;color:#34d399;letter-spacing:2px;text-align:center;margin-top:8px;}
+.boss-attack-flash{animation:boss-atk .3s ease-out;}
+@keyframes boss-atk{0%{filter:brightness(1);}50%{filter:brightness(2) hue-rotate(180deg);}100%{filter:brightness(1);}}
+
+/* ── DEVIL FRUIT COLLECTION ── */
+.df-collection-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:8px;margin-top:8px;}
+.df-card{border-radius:12px;padding:10px 6px;text-align:center;border:1.5px solid;transition:transform .2s,box-shadow .2s;cursor:default;}
+.df-card:hover{transform:translateY(-3px);}
+.df-card.locked{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08);}
+.df-card.owned{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.4);box-shadow:0 0 12px rgba(201,168,76,.15);}
+.df-card.active-now{border-color:rgba(255,107,0,.7);box-shadow:0 0 16px rgba(255,107,0,.3);animation:df-glow 1.5s ease-in-out infinite;}
+@keyframes df-glow{0%,100%{box-shadow:0 0 12px rgba(255,107,0,.3);}50%{box-shadow:0 0 28px rgba(255,107,0,.7);}}
+.df-card .df-emoji{font-size:26px;margin-bottom:4px;}
+.df-card .df-card-name{font-size:7.5px;font-weight:700;letter-spacing:.5px;line-height:1.3;}
+.df-card .df-card-buff{font-size:7px;opacity:.6;margin-top:2px;}
+
+/* ── RIVAL PANEL ── */
+.rival-vs-wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;margin:12px 0;}
+.rival-card{background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:12px;text-align:center;}
+.rival-card.you{border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.06);}
+.rival-card.rival{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.05);}
+.rival-vs-badge{font-family:var(--head);font-size:22px;font-weight:900;color:#ef4444;text-shadow:0 0 14px rgba(239,68,68,.7);}
+.rival-stat{font-size:18px;font-weight:900;font-family:var(--head);}
+.rival-label{font-size:8px;letter-spacing:1.5px;opacity:.55;margin-top:2px;}
+.rival-input-row{display:flex;gap:8px;margin-top:10px;}
+.rival-input{flex:1;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.18);border-radius:8px;padding:8px 10px;color:#fff;font-family:var(--font);font-size:11px;}
+.rival-input:focus{outline:none;border-color:var(--ac);}
+.rival-set-btn{background:rgba(201,168,76,.18);border:1.5px solid var(--ac);color:var(--ac);border-radius:8px;padding:8px 14px;cursor:pointer;font-family:var(--font);font-size:11px;font-weight:700;}
+.rival-ahead{font-size:10px;text-align:center;padding:6px;border-radius:8px;margin-top:8px;}
+.rival-ahead.winning{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.3);color:#34d399;}
+.rival-ahead.losing{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#ef4444;}
+.rival-ahead.tied{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:var(--txt3);}
 </style>
 </head>
 <body>
@@ -662,6 +1076,40 @@ main{max-width:980px;margin:0 auto;padding:16px 16px 60px;position:relative;z-in
 <div id="pwa-install-btn" onclick="installPWA()" style="display:none;position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(201,168,76,.2);border:1.5px solid var(--ac);color:var(--ac);border-radius:24px;padding:10px 20px;font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:1px;cursor:pointer;z-index:50;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);align-items:center;gap:8px;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.4);">📲 INSTALL APP</div>
 <div id="gear5-flash"></div>
 <div id="sea-king" style="left:10%">🦑</div>
+<div id="anime-overlay"></div>
+<div id="manga-flash"></div>
+<div id="skip-sad"></div>
+<div id="yosh-explosion"><div style="text-align:center"><div class="yosh-text">YOSH!!</div><div class="yosh-sub">1 HOUR STUDIED!</div></div></div>
+<div id="victory-screen"></div>
+<!-- Combo Flame Bar -->
+<div id="combo-bar" class="hidden">
+  <div class="combo-flame" id="combo-flame-icon">🔥</div>
+  <div class="combo-count" id="combo-count-val">3</div>
+  <div class="combo-label">NO-SKIP DAYS</div>
+</div>
+
+<!-- End of Day Summary -->
+<div id="eod-panel">
+  <div class="eod-card">
+    <div class="eod-title" id="eod-title">DAY COMPLETE</div>
+    <div class="eod-sub">TODAY'S REPORT CARD</div>
+    <div class="eod-grade" id="eod-grade">A</div>
+    <div id="eod-rows"></div>
+    <button class="eod-close" onclick="closeEOD()">SET SAIL ⚓</button>
+  </div>
+</div>
+
+<div id="char-unlock-screen">
+  <div style="position:relative;">
+    <div class="char-unlock-rays"></div>
+    <div class="char-unlock-card">
+      <span class="char-unlock-emoji-big" id="cu-emoji">⚔️</span>
+      <div class="char-unlock-label">NEW CREW MEMBER!</div>
+      <div class="char-unlock-name-big" id="cu-name">Zoro</div>
+      <div class="char-unlock-quote" id="cu-quote">Nothing happened.</div>
+    </div>
+  </div>
+</div>
 <canvas id="confetti-canvas" style="position:fixed;inset:0;z-index:400;pointer-events:none;display:none;"></canvas>
 <div id="rankup-overlay">
   <div id="rankup-popup-inner">
@@ -685,13 +1133,75 @@ main{max-width:980px;margin:0 auto;padding:16px 16px 60px;position:relative;z-in
 <div id="df-popup"><span class="df-fruit-emoji" id="df-emoji">🍎</span><div class="df-title">YOU FOUND A DEVIL FRUIT!</div><div class="df-name" id="df-name">Gomu Gomu no Mi</div><div class="df-effect">⚡ 2× XP for the next 30 minutes!</div></div>
 <div id="crew-unlock-popup"><div class="crew-unlock-emoji" id="crew-unlock-emoji">⚔️</div><div class="crew-unlock-title">CREW MEMBER UNLOCKED!</div><div class="crew-unlock-name" id="crew-unlock-name">Zoro joins the crew!</div></div>
 <div id="day-banner" style="position:fixed;top:0;left:0;right:0;z-index:450;padding:12px;text-align:center;font-family:var(--head);font-size:18px;font-weight:900;color:#fff;background:linear-gradient(90deg,#C9A84C,#ffd700,#C9A84C);transform:translateY(-100%);transition:transform .5s cubic-bezier(.175,.885,.32,1.275);letter-spacing:2px;">🎉 DAY COMPLETE! NAKAMA PROUD! 🏴‍☠️</div>
-<div id="arc-popup" onclick="dismissArcPopup()"><div class="arc-popup-arc" id="arc-popup-arc">EAST BLUE ARC</div><div class="arc-popup-icon" id="arc-popup-icon">🌊</div><div class="arc-popup-lore" id="arc-popup-lore">Where it all began.</div></div>
-<div id="loading"><div class="spinner"></div><div style="color:rgba(255,255,255,.3);font-size:11px;letter-spacing:3px;">SETTING SAIL…</div></div>
+
+<!-- ── ONBOARDING ── -->
+<div id="onboard-overlay" style="display:none;">
+  <div id="onboard-card">
+    <div class="onboard-jolly">☠️</div>
+    <div class="onboard-title">SET SAIL!</div>
+    <div class="onboard-sub">YOUR 90-DAY VOYAGE BEGINS</div>
+    <div class="onboard-label">⚓ YOUR PIRATE NAME</div>
+    <input class="onboard-input" id="onboard-name" placeholder="e.g. Monkey D. Luffy" maxlength="24"/>
+    <div class="onboard-label">📅 EXAM / GOAL DATE</div>
+    <input class="onboard-input" style="font-size:13px;font-family:var(--font);font-weight:400;" type="date" id="onboard-date"/>
+    <button class="onboard-btn" onclick="completeOnboarding()">⚓ BEGIN VOYAGE</button>
+    <div class="onboard-crew">🍖⚔️🌀🎯🔥🦌📖🤖💀🐋</div>
+  </div>
+</div>
+
+<!-- ── GRAND FINALE ── -->
+<div id="finale-overlay">
+  <div class="finale-bg"></div>
+  <div class="finale-inner">
+    <div class="finale-jolly">☠️</div>
+    <div class="finale-title" id="finale-title">VOYAGE COMPLETE!</div>
+    <div class="finale-name" id="finale-name"></div>
+    <div class="finale-sub" id="finale-sub">90 DAYS — PIRATE LEGEND</div>
+    <div class="finale-quote" id="finale-quote">"I'm not going to be the one who finds it."</div>
+    <div class="finale-stats" id="finale-stats"></div>
+    <button class="finale-close" onclick="closeFinale()">⚓ KEEP SAILING →</button>
+  </div>
+</div>
+<div id="streak-milestone-overlay" style="display:none;position:fixed;inset:0;z-index:600;align-items:center;justify-content:center;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);" onclick="closeStreakMilestone()">
+  <div id="streak-milestone-inner" style="background:linear-gradient(135deg,rgba(255,107,0,.15),rgba(255,200,0,.1));border:2px solid #FF6B00;border-radius:24px;padding:32px 28px;text-align:center;max-width:320px;width:88vw;transform:scale(0);">
+    <div id="sm-fire" style="font-size:72px;animation:sm-bounce 0.6s ease infinite alternate;">🔥</div>
+    <div style="font-family:var(--head);font-size:28px;font-weight:900;color:#ffd700;margin:8px 0;" id="sm-streak">7</div>
+    <div style="font-size:11px;color:#FF9F43;letter-spacing:3px;margin-bottom:6px;" id="sm-title">DAY STREAK!</div>
+    <div style="font-size:13px;color:rgba(255,255,255,.8);margin-bottom:16px;" id="sm-msg">You're on fire! Keep going!</div>
+    <div style="font-size:11px;color:#ffd700;font-weight:700;" id="sm-reward"></div>
+    <div style="margin-top:16px;font-size:9px;color:rgba(255,255,255,.3);">TAP TO CLOSE</div>
+  </div>
+</div>
+
+<!-- ── STREAK WARNING BANNER ── -->
+<div id="streak-warning-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:200;padding:8px 16px;text-align:center;font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:1.5px;background:linear-gradient(90deg,rgba(255,107,0,.9),rgba(255,60,0,.9));color:#fff;border-bottom:2px solid #FF6B00;cursor:pointer;" onclick="closeStreakWarning()">
+  ⚠️ <span id="streak-warning-msg">Complete 50% of tasks today or your streak breaks!</span> — TAP TO DISMISS ✕
+</div>
+
+<!-- ── STREAK PANEL MODAL ── -->
+<div id="streak-panel-modal" style="display:none;position:fixed;inset:0;z-index:500;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);" onclick="closeStreakPanel(event)">
+  <div style="background:#0d0d1f;border:1px solid rgba(255,107,0,.4);border-radius:24px 24px 0 0;padding:20px 16px 40px;width:100%;max-width:600px;max-height:85vh;overflow-y:auto;" onclick="event.stopPropagation()">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <div style="font-family:var(--head);font-size:20px;font-weight:900;color:#ffd700;">🔥 YOUR STREAK</div>
+      <button onclick="closeStreakPanel()" style="background:rgba(255,255,255,.08);border:none;color:var(--txt3);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:12px;">✕ CLOSE</button>
+    </div>
+    <div id="streak-panel-content"></div>
+  </div>
+</div>
+<div class="arc-popup-arc" id="arc-popup-arc">EAST BLUE ARC</div><div class="arc-popup-icon" id="arc-popup-icon">🌊</div><div class="arc-popup-lore" id="arc-popup-lore">Where it all began.</div></div>
+<div id="loading">
+  <div id="loading-jolly">☠️</div>
+  <div id="loading-title">STUDY PRO</div>
+  <div id="loading-sub">ONE PIECE EDITION</div>
+  <div id="loading-crew">🍖⚔️🌀🎯🔥🦌📖🤖💀🐋</div>
+  <div id="loading-bar-wrap"><div id="loading-bar-fill"></div></div>
+  <div id="loading-msg">SETTING SAIL…</div>
+</div>
 <div id="app" style="display:none;">
   <div id="banner"><div class="banner-row">
     <div class="banner-block"><div class="banner-label">🎯 EXAM</div><div id="countdown-display"></div></div>
     <div class="banner-divider"></div>
-    <div class="banner-block"><div class="banner-label">🔥 STREAK</div><div class="banner-val" id="streak-display"></div></div>
+    <div class="banner-block" onclick="openStreakPanel()" style="cursor:pointer;"><div class="banner-label">🔥 STREAK</div><div class="banner-val" id="streak-display" style="transition:transform .2s;"></div></div>
     <div class="banner-divider"></div>
     <div class="banner-block"><div class="banner-label">📅 STUDY DAY</div><div class="banner-val" id="studyday-display"></div></div>
     <div class="banner-divider"></div>
@@ -707,7 +1217,7 @@ main{max-width:980px;margin:0 auto;padding:16px 16px 60px;position:relative;z-in
   <div id="quote-bar" onclick="cycleQuote()"><span id="quote-char-badge" style="font-size:8px;letter-spacing:1.5px;border:1px solid;padding:2px 7px;border-radius:20px;flex-shrink:0;font-family:var(--font);">GOLD ROGER</span><span id="quote-text"></span><span class="quote-tap-hint">→ tap</span></div>
   <div id="header"><div class="header-inner">
     <div class="header-top">
-      <div style="flex:1;"><div class="brand-title">Study PRO ⚓</div><div class="brand-sub" id="header-date"></div></div>
+      <div style="flex:1;"><div class="brand-title">Study PRO ⚓</div><div id="pirate-name-badge" class="pirate-name-badge" onclick="promptRenamePirate()" style="display:none;margin-top:3px;"></div><div class="brand-sub" id="header-date"></div></div>
 
       <div class="ring-wrap"><svg width="50" height="50" viewBox="0 0 56 56"><circle cx="28" cy="28" r="22" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle id="ring-circle" cx="28" cy="28" r="22" fill="none" stroke="var(--ac)" stroke-width="6" stroke-dasharray="138.23" stroke-dashoffset="138.23" stroke-linecap="round" transform="rotate(-90 28 28)" style="transition:stroke-dashoffset .5s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 0 4px var(--ac));"/><text id="ring-text" x="28" y="32" text-anchor="middle" fill="var(--ac)" font-size="10" font-weight="700" font-family="DM Mono">0%</text></svg><span class="ring-label">OVERALL</span></div>
       <button class="icon-btn" id="sound-btn" onclick="toggleSound()">🔊</button>
@@ -730,10 +1240,10 @@ main{max-width:980px;margin:0 auto;padding:16px 16px 60px;position:relative;z-in
     <span id="edit-badge">✏️ EDIT ON</span>
   </div></div>
   <main>
-    <section id="sec-tasks" class="section active"><div id="mini-countdown-bar" style="margin-bottom:8px;"></div><div id="main-content"></div></section>
+    <section id="sec-tasks" class="section active"><div id="mini-countdown-bar" style="margin-bottom:8px;"></div><div id="battle-plan-slot"></div><div id="weather-banner"></div><div id="weak-spots-panel"></div><div id="main-content"></div></section>
     <section id="sec-timer" class="section">
       <div id="regular-timer-section">
-        <div class="glass-panel"><div class="timer-hero"><div class="timer-clock" id="timer-clock">00:00:00</div><div class="timer-subject-lbl" id="timer-sub-lbl">NO SUBJECT RUNNING</div><div class="timer-btns"><button class="tbtn primary" onclick="timerStartStop()">⏯ START / PAUSE</button><button class="tbtn danger" onclick="timerReset()">↺ RESET</button></div></div></div>
+        <div class="glass-panel"><div class="timer-hero" style="position:relative;"><div id="steam-container"></div><div class="timer-clock" id="timer-clock">00:00:00</div><div class="timer-subject-lbl" id="timer-sub-lbl">NO SUBJECT RUNNING</div><div class="timer-btns"><button class="tbtn primary" onclick="timerStartStop()">⏯ START / PAUSE</button><button class="tbtn danger" onclick="timerReset()">↺ RESET</button></div></div></div>
         <div class="today-total-bar"><span style="font-size:10px;color:var(--txt4);letter-spacing:1px;">⏱ TODAY'S TOTAL STUDY TIME</span><span id="today-total-lbl" style="font-size:16px;font-weight:700;color:var(--ac);font-family:var(--head);">0m</span></div>
         <div class="glass-panel" style="margin-bottom:10px;">
           <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-size:9px;color:var(--txt4);letter-spacing:1px;">🎯 DAILY 16HR GOAL</span><span id="goal-bar-lbl" style="font-size:9px;color:var(--ac);">0% of 16hr goal</span></div>
@@ -772,6 +1282,10 @@ main{max-width:980px;margin:0 auto;padding:16px 16px 60px;position:relative;z-in
         <div class="glass-panel">
           <div class="chart-header"><span class="bar-chart-title">📈 DAILY COMPLETION %</span><span class="chart-sub" id="chart-avg-label"></span></div>
           <div id="line-chart-body"></div>
+        </div>
+        <div class="glass-panel">
+          <div class="chart-header"><span class="bar-chart-title">📅 DAILY STUDY HOURS — THIS WEEK</span></div>
+          <div id="weekly-hours-body"></div>
         </div>
         <div class="glass-panel">
           <div class="chart-header"><span class="bar-chart-title">⏱ STUDY TIME PER SUBJECT</span></div>
@@ -822,6 +1336,10 @@ main{max-width:980px;margin:0 auto;padding:16px 16px 60px;position:relative;z-in
         <div style="font-size:9px;color:var(--txt5);letter-spacing:2px;margin-bottom:12px;">🎖️ ACHIEVEMENTS</div>
         <div id="achievements-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;"></div>
       </div>
+      <!-- Devil Fruit Collection -->
+      <div class="glass-panel" id="df-collection-panel"></div>
+      <!-- Rival / Leaderboard -->
+      <div class="glass-panel" id="rival-panel"></div>
       <!-- Poneglyph -->
       <div class="glass-panel" id="poneglyph-panel"></div>
       <!-- Ambience Music -->
@@ -902,9 +1420,15 @@ function loadSubjectColors(){
 const ICONS={"N.S":"🔢","G.S":"🌏","Reasoning":"🧠","English":"📝","Maths":"📐","Science / C.A":"🔬"};
 const S={P:"p",D:"d",X:"x"};
 const RANKS=[
-  {name:"Cabin Boy",xp:0,emoji:"⚓"},{name:"Deckhand",xp:500,emoji:"🪢"},{name:"Helmsman",xp:1200,emoji:"🧭"},
-  {name:"First Mate",xp:2500,emoji:"⚔️"},{name:"Ship Captain",xp:4000,emoji:"🚢"},{name:"Warlord of the Sea",xp:6500,emoji:"🏴‍☠️"},
-  {name:"Yonko Commander",xp:9500,emoji:"👥"},{name:"Emperor",xp:13000,emoji:"👑"},{name:"PIRATE KING",xp:17000,emoji:"🏆"},
+  {name:"Cabin Boy",    xp:0,   emoji:"⚓"},   // Day 1-7
+  {name:"Deckhand",     xp:150, emoji:"🪢"},   // Day ~8
+  {name:"Helmsman",     xp:400, emoji:"🧭"},   // Day ~20
+  {name:"First Mate",   xp:800, emoji:"⚔️"},   // Day ~40
+  {name:"Ship Captain", xp:1300,emoji:"🚢"},   // Day ~65
+  {name:"Warlord",      xp:1800,emoji:"🏴‍☠️"},  // Day ~90
+  {name:"Yonko Commander",xp:2500,emoji:"👥"}, // Beyond 90 days
+  {name:"Emperor",      xp:3500,emoji:"👑"},
+  {name:"PIRATE KING",  xp:5000,emoji:"🏆"},
 ];
 const MILESTONES={10:{name:"Day 10 — First Step!",icon:"🏅"},25:{name:"Day 25 — Quarter Way!",icon:"🏅"},50:{name:"Day 50 — Halfway!",icon:"🏅"},75:{name:"Day 75 — Almost There!",icon:"🏅"},100:{name:"Day 100 — LEGEND!",icon:"🏆"},180:{name:"Day 180 — PIRATE KING!",icon:"👑"}};
 const ACHIEVEMENTS=[
@@ -918,9 +1442,9 @@ const ACHIEVEMENTS=[
   {id:"study_1hr",name:"Early Bird",desc:"Study 1hr in a day",icon:"⏱️",check:()=>todayStudySecs()>=3600},
   {id:"study_8hr",name:"Half Day",desc:"Study 8hrs in a day",icon:"📚",check:()=>todayStudySecs()>=28800},
   {id:"study_16hr",name:"Gear 5",desc:"Hit 16hr daily goal!",icon:"⚡",check:()=>todayStudySecs()>=57600},
-  {id:"xp_1000",name:"Rising Pirate",desc:"Earn 1000 XP",icon:"💰",check:()=>xpData.total>=1000},
-  {id:"xp_5000",name:"Warlord",desc:"Earn 5000 XP",icon:"⚔️",check:()=>xpData.total>=5000},
-  {id:"xp_17000",name:"Pirate King",desc:"Reach max rank!",icon:"👑",check:()=>xpData.total>=17000},
+  {id:"xp_1000",name:"Rising Pirate",desc:"Earn 300 XP",icon:"💰",check:()=>xpData.total>=300},
+  {id:"xp_5000",name:"Warlord",desc:"Earn 1000 XP",icon:"⚔️",check:()=>xpData.total>=1000},
+  {id:"xp_17000",name:"Pirate King",desc:"Reach 2000 XP!",icon:"👑",check:()=>xpData.total>=2000},
   {id:"day_complete",name:"Perfect Day",desc:"Complete all tasks in a day",icon:"✅",check:()=>false},// set dynamically
   {id:"devil_fruit",name:"Devil Fruit",desc:"Find your first Devil Fruit",icon:"🍎",check:()=>buffData.active||false},
 ];
@@ -947,14 +1471,14 @@ const BOSS_BATTLES=[
   {name:"Im-sama",emoji:"👑",week:24,desc:"Reach Emperor rank",target:13000,type:"xp",reward:1000},
 ];
 const PONEGLYPHS=[
-  {id:"p1",xp:500,text:"\"The will of D. carries on. Those who seek knowledge never truly stop.\""},
-  {id:"p2",xp:1200,text:"\"Joy Boy made a promise to this land. Your promise is to your future self.\""},
-  {id:"p3",xp:2500,text:"\"The Void Century holds secrets. Your study log holds yours — never miss a day.\""},
-  {id:"p4",xp:4000,text:"\"The Ancient Weapons sleep. Your potential is the greatest weapon of all.\""},
-  {id:"p5",xp:6500,text:"\"Im sits on the Empty Throne. The throne of your exam awaits only you.\""},
-  {id:"p6",xp:9500,text:"\"Laugh Tale is real. So is your goal. Keep sailing.\""},
-  {id:"p7",xp:13000,text:"\"The One Piece exists. And so does your success — at the end of 180 days.\""},
-  {id:"p8",xp:17000,text:"\"I'm not going to be the one who finds it. You already did. — Roger\""},
+  {id:"p1",xp:100, text:"\"The will of D. carries on. Those who seek knowledge never truly stop.\""},
+  {id:"p2",xp:300, text:"\"Joy Boy made a promise to this land. Your promise is to your future self.\""},
+  {id:"p3",xp:600, text:"\"The Void Century holds secrets. Your study log holds yours — never miss a day.\""},
+  {id:"p4",xp:900, text:"\"The Ancient Weapons sleep. Your potential is the greatest weapon of all.\""},
+  {id:"p5",xp:1300,text:"\"Im sits on the Empty Throne. The throne of your exam awaits only you.\""},
+  {id:"p6",xp:1700,text:"\"Laugh Tale is real. So is your goal. Keep sailing.\""},
+  {id:"p7",xp:2200,text:"\"The One Piece exists. And so does your success — at the end of 90 days.\""},
+  {id:"p8",xp:3000,text:"\"I'm not going to be the one who finds it. You already did. — Roger\""},
 ];
 const CHARS=[
   {name:"Gold Roger",color:"#C9A84C",emoji:"👑",unlockXP:0,quote:"Inherited will, the destiny of the age — these will not be stopped."},
@@ -979,10 +1503,10 @@ const DEVIL_FRUITS=[
   {name:"Pika Pika no Mi",effect:"Light Speed"},{name:"Magu Magu no Mi",effect:"Magma Body"},
 ];
 const DF_SHOP=[
-  {id:"xp2x",name:"2× XP Boost",icon:"⚡",desc:"Double XP for 1 hour",cost:50,effect:"xp2x",duration:3600000},
-  {id:"freeze_extra",name:"Extra Freeze Token",icon:"❄️",desc:"Get 1 extra streak freeze",cost:80,effect:"freeze"},
-  {id:"skip_forgive",name:"Skip Forgive",icon:"🏳️",desc:"Remove 3 skip marks from today",cost:60,effect:"skip_forgive"},
-  {id:"bounty_boost",name:"Bounty Boost",icon:"💰",desc:"Add 500 XP instantly",cost:120,effect:"bounty_500"},
+  {id:"xp2x",name:"2× XP Boost",icon:"⚡",desc:"Double XP for 1 hour",cost:30,effect:"xp2x",duration:3600000},
+  {id:"freeze_extra",name:"Extra Freeze Token",icon:"❄️",desc:"Get 1 extra streak freeze",cost:40,effect:"freeze"},
+  {id:"skip_forgive",name:"Skip Forgive",icon:"🏳️",desc:"Remove 3 skip marks from today",cost:35,effect:"skip_forgive"},
+  {id:"bounty_boost",name:"Bounty Boost",icon:"💰",desc:"Add 100 XP instantly",cost:60,effect:"bounty_500"},
 ];
 const AMBIENCE_TRACKS=[
   {id:"ocean",name:"Ocean Waves",icon:"🌊",desc:"Calm sea ambience"},
@@ -1124,6 +1648,8 @@ function hourToSceneKey(h){
 // ════ STATE ════
 let days,tasks,meta,cfg,timerData,gridData,xpData,notes,priorityData,loopData;
 let seaChartData,buffData,unlocksData,achievementsData,missionsData,bossData,freezeData;
+let weatherData=null,skipCountData={},dfCollectionData={owned:[]},rivalData={name:"",xp:0,streak:0,tasks:0};
+let pirateName="",finaleShown=false;
 let ambienceNode=null,ambiencePlaying=false,ambienceType="";
 let activeDay=0,editMode=false,currentSection="tasks",statsRange=7;
 let editingTask=null,editingSub=null,editingLbl=null,addingTask=null,addingSub=null;
@@ -1159,6 +1685,11 @@ function load(){
   try{const bs=localStorage.getItem("sp_boss");bossData=bs?JSON.parse(bs):{defeated:[],current:0};}catch(e){bossData={defeated:[],current:0};}
   try{const fz=localStorage.getItem("sp_freeze");freezeData=fz?JSON.parse(fz):{tokens:1,lastRefill:"",used:[]};}catch(e){freezeData={tokens:1,lastRefill:"",used:[]};}
   try{const lp=localStorage.getItem("sp_loop");loopData=lp?JSON.parse(lp):{subjects:[],lastApplied:"",enabled:true};}catch(e){loopData={subjects:[],lastApplied:"",enabled:true};}
+  try{const wd=localStorage.getItem("sp_weather");weatherData=wd?JSON.parse(wd):null;}catch(e){weatherData=null;}
+  try{const sc2=localStorage.getItem("sp_skipcount");skipCountData=sc2?JSON.parse(sc2):{};} catch(e){skipCountData={};}
+  try{const df2=localStorage.getItem("sp_dfcollect");dfCollectionData=df2?JSON.parse(df2):{owned:[]};}catch(e){dfCollectionData={owned:[]};}
+  try{const rv=localStorage.getItem("sp_rival");rivalData=rv?JSON.parse(rv):{name:"",xp:0,streak:0,tasks:0};}catch(e){rivalData={name:"",xp:0,streak:0,tasks:0};}
+  pirateName=localStorage.getItem("sp_pirate_name")||"";
 }
 let saveTimer=null;
 function save(){
@@ -1189,6 +1720,10 @@ function saveMissions(){try{localStorage.setItem("sp_missions",JSON.stringify(mi
 function saveBoss(){try{localStorage.setItem("sp_boss",JSON.stringify(bossData));}catch(e){}}
 function saveFreeze(){try{localStorage.setItem("sp_freeze",JSON.stringify(freezeData));}catch(e){}}
 function saveLoop(){try{localStorage.setItem("sp_loop",JSON.stringify(loopData));}catch(e){}}
+function saveWeather(){try{localStorage.setItem("sp_weather",JSON.stringify(weatherData));}catch(e){}}
+function saveSkipCount(){try{localStorage.setItem("sp_skipcount",JSON.stringify(skipCountData));}catch(e){}}
+function saveDFCollection(){try{localStorage.setItem("sp_dfcollect",JSON.stringify(dfCollectionData));}catch(e){}}
+function saveRival(){try{localStorage.setItem("sp_rival",JSON.stringify(rivalData));}catch(e){}}
 function showSaving(){const el=document.getElementById("save-indicator");if(el)el.innerHTML='<span class="save-dot" style="background:var(--ac);animation:pulse 1s infinite;"></span><span style="font-size:8px;color:var(--ac);letter-spacing:1px;">SAVING…</span>';}
 function showSaved(){const el=document.getElementById("save-indicator");if(el)el.innerHTML='<span class="save-dot" style="background:var(--green);"></span><span style="font-size:8px;color:var(--green);letter-spacing:1px;">SAVED ✓</span>';}
 
@@ -1204,7 +1739,7 @@ function playTone(freq,type,dur,vol=0.3,delay=0){
   try{const ctx=getAudioCtx();const osc=ctx.createOscillator();const gain=ctx.createGain();osc.connect(gain);gain.connect(ctx.destination);osc.type=type;osc.frequency.value=freq;gain.gain.setValueAtTime(vol,ctx.currentTime+delay);gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+delay+dur);osc.start(ctx.currentTime+delay);osc.stop(ctx.currentTime+delay+dur+0.05);}catch(e){}
 }
 function soundDone(){playTone(523,"sine",.18,.25,0);playTone(659,"sine",.18,.22,.08);playTone(784,"sine",.22,.28,.16);}
-function soundSkip(){playTone(100,"sawtooth",.25,.3,0);playTone(80,"sawtooth",.15,.2,.1);}
+function soundSkip(){playTone(220,"sine",.12,.6,0);playTone(185,"sine",.08,.5,.15);playTone(160,"sine",.06,.4,.35);}// Sad descending tones
 function soundRankUp(){
   const ci=currentCharIdx();const tune=CHAR_TUNES[Math.min(ci,CHAR_TUNES.length-1)];
   tune.forEach((n,i)=>playTone(n.f,n.t,n.d,.35,i*.12));
@@ -1230,21 +1765,28 @@ function showDayBanner(){const b=document.getElementById("day-banner");b.style.t
 
 // ════ XP & RANK (WANTED POSTER) ════
 function getCurrentRankIdx(xp){let idx=0;for(let i=0;i<RANKS.length;i++)if(xp>=RANKS[i].xp)idx=i;return idx;}
-function fmtBounty(xp){return"₹"+(xp*1000000).toLocaleString("en-IN");}
+function fmtBounty(xp){return"₹"+(xp*50000).toLocaleString("en-IN");}
 function addXP(amount){
   const xpMul=buffData.active&&Date.now()<buffData.expiresAt&&amount>0?2:1;
-  const finalAmt=amount>0?amount*xpMul:amount;
+  const comboBonus=amount>0?getComboMultiplier().mul:1;
+  // Weather multiplier
+  const weatherMul=(amount>0&&typeof getDailyWeather==="function")?getDailyWeather().xpMul||1:1;
+  // Monsoon: skips cost 2× XP
+  const monsoonPenalty=(amount<0&&typeof getDailyWeather==="function"&&getDailyWeather().id==="monsoon")?2:1;
+  const finalAmt=amount>0?Math.round(amount*xpMul*comboBonus*weatherMul):Math.round(amount*monsoonPenalty);
   const prevRank=getCurrentRankIdx(xpData.total);
   xpData.total=Math.max(0,xpData.total+finalAmt);
   const newRank=getCurrentRankIdx(xpData.total);
   saveXP();updateRankHUD();checkUnlocks();if(finalAmt>0)spawnXpParticle(finalAmt);
   if(newRank>prevRank){showRankUp(newRank);soundRankUp();}
   if(xpMul>1&&amount>0)toast(`⚡ Devil Fruit: +${finalAmt} XP (2×)!`);
+  else if(weatherMul>1&&amount>0&&Math.abs(weatherMul-1)>0.05)toast(`🌤️ Calm winds: +${finalAmt} XP (${weatherMul}×)!`);
+  else if(weatherMul<1&&amount>0&&Math.abs(weatherMul-1)>0.05)toast(`⛈️ Storm weather: +${finalAmt} XP (${weatherMul}×)`);
 }
 let bountyAnimId=null;
 function animateBounty(target){
   const el=document.getElementById("bounty-amount");if(!el)return;
-  const cur=parseInt(el.dataset.val||0);const targetVal=target*1000000;
+  const cur=parseInt(el.dataset.val||0);const targetVal=target*50000;
   if(cur===targetVal){el.textContent=fmtBounty(target);return;}
   cancelAnimationFrame(bountyAnimId);let c=cur;const step=Math.max(1,Math.abs(targetVal-c)/25);
   function frame(){c+=(c<targetVal?step:-step);if((c>=targetVal&&step>0)||(c<=targetVal&&step<0)){c=targetVal;}el.textContent=fmtBounty(Math.round(c/1000000));el.dataset.val=Math.round(c);if(c!==targetVal)bountyAnimId=requestAnimationFrame(frame);}
@@ -1263,6 +1805,8 @@ function showRankUp(ri){
   inner.style.transform="scale(0) rotate(-8deg)";
   requestAnimationFrame(()=>requestAnimationFrame(()=>{inner.style.transition="transform .5s cubic-bezier(.175,.885,.32,1.275)";inner.style.transform="scale(1) rotate(0deg)";}));
   launchConfetti();
+  toast(`${r.emoji} RANK UP! You are now ${r.name}! 🎉`);
+  spawnImpact(`${r.emoji} ${r.name.toUpperCase()}!`,28,50,40,300);
   setTimeout(()=>{
     inner.style.transform="scale(0) rotate(8deg)";
     setTimeout(()=>{ov.classList.remove("show");ov.style.display="none";inner.style.transform="";inner.style.transition="";},500);
@@ -1315,7 +1859,10 @@ function checkUnlocks(){
   if(anyNew)saveUnlocks();
 }
 function isCharUnlocked(i){if(CHARS[i].unlockXP===0)return true;return!!unlocksData.unlocked["char_"+i];}
-function showCrewUnlock(ch){crewPopupQueue.push(ch);if(!crewPopupShowing)showNextCrew();}
+function showCrewUnlock(ch){
+  // Use the new full-screen unlock animation
+  showCharUnlockAnimation(ch);
+}
 function showNextCrew(){
   if(!crewPopupQueue.length){crewPopupShowing=false;return;}crewPopupShowing=true;
   const ch=crewPopupQueue.shift();
@@ -1335,13 +1882,50 @@ function gs(id){return tasks[id]||S.P;}
 function toggle(id){
   if(editMode)return;const prev=gs(id);const next=prev===S.P?S.D:prev===S.D?S.X:S.P;
   tasks[id]=next;
-  if(prev===S.P&&next===S.D){addXP(2);soundDone();checkDevilFruit();checkSeaKingDefeat();}
-  else if(prev===S.D&&next===S.X){addXP(-2);soundSkip();triggerSeaKingAttack();}
+  if(prev===S.P&&next===S.D){addXP(2);soundDone();checkDevilFruit();checkSeaKingDefeat();
+    if(Math.random()<0.25)setTimeout(()=>showNakamaReaction("task_done"),400);}
+  else if(prev===S.D&&next===S.X){addXP(-2);soundSkip();triggerSeaKingAttack();
+    if(Math.random()<0.4)setTimeout(()=>showNakamaReaction("skip"),400);}
+  else if(prev===S.P&&next===S.X){soundSkip();triggerSeaKingAttack();
+    if(Math.random()<0.3)setTimeout(()=>showNakamaReaction("skip"),400);}
+  // Track skip count for weak spots
+  if(next===S.X){skipCountData[id]=(skipCountData[id]||0)+1;saveSkipCount();}
+  else if(next===S.D&&skipCountData[id]){delete skipCountData[id];saveSkipCount();}
   checkDayComplete();save();render();updateWaveProgress();
+  // All animations run AFTER render so DOM is fresh
+  if(next===S.D){
+    requestAnimationFrame(()=>{
+      const el=document.querySelector(`.chip[data-tid="${id}"]`);
+      if(el){
+        el.classList.remove("tick-anim");void el.offsetWidth;el.classList.add("tick-anim");
+        el.addEventListener("animationend",()=>el.classList.remove("tick-anim"),{once:true});
+        showAnimeTaskComplete(el);
+        showMangaFlash();
+        applyDFEffect(el);
+        spawnImpact(["GOMU GOMU!","PIRATE KING!","NAKAMA!","YOSH!","ONE PIECE!"][Math.floor(Math.random()*5)],30,50,45,100);
+      }
+    });
+  }
+  // Skip animation — fires AFTER render so chip is in fresh DOM
+  if(next===S.X){
+    requestAnimationFrame(()=>{
+      const skipEl=document.querySelector(`.chip[data-tid="${id}"]`);
+      showZoroSlash(skipEl);
+    });
+  }
 }
 function checkDayComplete(){
   const day=days[activeDay];const allT=Object.values(day.tasks).flat();const doneT=allT.filter(t=>gs(t.id)===S.D).length;
-  if(allT.length>0&&doneT===allT.length){const key="celebrated_"+days[activeDay].id;if(!tasks[key]){tasks[key]="yes";addXP(10);launchConfetti();gear5Flash();showDayBanner();checkMilestone();toast("🎉 DAY COMPLETE! +10 XP BONUS! ⚡");}}
+  if(allT.length>0&&doneT===allT.length){const key="celebrated_"+days[activeDay].id;if(!tasks[key]){tasks[key]="yes";addXP(10);launchConfetti();gear5Flash();showDayBanner();showMangaVictory();checkMilestone();toast("🎉 DAY COMPLETE! +10 XP BONUS! ⚡");maybeShowEOD();
+    setTimeout(()=>showNakamaReaction("day_complete"),1000);
+    checkGrandFinale();
+  }}
+  checkStreakWarning();
+  checkStreakMilestones();
+  checkDailyChallenge();
+  checkMasteryLevelUps();
+  updateComboBar();
+  checkNoSkipStreakThreshold();
 }
 function colorFor(i,sub){if(sub)return getSubjectColor(sub);return COLORS[i%COLORS.length];}
 function fmtSecs(s){const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),ss=s%60;if(h>0)return`${h}:${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;return`${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;}
@@ -1350,7 +1934,17 @@ function fmtMin(s){if(!s||s<=0)return"0m";const h=Math.floor(s/3600),m=Math.floo
 function todayKey(){return new Date().toISOString().slice(0,10);}
 function streakCount(){
   let streak=0;const today=new Date();today.setHours(0,0,0,0);const sdt=new Date(meta.startDate);sdt.setHours(0,0,0,0);
-  for(let i=0;i<100;i++){const d=new Date(today);d.setDate(d.getDate()-i);const di=Math.round((d-sdt)/86400000);if(di<0||di>=days.length){if(i===0)continue;break;}const allT=Object.values(days[di].tasks).flat();if(!allT.length){if(i===0)continue;break;}const doneT=allT.filter(t=>gs(t.id)===S.D).length;if(doneT/allT.length>=.5)streak++;else if(i>0)break;}
+  // Grace: if it's before 2am, also treat yesterday's data as "today" for streak
+  const graceMinutes=new Date().getHours()*60+new Date().getMinutes();
+  const graceDay=(graceMinutes<120)?1:0; // before 2am = still counts as previous day
+  for(let i=0;i<100;i++){const d=new Date(today);d.setDate(d.getDate()-i);const di=Math.round((d-sdt)/86400000);
+    // Grace: also check if yesterday had study sessions (covers midnight edge case)
+    if(i===0&&graceDay){
+      const yKey=new Date(today);yKey.setDate(yKey.getDate()-1);
+      const yDi=Math.round((yKey-sdt)/86400000);
+      if(yDi>=0&&yDi<days.length){const yT=Object.values(days[yDi].tasks).flat();if(yT.filter(t=>gs(t.id)===S.D).length/yT.length>=.5){streak++;continue;}}
+    }
+    if(di<0||di>=days.length){if(i===0)continue;break;}const allT=Object.values(days[di].tasks).flat();if(!allT.length){if(i===0)continue;break;}const doneT=allT.filter(t=>gs(t.id)===S.D).length;if(doneT/allT.length>=.5)streak++;else if(i>0)break;}
   return streak;
 }
 function todayStudySecs(){const tk=todayKey();return(timerData.sessions||[]).filter(s=>s.date===tk).reduce((a,s)=>a+s.dur,0);}
@@ -1688,8 +2282,14 @@ function renderSeaChart(){
   // Compass rose
   html+=`<g transform="translate(${W-80},40)"><circle cx="0" cy="0" r="28" fill="rgba(10,20,40,.7)" stroke="rgba(201,168,76,.3)" stroke-width="1.5"/><polygon points="0,-22 4,-6 -4,-6" fill="rgba(220,50,50,.8)"/><polygon points="0,22 4,6 -4,6" fill="rgba(200,200,200,.5)"/><polygon points="-22,0 -6,-4 -6,4" fill="rgba(200,200,200,.5)"/><polygon points="22,0 6,-4 6,4" fill="rgba(200,200,200,.5)"/><circle cx="0" cy="0" r="3" fill="rgba(201,168,76,.9)"/><text x="0" y="-26" text-anchor="middle" fill="rgba(220,50,50,.8)" font-size="9" font-weight="700" font-family="DM Mono">N</text></g>`;
   html+="</svg>";
-  // Ship SVG
-  html+=`<div style="position:absolute;left:${shipX-28}px;top:${shipY-38}px;z-index:4;pointer-events:none;"><svg width="56" height="55" viewBox="0 0 90 55"><polygon points="10,40 80,40 70,50 20,50" fill="rgba(255,255,255,.25)"/><polygon points="40,10 55,10 60,40 35,40" fill="rgba(255,255,255,.3)"/><rect x="47" y="5" width="2" height="35" fill="rgba(255,255,255,.5)"/><polygon points="49,5 68,18 49,25" fill="rgba(255,255,255,.4)"/></svg></div>`;
+  // Ship SVG — upgraded based on XP rank
+  const _shipLevel=getShipLevel();
+  const _shipSVG=buildShipSVG(_shipLevel);
+  const _shipW=56+(_shipLevel-1)*10;
+  html+=`<div class="sc-ship-wrap${_shipLevel>=3?" ship-upgraded":""}" style="position:absolute;left:${shipX-_shipW/2}px;top:${shipY-42}px;z-index:4;pointer-events:none;" title="Ship Level ${_shipLevel}">${_shipSVG}</div>`;
+  // Ship level label
+  const _shipNames=["Dinghy","Going Merry","Going Merry II","Thousand Sunny","Oro Jackson ⚓"];
+  html+=`<div style="position:absolute;left:${shipX-40}px;top:${shipY+18}px;z-index:4;pointer-events:none;font-size:8px;color:rgba(255,215,0,.7);letter-spacing:1px;font-family:var(--font);text-align:center;width:80px;">${_shipNames[_shipLevel-1]}</div>`;
   // Islands
   positions.forEach(({x,y,isl})=>{
     const examDate=new Date(isl.date);examDate.setHours(0,0,0,0);
@@ -1705,14 +2305,58 @@ function renderSeaChart(){
     const dayTxt=isl.conquered?"✅":days===0?"TODAY!":days<0?Math.abs(days)+"d ago":days+"d";
     const escId=isl.id.replace(/[^a-z0-9]/gi,"_");
     html+=`<div class="${classes}" style="left:${x-65}px;top:${y-68}px;" onclick="openIslandModal('${isl.id}')">`;
-    html+=`<div class="sc-island-art">${getIslandArt(isl.name)}</div>`;
+    const _prepPct=getIslandPrepPct(isl);
+    const _prepRing=buildPrepRingSVG(_prepPct,null,38);
+    html+=`<div style="position:relative;display:inline-block;">${getIslandArt(isl.name)}<div class="island-prep-ring" title="Prep: ${_prepPct}%">${_prepRing}</div></div>`;
     if(scEditMode){html+=`<div style="font-size:8px;color:var(--orange);letter-spacing:1px;margin-top:2px;">✏️ EDIT</div>`;}
     html+=`<div class="sc-island-name">${isl.name}</div>`;
     html+=`<div class="sc-island-exam">${isl.examName}</div>`;
     html+=`<div class="sc-countdown-badge" style="color:${badgeColor};border-color:${badgeColor};">${dayTxt}</div>`;
     html+="</div>";
   });
+  // ── Animated ocean waves ──
+  const wavePath=`M0,30 C${W*0.1},10 ${W*0.2},50 ${W*0.3},30 C${W*0.4},10 ${W*0.5},50 ${W*0.6},30 C${W*0.7},10 ${W*0.8},50 ${W*0.9},30 C${W*0.95},10 ${W},30 ${W*1.1},30 C${W*1.2},10 ${W*1.3},50 ${W*1.4},30 C${W*1.5},10 ${W*1.6},50 ${W*1.7},30 C${W*1.8},10 ${W*1.9},50 ${W*2},30 L${W*2},60 L0,60Z`;
+  const wavePath2=`M0,40 C${W*0.15},20 ${W*0.3},55 ${W*0.45},38 C${W*0.6},22 ${W*0.75},52 ${W*0.9},38 C${W*1.05},24 ${W*1.2},54 ${W*1.35},38 C${W*1.5},22 ${W*1.65},52 ${W*1.8},38 L${W*2},40 L${W*2},60 L0,60Z`;
+  html+=`<svg class="sc-wave-layer w1" style="position:absolute;bottom:0;left:0;width:${W*2}px;height:60px;pointer-events:none;z-index:0;" viewBox="0 0 ${W*2} 60" preserveAspectRatio="none"><path d="${wavePath}" fill="rgba(14,116,144,.35)"/></svg>`;
+  html+=`<svg class="sc-wave-layer w2" style="position:absolute;bottom:0;left:0;width:${W*2}px;height:60px;pointer-events:none;z-index:0;" viewBox="0 0 ${W*2} 60" preserveAspectRatio="none"><path d="${wavePath2}" fill="rgba(8,145,178,.2)"/></svg>`;
+
+  // ── Weather overlay ──
+  const _weather=getMapWeather();
+  html+=buildWeatherOverlay(_weather,W,OCEAN_H);
+
   map.innerHTML=html;
+
+  // ── Spawn sea creatures periodically ──
+  if(window._scCreatureInterval)clearInterval(window._scCreatureInterval);
+  window._scCreatureInterval=setInterval(()=>{
+    const mapEl=document.getElementById("sc-map");if(!mapEl)return clearInterval(window._scCreatureInterval);
+    spawnSeaCreature(mapEl,W,OCEAN_H);
+  },4000+Math.random()*3000);
+  // Spawn one immediately
+  setTimeout(()=>{const mapEl=document.getElementById("sc-map");if(mapEl)spawnSeaCreature(mapEl,W,OCEAN_H);},800);
+
+  // ── Spawn sea foam bubbles periodically ──
+  if(window._scFoamInterval)clearInterval(window._scFoamInterval);
+  window._scFoamInterval=setInterval(()=>{
+    const mapEl=document.getElementById("sc-map");if(!mapEl)return clearInterval(window._scFoamInterval);
+    for(let i=0;i<3;i++){
+      const foam=document.createElement("div");
+      foam.className="sea-foam";
+      const sz=3+Math.random()*5;
+      foam.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;bottom:${4+Math.random()*30}px;animation-delay:${Math.random()*800}ms;`;
+      mapEl.appendChild(foam);
+      setTimeout(()=>foam.remove(),2200);
+    }
+  },900);
+
+  // ── Storm zone SVG lightning ──
+  document.querySelectorAll(".sc-storm-zone").forEach(el=>{
+    setInterval(()=>{
+      el.style.opacity=Math.random()>.7?"0.8":"0.15";
+      setTimeout(()=>el.style.opacity="0.15",80);
+    },2800+Math.random()*1500);
+  });
+
   document.getElementById("sc-outer").scrollLeft=Math.max(0,shipX-150);
   renderUpcomingExams();
 }
@@ -1819,7 +2463,27 @@ function toggleConquer(){
   const isl=seaChartData.islands.find(i=>i.id===activeIslandId);if(!isl)return;
   isl.conquered=!isl.conquered;
   const cb=document.getElementById("iml-conquer-btn");
-  if(isl.conquered){cb.textContent="✅ CONQUERED";cb.classList.add("conquered");if(soundEnabled)soundBell();toast("🏴‍☠️ Island Conquered!");}
+  if(isl.conquered){
+    cb.textContent="✅ CONQUERED";cb.classList.add("conquered");if(soundEnabled)soundBell();toast("🏴‍☠️ Island Conquered!");
+    // Conquest burst animation
+    launchConfetti();
+    const bursts=["🏴‍☠️","⭐","💥","✨","🔥"];
+    bursts.forEach((emoji,i)=>{
+      setTimeout(()=>{
+        const b=document.createElement("div");
+        b.className="conq-burst";
+        b.textContent=emoji;
+        b.style.cssText=`left:${30+Math.random()*40}%;top:${30+Math.random()*30}%;animation-delay:0ms;`;
+        document.body.appendChild(b);
+        setTimeout(()=>b.remove(),1000);
+      },i*120);
+    });
+    // Screen flash gold
+    const f=document.createElement("div");
+    f.style.cssText="position:fixed;inset:0;pointer-events:none;z-index:799;background:rgba(255,215,0,.15);animation:screen-flash-anim .5s ease-out forwards;";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),550);
+  }
   else{cb.textContent="🏴‍☠️ MARK CONQUERED";cb.classList.remove("conquered");}
   saveSeaChart();renderSeaChart();
 }
@@ -1880,7 +2544,16 @@ function addCustomIsland(){
 function updateBanner(){
   const dl=daysLeft();const el=document.getElementById("countdown-display");
   if(el){if(dl===null){el.innerHTML='<span style="font-size:11px;color:var(--txt4);cursor:pointer;" onclick="openExamModal()">Set Exam Date →</span>';}else{el.innerHTML=`<span class="banner-val" style="cursor:pointer;" onclick="openExamModal()">${dl>0?dl+"d left":dl===0?"TODAY!":"DONE!"}</span>`;}}
-  const sd=document.getElementById("streak-display");if(sd)sd.textContent=streakCount()+"🔥";
+  const sd=document.getElementById("streak-display");
+  if(sd){
+    const sc=streakCount();
+    const col=sc>=30?"#ffd700":sc>=14?"#FF9F43":sc>=7?"#FF6B00":sc>=3?"#FF6B6B":"var(--txt2)";
+    sd.textContent=sc+"🔥";
+    sd.style.color=col;
+    sd.style.textShadow=sc>=7?`0 0 12px ${col}`:"none";
+    if(sc>=7)sd.style.animation="streak-glow 2s ease infinite";
+    else sd.style.animation="none";
+  }
   const sdd=document.getElementById("studyday-display");if(sdd)sdd.textContent="#"+(studyDayNum()+1);
   const tt=document.getElementById("today-time-display");if(tt){const secs=todayStudySecs();if(timerRunning&&timerStart&&timerSub)tt.textContent=fmtMin(secs+(Math.floor((Date.now()-timerStart)/1000)));else tt.textContent=fmtMin(secs)||"0m";}
   const hd=document.getElementById("header-date");if(hd)hd.textContent=new Date().toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long"});
@@ -2158,7 +2831,7 @@ function renderWantedPoster(container){
   <div style="background:linear-gradient(145deg,#2a1a00,#1a0f00);border:3px solid #C9A84C;border-radius:12px;padding:16px;text-align:center;box-shadow:0 0 30px rgba(201,168,76,.3),inset 0 0 40px rgba(0,0,0,.5);">
     <div style="font-size:9px;color:#C9A84C;letter-spacing:4px;margin-bottom:8px;border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:6px;">WANTED — DEAD OR ALIVE</div>
     <div style="font-size:64px;margin:10px 0;filter:drop-shadow(0 4px 12px rgba(0,0,0,.8));">${ch.emoji}</div>
-    <div style="font-family:var(--head);font-size:22px;font-weight:900;color:#ffffff;letter-spacing:2px;text-shadow:0 2px 8px rgba(0,0,0,.9);">${ch.name.toUpperCase()}</div>
+    <div style="font-family:var(--head);font-size:22px;font-weight:900;color:#ffffff;letter-spacing:2px;text-shadow:0 2px 8px rgba(0,0,0,.9);">${(pirateName||ch.name).toUpperCase()}</div>
     <div style="font-size:9px;color:#C9A84C;letter-spacing:2px;margin:4px 0 12px;">${rank.emoji} ${rank.name.toUpperCase()}</div>
     <div style="background:rgba(0,0,0,.4);border-radius:8px;padding:10px;margin-bottom:10px;">
       <div style="font-size:11px;color:rgba(201,168,76,.6);letter-spacing:1px;margin-bottom:4px;">BOUNTY</div>
@@ -2268,6 +2941,8 @@ function buyDFItem(id){
   const item=DF_SHOP.find(i=>i.id===id);if(!item)return;
   if(xpData.total<item.cost){toast("❌ Not enough XP!");return;}
   addXP(-item.cost);
+  // Track in collection
+  if(!dfCollectionData.owned.includes(item.name)){dfCollectionData.owned.push(item.name);saveDFCollection();}
   if(item.effect==="xp2x"){
     buffData={active:true,fruitName:item.name,fruitEmoji:item.icon,expiresAt:Date.now()+item.duration};
     saveBuff();startBuffUI();toast("⚡ 2× XP Boost activated for 1 hour!");
@@ -2280,7 +2955,7 @@ function buyDFItem(id){
       save();render();toast("🏳️ "+fixed+" skips forgiven!");
     }
   } else if(item.effect==="bounty_500"){
-    addXP(500);toast("💰 +500 XP Bounty Boost!");
+    addXP(100);toast("💰 +100 XP Bounty Boost!");
   }
   renderMissions();
 }
@@ -2371,7 +3046,7 @@ function renderAmbiencePanel(container){
 // ════ SEA CHART ISLAND UNLOCK ════
 function checkIslandUnlock(){
   const xp=xpData.total;
-  const ISLAND_UNLOCK_XP=[0,200,500,1000,2000,3500,5000,7000,10000];
+  const ISLAND_UNLOCK_XP=[0,50,150,300,500,800,1100,1500,2000];
   const islands=seaChartData.islands||[];
   let changed=false;
   islands.forEach((isl,i)=>{
@@ -2401,6 +3076,8 @@ function renderMissions(){
   renderTargetActual(document.getElementById("target-actual-panel"));
   renderWantedPoster(document.getElementById("wanted-poster-panel"));
   renderDFShop(document.getElementById("df-shop-panel"));
+  renderDFCollection(document.getElementById("df-collection-panel"));
+  renderRivalPanel(document.getElementById("rival-panel"));
   renderAmbiencePanel(document.getElementById("ambience-panel"));
   // Daily mission
   const mp=document.getElementById("daily-mission-panel");
@@ -2437,34 +3114,9 @@ function renderMissions(){
       <button onclick="useStreakFreeze()" ${used||freezeData.tokens<=0?"disabled":""} style="background:rgba(100,180,255,.12);border:1.5px solid rgba(100,180,255,.4);color:#7dd3fc;border-radius:8px;padding:7px 14px;cursor:pointer;font-family:var(--font);font-size:10px;font-weight:700;${used||freezeData.tokens<=0?"opacity:.4;":""}">${used?"USED":"USE ❄️"}</button>
     </div>`;
   }
-  // Boss battle
+  // Boss battle (enhanced)
   const bp=document.getElementById("boss-battle-panel");
-  if(bp){
-    const boss=getCurrentBoss();
-    if(boss){
-      const prog=getBossProgress(boss);
-      const pct=Math.min(100,Math.round(prog/boss.target*100));
-      const isDefeated=bossData.defeated.includes(boss.name);
-      bp.innerHTML=`<div style="font-size:9px;color:#ef4444;letter-spacing:2px;margin-bottom:10px;">⚔️ BOSS BATTLE — WEEK ${boss.week}</div>
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
-        <div style="font-size:44px;${isDefeated?"filter:grayscale(1);opacity:.4":""}">${boss.emoji}</div>
-        <div style="flex:1;">
-          <div style="font-size:14px;font-weight:900;color:#ffffff;font-family:var(--head);">${boss.name}</div>
-          <div style="font-size:10px;color:var(--txt3);margin-top:2px;">${boss.desc}</div>
-          <div style="font-size:9px;color:var(--ac);margin-top:2px;">Reward: +${boss.reward} XP</div>
-        </div>
-      </div>
-      <div style="height:8px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;margin-bottom:6px;">
-        <div style="height:100%;width:${pct}%;background:${isDefeated?"var(--teal)":pct>=70?"var(--green)":pct>=40?"var(--orange)":"#ef4444"};border-radius:4px;transition:width .5s;box-shadow:0 0 8px currentColor;"></div>
-      </div>
-      <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--txt4);">
-        <span>${isDefeated?"✅ DEFEATED!":"Progress: "+pct+"%"}</span>
-        <span>${boss.type==="weekly_timer"?fmtMin(prog)+"/"+fmtMin(boss.target):prog+"/"+boss.target}</span>
-      </div>`;
-    } else {
-      bp.innerHTML=`<div style="text-align:center;padding:16px;font-size:11px;color:var(--txt5);">⚔️ All bosses defeated! You are unstoppable! 👑</div>`;
-    }
-  }
+  if(bp){renderEnhancedBoss(bp);}
   // Achievements
   const ag=document.getElementById("achievements-grid");
   if(ag){
@@ -2564,11 +3216,34 @@ function renderDayTabs(){
   if(editMode)html+=`<button class="add-tab-btn" onclick="addDay()">＋</button>`;
   w.innerHTML=html;
 }
-function setDay(i){activeDay=i;render();}
+function setDay(i){
+  activeDay=i;
+  const c=document.getElementById("timer-clock");
+  if(c){
+    if(i===studyDayNum()){
+      c.textContent=fmtSecsLong(timerAccum);
+    } else if(!timerRunning){
+      c.textContent="00:00:00";
+    }
+  }
+  // Slide-in animation + scroll to top on tab switch
+  render();
+  requestAnimationFrame(()=>{
+    const mc=document.getElementById("main-content");
+    if(mc){
+      mc.classList.remove("main-content-anim");
+      void mc.offsetWidth; // force reflow
+      mc.classList.add("main-content-anim");
+      mc.scrollIntoView({behavior:"smooth",block:"start"});
+      mc.addEventListener("animationend",()=>mc.classList.remove("main-content-anim"),{once:true});
+    }
+  });
+}
 
 // ════ TASKS RENDER ════
 function render(){
   updateBanner();updateStrip();renderDayTabs();renderTabs();renderMainContent();renderMiniCountdown();
+  renderWeatherBanner();renderWeakSpots();renderBattlePlan();
 }
 function renderMiniCountdown(){
   const el=document.getElementById("mini-countdown-bar");if(!el)return;
@@ -2588,6 +3263,8 @@ function renderSubjectTabs(){renderTabs();}
 function renderMainContent(){
   const day=days[activeDay];const subs=Object.keys(day.tasks);const mc=document.getElementById("main-content");if(!mc)return;
   let html="";
+  // Daily challenge
+  html+='<div id="daily-challenge-slot"></div>';
   // Sticky notes
   const noteKey="day_"+days[activeDay].id;const noteVal=notes[noteKey]||"";
   const isOpen=notesOpen[noteKey];
@@ -2612,6 +3289,7 @@ function renderMainContent(){
     +`<button class="reset-btn" onclick="toggleLoopEnabled()" style="background:${loopEnabled?"rgba(78,205,196,.15)":"rgba(255,255,255,.05)"};border:1px solid ${loopEnabled?"rgba(78,205,196,.4)":"rgba(255,255,255,.15)"};color:${loopEnabled?"var(--teal)":"rgba(255,255,255,.3)"};" title="${loopEnabled?"Daily loop is ON — click to pause":"Daily loop paused — click to enable"}">${loopEnabled?"🔄 LOOP ON":"⏸ LOOP OFF"}${loopCount?" ("+loopCount+" subjects)":""}</button>`
     +`<button class="hc-toggle-btn${hcClass}" onclick="toggleHardcore()">${hcLabel}</button></div>`;
   mc.innerHTML=html;
+  renderDailyChallenge();
   // Attach long-press priority
   mc.querySelectorAll(".chip[data-tid]").forEach(el=>{
     const tid=el.dataset.tid;let pt=null;
@@ -2624,7 +3302,10 @@ function renderCard(sub,si,day,faded){
   const tks=day.tasks[sub]||[];const done=tks.filter(t=>gs(t.id)===S.D).length;const total=tks.length;const pct=total?Math.round(done/total*100):0;const c=getSubjectColor(sub);
   let html=`<div class="card${faded?" focus-fade":""}">`;
   html+=`<div class="card-head" style="border-left:3px solid ${c};">`;
+  const _crew=getCrewForSub(sub);
   html+=`<span class="card-head-icon">${ICONS[sub]||"📚"}</span>`;
+  html+=`<span class="crew-badge" style="color:${_crew.color};border-color:${_crew.color}20;background:${_crew.color}12;" title="${_crew.quote}">${_crew.emoji} ${_crew.name}</span>`;
+  html+=getMasteryBadgeHTML(sub);
   if(editMode&&editingSub===sub){html+=`<input class="ei" value="${sub.replace(/'/g,'&#39;')}" id="sub-rename-${si}" data-si="${si}" data-oldsub="${encodeURIComponent(sub)}" style="flex:1;" onblur="commitSubRename(parseInt(this.dataset.si),decodeURIComponent(this.dataset.oldsub))" onkeydown="if(event.key==='Enter')commitSubRename(parseInt(this.dataset.si),decodeURIComponent(this.dataset.oldsub))" />`;}
   else{html+=`<span class="card-head-name" style="color:${c};" data-si="${si}" data-sub="${encodeURIComponent(sub)}" ondblclick="if(editMode)startSubRename(parseInt(this.dataset.si),decodeURIComponent(this.dataset.sub))">${sub}</span>`;}
   html+=`<div class="card-head-right">`;
@@ -2632,7 +3313,15 @@ function renderCard(sub,si,day,faded){
   html+=`<span class="card-head-pct" style="color:${c};">${pct}%</span>`;
   html+=`<span class="card-head-count">${done}/${total}</span>`;
   html+=`<button class="play-btn${timerSub===sub&&timerRunning?" running":""}" data-sub="${encodeURIComponent(sub)}" onclick="playSubTimer(decodeURIComponent(this.dataset.sub))">${timerSub===sub&&timerRunning?"⏸ STOP":"▶ TIME"}</button>`;
-  if(timerData.totals&&timerData.totals[sub]){html+=`<span class="timer-badge has-time">${fmtMin(timerData.totals[sub])}</span>`;}
+  // Show THIS DAY's time for the subject (faint 0m if none, gold if has time)
+  const _sdtC=new Date(meta.startDate);_sdtC.setHours(0,0,0,0);_sdtC.setDate(_sdtC.getDate()+activeDay);
+  const _activeDK=_sdtC.toISOString().slice(0,10);
+  const _daySubTime=(timerData.sessions||[]).filter(s=>s.date===_activeDK&&s.sub===sub).reduce((a,s)=>a+s.dur,0);
+  const _isActiveDayToday=_activeDK===todayKey();
+  const _liveAdd=_isActiveDayToday&&timerRunning&&timerStart&&timerSub===sub?(Math.floor((Date.now()-timerStart)/1000)+timerAccum):0;
+  const _subDayTotal=_daySubTime+_liveAdd;
+  if(_subDayTotal>0){html+=`<span class="timer-badge has-time">${fmtMin(_subDayTotal)}</span>`;}
+  else{html+=`<span class="timer-badge" style="opacity:.28;font-size:8px;">0m</span>`;}
   if(editMode)html+=`<button class="card-del-btn" data-sub="${encodeURIComponent(sub)}" onclick="delSub(decodeURIComponent(this.dataset.sub))">🗑</button>`;
   const isLooped=loopData.subjects.includes(sub);
   if(editMode)html+=`<button class="card-del-btn" data-sub="${encodeURIComponent(sub)}" onclick="toggleSubjectLoop(decodeURIComponent(this.dataset.sub))" title="${isLooped?'Remove from daily loop':'Set as daily loop'}" style="background:${isLooped?"rgba(78,205,196,.25)":"rgba(255,255,255,.06)"};border-color:${isLooped?"var(--teal)":"rgba(255,255,255,.18)"};color:${isLooped?"var(--teal)":"rgba(255,255,255,.4)"};">🔄</button>`;
@@ -2759,6 +3448,7 @@ function commitSubRename(si,oldSub){
 }
 // ════ MOBILE CONFIRM ════
 let _inputCallback=null;
+let _confirmCallback=null;
 function mobileInput(title,placeholder,icon='✏️'){
   return new Promise(resolve=>{
     _inputCallback=resolve;
@@ -2852,18 +3542,31 @@ function timerTick(){
   if(!timerRunning||!timerStart)return;
   const elapsed=Math.floor((Date.now()-timerStart)/1000);
   document.getElementById("timer-clock").textContent=fmtSecsLong(timerAccum+elapsed);
+  // Midnight auto-stop
+  const now=new Date();
+  if(now.getHours()===0&&now.getMinutes()===0&&now.getSeconds()<2){toast("🌙 Midnight! Timer saved.");timerStartStop();return;}
+  // Crash recovery save every 10s
+  if(elapsed%10===0&&elapsed>0){try{localStorage.setItem("sp_timer_live",JSON.stringify({sub:timerSub,start:timerStart,accum:timerAccum,date:todayKey()}));}catch(e){}}
+  // 1hr milestone check every minute
+  if(elapsed%60===0&&elapsed>0)checkTimerMilestones();
 }
 function timerStartStop(){
   if(!timerRunning){
     timerRunning=true;timerStart=Date.now();
     timerInterval=setInterval(timerTick,1000);
     if(timerSub)document.getElementById("timer-sub-lbl").textContent="TIMING: "+timerSub.toUpperCase();
+    // Glow pulse + Gear 2 steam while running
+    const clk=document.getElementById("timer-clock");if(clk)clk.classList.add("running");
+    startGear2Steam();
     // Persist timer state so it survives app switching
     try{localStorage.setItem("sp_timer_live",JSON.stringify({sub:timerSub,start:timerStart,accum:timerAccum,date:todayKey()}));}catch(e){}
   } else {
     timerRunning=false;
     const elapsed=Math.floor((Date.now()-timerStart)/1000);
     timerAccum+=elapsed;clearInterval(timerInterval);
+    // Remove glow + steam
+    const clk2=document.getElementById("timer-clock");if(clk2)clk2.classList.remove("running");
+    stopGear2Steam();
     try{localStorage.removeItem("sp_timer_live");}catch(e){}
     if(timerSub&&elapsed>0){
       timerData.sessions=timerData.sessions||[];
@@ -2887,17 +3590,23 @@ function playSubTimer(sub){
 function updateTimerPanel(){
   const grid=document.getElementById("timer-grid");if(!grid)return;
   const day=days[activeDay];const subs=Object.keys(day.tasks);
-  const tk2=todayKey();
-  // Build today's per-subject totals from sessions
+  // FIX: compute calendar date for the active day tab so future days show 0, not today's time
+  const _sdt2=new Date(meta.startDate);_sdt2.setHours(0,0,0,0);_sdt2.setDate(_sdt2.getDate()+activeDay);
+  const tk2=_sdt2.toISOString().slice(0,10);
+  const isViewingToday=tk2===todayKey();
+  // Build per-subject totals for the active day from sessions
   const todaySubs={};
   (timerData.sessions||[]).filter(s=>s.date===tk2).forEach(s=>{todaySubs[s.sub]=(todaySubs[s.sub]||0)+s.dur;});
-  // If timer currently running, add live elapsed
-  if(timerRunning&&timerStart&&timerSub){
+  // Only add live elapsed when viewing today's tab
+  if(isViewingToday&&timerRunning&&timerStart&&timerSub){
     const live=Math.floor((Date.now()-timerStart)/1000);
     todaySubs[timerSub]=(todaySubs[timerSub]||0)+timerAccum+live;
   }
-  grid.innerHTML=subs.map(sub=>{const t=todaySubs[sub]||0;return`<div class="timer-card"><div class="timer-card-sub">${ICONS[sub]||"📚"} ${sub}</div><div class="timer-card-time${t?" has":""}">${fmtMin(t)||"0m"}<div style="font-size:7px;color:var(--txt5);margin-top:2px;">TODAY</div></div></div>`;}).join("");
-  const todayTotal=timerData.totals&&timerData.totals["day_"+tk2]||0;
+  const dayLabel=isViewingToday?"TODAY":tk2;
+  grid.innerHTML=subs.map(sub=>{const t=todaySubs[sub]||0;return`<div class="timer-card"><div class="timer-card-sub">${ICONS[sub]||"📚"} ${sub}</div><div class="timer-card-time${t?" has":""}">${fmtMin(t)||"0m"}<div style="font-size:7px;color:var(--txt5);margin-top:2px;">${dayLabel}</div></div></div>`;}).join("");
+  // TODAY'S TOTAL and goal bar always show real today's data
+  const realTodayKey=todayKey();
+  const todayTotal=timerData.totals&&timerData.totals["day_"+realTodayKey]||0;
   const ttl=document.getElementById("today-total-lbl");if(ttl)ttl.textContent=fmtMin(todayTotal)||"0m";
   // 16hr goal progress
   const goalSecs=16*3600;const goalPct=Math.min(100,Math.round(todayTotal/goalSecs*100));
@@ -3005,17 +3714,58 @@ function renderStats(){
     </svg>`;
   }
 
-  // ── Study Time Bars ──
+  // ── Weekly Hours Bar Chart ──
+  const whb=document.getElementById("weekly-hours-body");
+  if(whb){
+    // Get last 7 days (Mon-Sun or last 7)
+    const sdt7=new Date(meta.startDate);sdt7.setHours(0,0,0,0);
+    const today7=new Date();today7.setHours(0,0,0,0);
+    const days7=[];
+    for(let i=6;i>=0;i--){const d=new Date(today7);d.setDate(d.getDate()-i);days7.push(d);}
+    const weekEntries=days7.map(d=>{
+      const dk=d.toISOString().slice(0,10);
+      const secs=(timerData.sessions||[]).filter(s=>s.date===dk).reduce((a,s)=>a+s.dur,0);
+      const label=d.toLocaleDateString("en-IN",{weekday:"short"}).toUpperCase().slice(0,2);
+      const isToday7=dk===todayKey();
+      return{label,secs,isToday7,dk};
+    });
+    const maxSecs=Math.max(...weekEntries.map(e=>e.secs),1);
+    const totalWeekSecs=weekEntries.reduce((a,e)=>a+e.secs,0);
+    whb.innerHTML=`
+      <div style="display:flex;align-items:flex-end;gap:6px;height:80px;margin-bottom:6px;">
+        ${weekEntries.map(e=>{
+          const h=Math.max(4,Math.round(e.secs/maxSecs*70));
+          const color=e.isToday7?"var(--ac)":e.secs>0?"var(--teal)":"rgba(255,255,255,.08)";
+          return`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;">
+            ${e.secs>0?`<div style="font-size:7px;color:${e.isToday7?"var(--ac)":"var(--txt4)"};">${fmtMin(e.secs)}</div>`:""}
+            <div style="width:100%;height:${h}px;background:${color};border-radius:4px 4px 2px 2px;transition:height .4s;"></div>
+            <div style="font-size:7px;color:${e.isToday7?"var(--ac)":"var(--txt5)"};font-weight:${e.isToday7?"700":"400"};">${e.label}</div>
+          </div>`;
+        }).join("")}
+      </div>
+      <div style="font-size:8px;color:var(--txt4);text-align:right;">WEEK TOTAL: <span style="color:var(--ac);font-weight:700;">${fmtMin(totalWeekSecs)||"0m"}</span></div>
+    `;
+  }
+
+  // ── Study Time Bars (this week per subject) ──
   const tb=document.getElementById("time-bars-body");
   if(tb){
-    const totals=timerData.totals||{};
-    const subTimes=Object.entries(totals).filter(([k])=>!k.startsWith("day_")).sort((a,b)=>b[1]-a[1]).slice(0,8);
+    // Compute this week's dates
+    const todayTB=new Date();todayTB.setHours(0,0,0,0);
+    const weekDatesTB=[];for(let i=6;i>=0;i--){const d=new Date(todayTB);d.setDate(d.getDate()-i);weekDatesTB.push(d.toISOString().slice(0,10));}
+    // Sum per subject for this week
+    const subWeekTotals={};
+    (timerData.sessions||[]).filter(s=>weekDatesTB.includes(s.date)).forEach(s=>{subWeekTotals[s.sub]=(subWeekTotals[s.sub]||0)+s.dur;});
+    const subTimes=Object.entries(subWeekTotals).sort((a,b)=>b[1]-a[1]).slice(0,8);
     const maxTime=subTimes[0]?subTimes[0][1]:1;
-    tb.innerHTML=subTimes.map(([sub,secs])=>{
+    // Also show all-time total in smaller text
+    const allTimeTotals=timerData.totals||{};
+    tb.innerHTML=(subTimes.length?subTimes.map(([sub,secs])=>{
       const pct=Math.round(secs/maxTime*100);
       const c=getSubjectColor(sub);
-      return`<div class="time-bar-row"><div class="time-bar-label">${ICONS[sub]||"📚"} ${sub}</div><div class="time-bar-wrap"><div class="time-bar-fill" style="width:${pct}%;background:${c};"></div></div><div class="time-bar-val">${fmtMin(secs)}</div></div>`;
-    }).join("")||'<div style="color:var(--txt5);font-size:10px;padding:8px 0;">Start the timer to track study time!</div>';
+      const allTime=allTimeTotals[sub]||0;
+      return`<div class="time-bar-row"><div class="time-bar-label">${ICONS[sub]||"📚"} ${sub}</div><div class="time-bar-wrap"><div class="time-bar-fill" style="width:${pct}%;background:${c};"></div></div><div class="time-bar-val">${fmtMin(secs)}<div style="font-size:7px;color:var(--txt5);">all: ${fmtMin(allTime)}</div></div></div>`;
+    }).join(""):'<div style="color:var(--txt5);font-size:10px;padding:8px 0;">No study sessions this week yet!</div>');
   }
 
   // ── Subject Completion Bars ──
@@ -3103,6 +3853,173 @@ function pickChar(i){
 }
 function unpinChar(){cfg.pinnedChar=null;applyAccent();saveCfg();renderBgSection();}
 
+// ════ UPGRADED STREAK SYSTEM ════
+const STREAK_MILESTONES={
+  3:{msg:"3 days in a row! You're building momentum! 🌊",reward:20,emoji:"🔥"},
+  7:{msg:"One full week! Week Warrior! ⚔️",reward:50,emoji:"⚔️"},
+  14:{msg:"Two weeks strong! Iron Discipline! 💎",reward:100,emoji:"💎"},
+  21:{msg:"21 days! This is now a HABIT! 🏴‍☠️",reward:150,emoji:"🏴‍☠️"},
+  30:{msg:"30 days! You have Iron Will! 👑",reward:250,emoji:"👑"},
+  60:{msg:"60 days! You're a LEGEND! 🌟",reward:500,emoji:"🌟"},
+  90:{msg:"90 days! EMPEROR level dedication! 👑",reward:1000,emoji:"🏆"},
+};
+function checkStreakMilestones(){
+  const streak=streakCount();
+  const milestone=STREAK_MILESTONES[streak];
+  if(!milestone)return;
+  const key="streak_milestone_"+streak;
+  if(tasks[key])return; // already shown
+  tasks[key]="done";save();
+  // Give XP reward
+  addXP(milestone.reward);
+  // Show milestone popup
+  setTimeout(()=>showStreakMilestone(streak,milestone),600);
+}
+function showStreakMilestone(streak,milestone){
+  const ov=document.getElementById("streak-milestone-overlay");
+  const inner=document.getElementById("streak-milestone-inner");
+  document.getElementById("sm-fire").textContent=milestone.emoji;
+  document.getElementById("sm-streak").textContent=streak+"🔥";
+  document.getElementById("sm-title").textContent="DAY STREAK ACHIEVED!";
+  document.getElementById("sm-msg").textContent=milestone.msg;
+  document.getElementById("sm-reward").textContent="🎁 REWARD: +"+milestone.reward+" XP EARNED!";
+  ov.style.display="flex";
+  inner.style.transform="scale(0)";
+  launchConfetti();
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    inner.style.transition="transform .5s cubic-bezier(.175,.885,.32,1.275)";
+    inner.style.transform="scale(1)";
+  }));
+}
+function closeStreakMilestone(){
+  const ov=document.getElementById("streak-milestone-overlay");
+  const inner=document.getElementById("streak-milestone-inner");
+  inner.style.transform="scale(0)";
+  setTimeout(()=>{ov.style.display="none";inner.style.transition="";},400);
+}
+function checkStreakWarning(){
+  const streak=streakCount();
+  if(streak===0)return; // no streak to protect
+  const todayIdx=studyDayNum();
+  if(todayIdx<0||todayIdx>=days.length)return;
+  const day=days[todayIdx];
+  const allT=Object.values(day.tasks).flat();
+  if(!allT.length)return;
+  const doneT=allT.filter(t=>gs(t.id)===S.D).length;
+  const pct=doneT/allT.length;
+  const banner=document.getElementById("streak-warning-banner");
+  const msg=document.getElementById("streak-warning-msg");
+  if(pct<0.5&&streak>0){
+    const needed=Math.ceil(allT.length*0.5)-doneT;
+    msg.textContent="⚠️ Complete "+needed+" more task"+(needed>1?"s":"")+" to protect your "+streak+"🔥 streak!";
+    banner.style.display="block";
+  } else {
+    banner.style.display="none";
+  }
+}
+function closeStreakWarning(){document.getElementById("streak-warning-banner").style.display="none";}
+function openStreakPanel(){
+  renderStreakPanel();
+  document.getElementById("streak-panel-modal").style.display="flex";
+}
+function closeStreakPanel(e){
+  if(!e||e.target===document.getElementById("streak-panel-modal"))
+    document.getElementById("streak-panel-modal").style.display="none";
+}
+function renderStreakPanel(){
+  const el=document.getElementById("streak-panel-content");if(!el)return;
+  const streak=streakCount();
+  const sdt=new Date(meta.startDate);sdt.setHours(0,0,0,0);
+  const today=new Date();today.setHours(0,0,0,0);
+  // Find next milestone
+  const milestoneKeys=Object.keys(STREAK_MILESTONES).map(Number).sort((a,b)=>a-b);
+  const nextMilestone=milestoneKeys.find(m=>m>streak);
+  const prevMilestone=milestoneKeys.filter(m=>m<=streak).pop()||0;
+  const progressToNext=nextMilestone?Math.round((streak-prevMilestone)/(nextMilestone-prevMilestone)*100):100;
+  // Build last 30 days calendar
+  let calHtml='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px;">';
+  ['S','M','T','W','T','F','S'].forEach(d=>{calHtml+=`<div style="text-align:center;font-size:8px;color:var(--txt5);padding-bottom:3px;">${d}</div>`;});
+  // Fill blank days to align with weekday
+  const startOfCal=new Date(today);startOfCal.setDate(startOfCal.getDate()-27);
+  const startDow=startOfCal.getDay();
+  for(let i=0;i<startDow;i++)calHtml+=`<div></div>`;
+  for(let i=0;i<28;i++){
+    const d=new Date(startOfCal);d.setDate(d.getDate()+i);d.setHours(0,0,0,0);
+    const di=Math.round((d-sdt)/86400000);
+    const isFuture=d>today;
+    const isToday2=d.getTime()===today.getTime();
+    let bg="rgba(255,255,255,.06)",border="transparent",glow="";
+    if(!isFuture&&di>=0&&di<days.length){
+      const allT=Object.values(days[di].tasks).flat();
+      if(allT.length){
+        const doneT=allT.filter(t=>gs(t.id)===S.D).length;
+        const pct=doneT/allT.length;
+        if(pct>=0.8){bg="rgba(38,222,129,.7)";glow="box-shadow:0 0 6px rgba(38,222,129,.5);";}
+        else if(pct>=0.5){bg="rgba(255,159,67,.7)";glow="box-shadow:0 0 4px rgba(255,159,67,.4);";}
+        else if(pct>0){bg="rgba(255,107,107,.5)";}
+        else{bg="rgba(255,255,255,.06)";}
+      }
+    }
+    if(isToday2){border="2px solid #ffd700";glow+="box-shadow:0 0 8px rgba(255,215,0,.5);";}
+    const dayNum=d.getDate();
+    calHtml+=`<div style="aspect-ratio:1;border-radius:6px;background:${bg};border:${border};${glow}display:flex;align-items:center;justify-content:center;font-size:8px;color:rgba(255,255,255,.5);">${isToday2?"🔥":dayNum}</div>`;
+  }
+  calHtml+="</div>";
+  // Milestones list
+  let msHtml="";
+  milestoneKeys.forEach(m=>{
+    const achieved=streak>=m;
+    const ms=STREAK_MILESTONES[m];
+    msHtml+=`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);">
+      <div style="font-size:24px;${achieved?"":"filter:grayscale(1);opacity:.3;"}">${ms.emoji}</div>
+      <div style="flex:1;">
+        <div style="font-size:11px;font-weight:700;color:${achieved?"#ffd700":"var(--txt4)"};">${m} Day Streak</div>
+        <div style="font-size:9px;color:var(--txt5);margin-top:1px;">${ms.msg.slice(0,40)}...</div>
+      </div>
+      <div style="text-align:right;font-size:10px;color:${achieved?"var(--green)":"var(--txt5)"};">
+        ${achieved?"✅ DONE":"+"+ms.reward+" XP"}
+      </div>
+    </div>`;
+  });
+  el.innerHTML=`
+    <!-- Current streak big display -->
+    <div style="text-align:center;padding:16px;background:linear-gradient(135deg,rgba(255,107,0,.12),rgba(255,200,0,.08));border:1px solid rgba(255,107,0,.3);border-radius:16px;margin-bottom:14px;">
+      <div style="font-size:56px;animation:sm-bounce .8s ease infinite alternate;">${streak>0?"🔥":"💤"}</div>
+      <div style="font-family:var(--head);font-size:42px;font-weight:900;color:#ffd700;animation:streak-glow 2s ease infinite;">${streak}</div>
+      <div style="font-size:11px;color:#FF9F43;letter-spacing:2px;margin-top:2px;">DAY STREAK</div>
+      ${streak>=3?`<div style="font-size:10px;color:rgba(255,255,255,.5);margin-top:6px;">${STREAK_MILESTONES[prevMilestone]?.msg||"Keep going!"}</div>`:""}
+    </div>
+    <!-- Progress to next milestone -->
+    ${nextMilestone?`
+    <div style="margin-bottom:14px;">
+      <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--txt4);margin-bottom:5px;">
+        <span>🎯 NEXT MILESTONE: ${nextMilestone} DAYS</span>
+        <span>${nextMilestone-streak} days to go</span>
+      </div>
+      <div style="height:8px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:${progressToNext}%;background:linear-gradient(90deg,#FF6B00,#ffd700);border-radius:4px;transition:width .5s;box-shadow:0 0 8px rgba(255,107,0,.5);"></div>
+      </div>
+      <div style="font-size:9px;color:var(--txt5);margin-top:3px;">Reward: +${STREAK_MILESTONES[nextMilestone].reward} XP 🎁</div>
+    </div>`:""}
+    <!-- Calendar -->
+    <div style="margin-bottom:14px;">
+      <div style="font-size:9px;color:var(--ac);letter-spacing:2px;margin-bottom:8px;">📅 LAST 28 DAYS</div>
+      ${calHtml}
+      <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;">
+        <span style="font-size:8px;color:rgba(38,222,129,.8);">● 80%+ done</span>
+        <span style="font-size:8px;color:rgba(255,159,67,.8);">● 50–79%</span>
+        <span style="font-size:8px;color:rgba(255,107,107,.7);">● Under 50%</span>
+        <span style="font-size:8px;color:rgba(255,215,0,.9);">🔥 Today</span>
+      </div>
+    </div>
+    <!-- Milestones -->
+    <div>
+      <div style="font-size:9px;color:var(--ac);letter-spacing:2px;margin-bottom:8px;">🏆 STREAK MILESTONES</div>
+      ${msHtml}
+    </div>
+  `;
+}
+
 // ════ DAILY LOOP SYSTEM ════
 function checkDailyLoopReset(){
   if(!loopData.enabled||!loopData.subjects.length)return;
@@ -3160,9 +4077,16 @@ function scheduleLoopMidnightCheck(){
 
 // ════ INIT ════
 function init(){
+  // Animated loading bar, then core init
+  runLoadingBar(()=>_initCore());
+}
+function _initCore(){
   load();
   applyDark();applyAccent();
-  autoScene();setInterval(autoScene,60*1000);
+  autoScene();applyDayTheme();setInterval(()=>{autoScene();},60*1000);
+  updateComboBar();
+  _prevNoSkipStreak=getNoSkipStreak();
+  checkMasteryLevelUps();
   if(buffData.active&&Date.now()<buffData.expiresAt)startBuffUI();else{buffData.active=false;saveBuff();}
   const xp=xpData.total;CHARS.forEach((ch,i)=>{if(ch.unlockXP===0)return;const key="char_"+i;if(xp>=ch.unlockXP&&!unlocksData.unlocked[key]){unlocksData.unlocked[key]=true;}});saveUnlocks();
   quoteIdx=Math.floor(Math.random()*QUOTES.length);renderQuote();
@@ -3180,23 +4104,687 @@ function init(){
   autoGenerateDays();
   checkDailyLoopReset();
   scheduleLoopMidnightCheck();
+  checkStreakWarning();
+  getDailyWeather();
   render();updateRankHUD();updateTimerPanel();
+  updatePirateNameBadge();
   setInterval(updateBanner,30000);
   setInterval(()=>{checkAchievements();checkBossDefeated();checkIslandUnlock();},60000);
   document.getElementById("loading").style.display="none";
   document.getElementById("app").style.display="block";
+  setTimeout(checkOnboarding,500);
 }
 
 // ════ ONE PIECE EXTRA ANIMATIONS ════
 function spawnXpParticle(amount){
-  const p=document.createElement("div");
-  p.className="xp-particle";
-  p.textContent="+" + amount + " XP";
-  p.style.left=Math.random()*60+20+"%";
-  p.style.top="60%";
-  document.body.appendChild(p);
-  setTimeout(()=>p.remove(),1500);
+  // Spawn 1 main particle + 2 smaller echo particles
+  const spawnOne=(txt,size,delay,x,y)=>{
+    const p=document.createElement("div");
+    p.className="xp-particle";
+    p.textContent=txt;
+    p.style.fontSize=size+"px";
+    p.style.left=x+"%";
+    p.style.top=y+"%";
+    p.style.animationDelay=delay+"ms";
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),1500+delay);
+  };
+  // Try to spawn near the rank HUD if visible
+  const hud=document.getElementById("rank-hud");
+  let bx=50,by=12;
+  if(hud){const r=hud.getBoundingClientRect();bx=Math.round((r.left+r.width/2)/window.innerWidth*100);by=Math.round(r.bottom/window.innerHeight*100);}
+  spawnOne("+"+amount+" XP",15,0,bx+Math.random()*10-5,by+5);
+  if(amount>=5){spawnOne("⭐",11,80,bx+Math.random()*16-8,by+8);}
+  if(amount>=10){spawnOne("+"+amount+" XP",11,150,bx+Math.random()*20-10,by+6);}
 }
+// ════════════════════════════════════════════
+// ONE PIECE ANIME EFFECTS
+// ════════════════════════════════════════════
+
+// ── IMPACT TEXT helper ──
+function spawnImpact(text, size, x, y, delay){
+  setTimeout(()=>{
+    const el=document.createElement("div");
+    el.className="impact-text";
+    el.textContent=text;
+    el.style.cssText=`left:${x}%;top:${y}%;font-size:${size}px;`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),750);
+  },delay||0);
+}
+
+// ── MANGA PANEL FLASH (task complete) ──
+function showMangaFlash(){
+  // Replaced by local chip-burst — no more full-screen flash
+}
+
+// ── ZORO SLASH (skip task) ──
+function showZoroSlash(chipEl){
+  // Renamed but kept same call — now shows sad motivating overlay
+  const overlay=document.getElementById("skip-sad");
+  if(!overlay)return;
+  overlay.innerHTML="";
+
+  // 1. Soft grey vignette
+  const vign=document.createElement("div");
+  vign.className="sad-vignette";
+  overlay.appendChild(vign);
+
+  // 2. Rain drops across screen
+  for(let i=0;i<28;i++){
+    const drop=document.createElement("div");
+    drop.className="sad-rain";
+    const h=40+Math.random()*80;
+    drop.style.cssText=`left:${Math.random()*100}%;top:${-h}px;height:${h}px;
+      --rd:${0.8+Math.random()*0.8}s;--rdelay:${Math.random()*0.6}s;`;
+    overlay.appendChild(drop);
+  }
+
+  overlay.classList.add("active");
+
+  // 3. Chip goes grey briefly
+  if(chipEl){
+    chipEl.classList.add("skip-anim");
+    setTimeout(()=>chipEl.classList.remove("skip-anim"),1100);
+  }
+
+  // 4. Sad motivating bubble from a crew member
+  const msgs=[
+    ["😔","Luffy","Even I take breaks… but I always get back up. You can do this!"],
+    ["😞","Nami","Every skipped task is a detour from your dream."],
+    ["😶","Zoro","A swordsman who gives up is just holding dead weight."],
+    ["😟","Chopper","It's okay to struggle. But we keep going together!"],
+    ["😦","Robin","History remembers those who endure. This moment will pass."],
+    ["😕","Usopp","Even great warriors have bad days! Tomorrow we fight again!"],
+    ["😐","Sanji","A cook never leaves a meal unfinished. Come back and finish this."],
+    ["😔","Brook","Even bones feel sadness. But music plays on. So must you."],
+  ];
+  const [emoji,name,msg]=msgs[Math.floor(Math.random()*msgs.length)];
+  const bubble=document.createElement("div");
+  bubble.className="sad-bubble";
+  bubble.innerHTML=`<span class="sad-bubble-emoji">${emoji}</span><div class="sad-bubble-msg">"${msg}"</div><div class="sad-bubble-name">— ${name}</div>`;
+  // Position near chip if available, else centre-top
+  const rect=chipEl?chipEl.getBoundingClientRect():null;
+  const bx=rect?Math.max(120,Math.min(rect.left+rect.width/2,window.innerWidth-120)):window.innerWidth/2;
+  const by=rect?Math.max(120,rect.top-10):window.innerHeight*0.35;
+  bubble.style.cssText=`left:${bx}px;top:${by}px;`;
+  document.body.appendChild(bubble);
+  setTimeout(()=>bubble.remove(),3000);
+
+  // 5. Clean up overlay
+  setTimeout(()=>{overlay.classList.remove("active");overlay.innerHTML="";},2400);
+}
+
+// ── GEAR 2 STEAM ──
+let steamInterval=null;
+function startGear2Steam(){
+  const sc=document.getElementById("steam-container");if(!sc)return;
+  if(steamInterval)return;
+  // Add haki border to timer panel
+  const tp=document.querySelector("#sec-timer .glass-panel");
+  if(tp)tp.classList.add("haki-active");
+  steamInterval=setInterval(()=>{
+    const sc2=document.getElementById("steam-container");if(!sc2)return;
+    for(let i=0;i<2;i++){
+      const p=document.createElement("div");
+      p.className="steam-particle";
+      const sz=8+Math.random()*14;
+      const ox=(Math.random()-.5)*60;
+      p.style.cssText=`width:${sz}px;height:${sz}px;left:calc(50% + ${ox}px);bottom:0;
+        --st:${1.5+Math.random()}s;--sd:${Math.random()*0.5}s;
+        --sx:${(Math.random()-.5)*20}px;--sx2:${(Math.random()-.5)*30}px;`;
+      sc2.appendChild(p);
+      setTimeout(()=>p.remove(),2600);
+    }
+    // Random haki spark
+    if(Math.random()>.6){
+      const tp2=document.querySelector("#sec-timer .glass-panel");
+      if(tp2){
+        const sp=document.createElement("div");
+        sp.className="haki-spark";
+        sp.textContent="⚡";
+        sp.style.cssText=`left:${Math.random()*90}%;top:${Math.random()*80}%;
+          --sx:${(Math.random()-.5)*30}px;--sy:${-10-Math.random()*20}px;`;
+        tp2.style.position="relative";
+        tp2.appendChild(sp);
+        setTimeout(()=>sp.remove(),650);
+      }
+    }
+  },400);
+}
+function stopGear2Steam(){
+  if(steamInterval){clearInterval(steamInterval);steamInterval=null;}
+  const sc=document.getElementById("steam-container");if(sc)sc.innerHTML="";
+  const tp=document.querySelector("#sec-timer .glass-panel");
+  if(tp)tp.classList.remove("haki-active");
+}
+
+// ── 1HR YOSH EXPLOSION ──
+let yoshShown={};
+function checkTimerMilestones(){
+  const totalSecs=todayStudySecs()+(timerRunning&&timerStart?Math.floor((Date.now()-timerStart)/1000)+timerAccum:0);
+  const hours=Math.floor(totalSecs/3600);
+  const key="yosh_"+todayKey()+"_"+hours;
+  if(hours>=1&&!yoshShown[key]){
+    yoshShown[key]=true;
+    showYoshExplosion(hours);
+  }
+}
+function showYoshExplosion(hours){
+  const el=document.getElementById("yosh-explosion");if(!el)return;
+  el.querySelector(".yosh-text").textContent=hours===1?"YOSH!!":hours+"HR POWER!";
+  el.querySelector(".yosh-sub").textContent=hours===1?"1 HOUR STUDIED! NAKAMA PROUD!":hours+" HOURS! PIRATE KING LEVEL!";
+  el.classList.add("active");
+  // Also do confetti + impact
+  launchConfetti();
+  spawnImpact("⚡ GEAR 2! ⚡",24,50,60,400);
+  setTimeout(()=>{el.classList.remove("active");},950);
+}
+
+// ── DAY COMPLETE MANGA VICTORY SCREEN ──
+function showMangaVictory(){
+  const vs=document.getElementById("victory-screen");if(!vs)return;
+  vs.innerHTML="";
+  // Background panels
+  const bg=document.createElement("div");
+  bg.style.cssText="position:absolute;inset:0;background:#fff;";
+  vs.appendChild(bg);
+  // Speed lines from center
+  for(let i=0;i<24;i++){
+    const line=document.createElement("div");
+    const angle=i*(360/24);
+    line.style.cssText=`position:absolute;left:50%;top:50%;width:60%;height:3px;
+      background:linear-gradient(90deg,rgba(0,0,0,.8),transparent);
+      transform-origin:left center;transform:rotate(${angle}deg);`;
+    vs.appendChild(line);
+  }
+  // Dark corner panels
+  [[0,0,42,45],[58,0,42,45],[0,55,42,45],[58,55,42,45]].forEach(([l,t,w,h],i)=>{
+    const p=document.createElement("div");
+    p.style.cssText=`position:absolute;left:${l}%;top:${t}%;width:${w}%;height:${h}%;
+      background:#111;border:4px solid #000;
+      animation:vp-slide .3s ${i*0.08}s cubic-bezier(.175,.885,.32,1.275) both;
+      --vs:${i%2===0?"translateX(-100%)":"translateX(100%)"};`;
+    vs.appendChild(p);
+  });
+  // Victory text
+  const title=document.createElement("div");
+  title.className="vp-title";
+  title.style.cssText="left:50%;top:38%;transform:translateX(-50%);font-size:52px;white-space:nowrap;";
+  title.textContent="VICTORY!!";
+  vs.appendChild(title);
+  const sub=document.createElement("div");
+  sub.className="vp-title";
+  sub.style.cssText="left:50%;top:58%;transform:translateX(-50%);font-size:18px;letter-spacing:6px;animation-delay:.7s;";
+  sub.textContent="NAKAMA PROUD 🏴‍☠️";
+  vs.appendChild(sub);
+  vs.classList.add("active");
+  setTimeout(()=>{vs.classList.remove("active");vs.innerHTML="";},3000);
+}
+
+// ════════════════════════════════════════════
+// SUBJECT MASTERY SYSTEM
+// ════════════════════════════════════════════
+const MASTERY_LEVELS=[
+  {min:0,    label:"BEGINNER",  icon:"⚓", cls:"mastery-0"},   // 0 min
+  {min:60,   label:"APPRENTICE",icon:"🗺️", cls:"mastery-1"},  // 1 hr
+  {min:300,  label:"SKILLED",   icon:"⚔️", cls:"mastery-2"},  // 5 hr
+  {min:900,  label:"EXPERT",    icon:"💎", cls:"mastery-3"},   // 15 hr
+  {min:1800, label:"MASTER",    icon:"👑", cls:"mastery-4"},   // 30 hr
+];
+function getMasteryLevel(sub){
+  const totalMins=Math.round((timerData.totals&&timerData.totals[sub]||0)/60);
+  let level=0;
+  MASTERY_LEVELS.forEach((m,i)=>{if(totalMins>=m.min)level=i;});
+  return{...MASTERY_LEVELS[level],totalMins,level};
+}
+function getMasteryBadgeHTML(sub){
+  const m=getMasteryLevel(sub);
+  const next=MASTERY_LEVELS[m.level+1];
+  const hrs=Math.round(m.totalMins/60*10)/10;
+  const nextLabel=next?`→ ${next.min>=60?next.min/60+'hr':next.min+'min'} for ${next.label}`:'';
+  return`<span class="mastery-badge ${m.cls}" title="${hrs}hr studied ${nextLabel}">${m.icon} ${m.label}</span>`;
+}
+let _prevMasteryLevels={};
+function checkMasteryLevelUps(){
+  // Collect all unique subjects across all days
+  const subSet=new Set();
+  days.forEach(d=>Object.keys(d.tasks||{}).forEach(s=>subSet.add(s)));
+  const subs=Array.from(subSet);
+  subs.forEach(sub=>{
+    const now=getMasteryLevel(sub).level;
+    if(_prevMasteryLevels[sub]!==undefined&&now>_prevMasteryLevels[sub]){
+      const m=MASTERY_LEVELS[now];
+      // Toast + confetti + impact text
+      toast(`${m.icon} ${sub} reached ${m.label}! 🎉`);
+      spawnImpact(`${m.icon} ${m.label}!`,28,50,38,100);
+      launchConfetti();
+      soundRankUp();
+    }
+    _prevMasteryLevels[sub]=now;
+  });
+}
+
+// ════════════════════════════════════════════
+// STUDY COMBO / NO-SKIP STREAK
+// ════════════════════════════════════════════
+function getNoSkipStreak(){
+  // Count consecutive past days with zero skips
+  const sdt=new Date(meta.startDate);sdt.setHours(0,0,0,0);
+  const today=new Date();today.setHours(0,0,0,0);
+  let streak=0;
+  for(let i=0;i<60;i++){
+    const d=new Date(today);d.setDate(d.getDate()-i);
+    const di=Math.round((d-sdt)/86400000);
+    if(di<0||di>=days.length)break;
+    const tks=Object.values(days[di].tasks).flat();
+    if(!tks.length)continue;
+    const hasSkip=tks.some(t=>gs(t.id)===S.X);
+    if(hasSkip){if(i>0)break;} else streak++;
+  }
+  return streak;
+}
+function getComboMultiplier(){
+  const s=getNoSkipStreak();
+  if(s>=7)return{mul:2.0,label:"2× XP",color:"#f472b6"};
+  if(s>=3)return{mul:1.5,label:"1.5× XP",color:"#fbbf24"};
+  return{mul:1,label:"",color:""};
+}
+function updateComboBar(){
+  const streak=getNoSkipStreak();
+  const bar=document.getElementById("combo-bar");if(!bar)return;
+  if(streak<3){bar.classList.add("hidden");return;}
+  bar.classList.remove("hidden");
+  const combo=getComboMultiplier();
+  const flameIcon=streak>=7?"🔥🔥":streak>=3?"🔥":"✨";
+  document.getElementById("combo-flame-icon").textContent=flameIcon;
+  document.getElementById("combo-count-val").textContent=streak+"d no-skip"+(combo.mul>1?" · "+combo.label:"");
+  bar.querySelector(".combo-count").style.color=combo.mul>1?combo.color:"#ffd700";
+  // Pulse animation on the flame when multiplier active
+  if(combo.mul>1){bar.querySelector(".combo-flame").style.animation="combo-pop .5s ease-out";}
+}
+// Track previous no-skip streak to fire notification on crossing thresholds
+let _prevNoSkipStreak=-1;
+function checkNoSkipStreakThreshold(){
+  const streak=getNoSkipStreak();
+  if(_prevNoSkipStreak===-1){_prevNoSkipStreak=streak;return;}
+  if(streak===3&&_prevNoSkipStreak<3){
+    toast("🔥 3-DAY NO-SKIP STREAK! 1.5× XP activated!");
+    spawnImpact("🔥 1.5× XP!",24,50,45,200);
+    launchConfetti();
+  } else if(streak===7&&_prevNoSkipStreak<7){
+    toast("🔥🔥 7-DAY NO-SKIP COMBO! 2× XP activated!");
+    spawnImpact("🔥🔥 2× XP!",28,50,45,200);
+    launchConfetti();
+    soundRankUp();
+  }
+  _prevNoSkipStreak=streak;
+}
+
+// Apply combo multiplier to XP
+function getComboXPBonus(base){
+  const{mul}=getComboMultiplier();
+  return base>0?Math.round(base*mul):base;
+}
+
+// ════════════════════════════════════════════
+// DAILY CHALLENGE SYSTEM
+const CHALLENGE_TYPES=[
+  {id:"all_one_sub",gen:()=>{
+    const subs=Object.keys(days[studyDayNum()]?.tasks||{});
+    if(!subs.length)return null;
+    const sub=subs[Math.floor(Math.random()*subs.length)];
+    return{desc:`Complete ALL ${sub} tasks today`,reward:15,
+      check:()=>{const tks=days[studyDayNum()]?.tasks[sub]||[];return tks.length>0&&tks.every(t=>gs(t.id)===S.D);}};
+  }},
+  {id:"no_skips",gen:()=>({
+    desc:"Complete today with ZERO skips",reward:20,
+    check:()=>{const tks=Object.values(days[studyDayNum()]?.tasks||{}).flat();return tks.length>0&&!tks.some(t=>gs(t.id)===S.X);}
+  })},
+  {id:"study_time",gen:()=>({
+    desc:"Study for 2+ hours today",reward:25,
+    check:()=>todayStudySecs()>=7200
+  })},
+  {id:"half_done",gen:()=>({
+    desc:"Finish at least 50% of today's tasks",reward:10,
+    check:()=>{const tks=Object.values(days[studyDayNum()]?.tasks||{}).flat();const done=tks.filter(t=>gs(t.id)===S.D).length;return tks.length>0&&done/tks.length>=0.5;}
+  })},
+  {id:"three_subjects",gen:()=>({
+    desc:"Complete tasks in 3 different subjects",reward:18,
+    check:()=>{const d=studyDayNum();return Object.entries(days[d]?.tasks||{}).filter(([,tks])=>tks.some(t=>gs(t.id)===S.D)).length>=3;}
+  })},
+];
+let _dailyChallenge=null;
+function getDailyChallenge(){
+  const key="challenge_"+todayKey();
+  try{
+    const saved=localStorage.getItem("sp_challenge");
+    if(saved){
+      const p=JSON.parse(saved);
+      if(p.date===todayKey()){
+        // Re-attach the check function (lost during JSON serialization)
+        if(!p.check){
+          const src=CHALLENGE_TYPES.find(c=>{const g=c.gen();return g&&g.desc===p.desc;});
+          if(src){const fresh=src.gen();if(fresh)p.check=fresh.check;}
+        }
+        _dailyChallenge=p;return p;
+      }
+    }
+  }catch(e){}
+  // Generate new
+  const valid=CHALLENGE_TYPES.map(c=>c.gen()).filter(Boolean);
+  const pick=valid[Math.floor(Math.random()*valid.length)];
+  const ch={...pick,date:todayKey(),claimed:false};
+  _dailyChallenge=ch;
+  try{localStorage.setItem("sp_challenge",JSON.stringify(ch));}catch(e){}
+  return ch;
+}
+function checkDailyChallenge(){
+  const ch=getDailyChallenge();
+  if(!ch||ch.claimed)return;
+  if(typeof ch.check!=="function")return;
+  if(ch.check()){
+    ch.claimed=true;
+    try{localStorage.setItem("sp_challenge",JSON.stringify(ch));}catch(e){}
+    addXP(ch.reward);
+    toast(`⚡ DAILY CHALLENGE COMPLETE! +${ch.reward} XP!`);
+    launchConfetti();
+    spawnImpact("CHALLENGE!",26,50,38,100);
+  }
+}
+function renderDailyChallenge(){
+  const el=document.getElementById("daily-challenge-slot");if(!el)return;
+  const ch=getDailyChallenge();if(!ch){el.innerHTML="";return;}
+  const done=ch.check&&ch.check();
+  el.innerHTML=`<div class="challenge-card${done||ch.claimed?" challenge-done":""}">
+    <div class="challenge-title">⚡ DAILY CHALLENGE</div>
+    <div class="challenge-desc">${ch.desc}</div>
+    <div class="challenge-reward">+${ch.reward} XP reward${ch.claimed?" · ✅ CLAIMED":done?" · Tap to claim!":""}</div>
+  </div>`;
+}
+
+// ════════════════════════════════════════════
+// END OF DAY SUMMARY
+// ════════════════════════════════════════════
+let _eodShownToday="";
+function maybeShowEOD(){
+  const tk=todayKey();
+  if(_eodShownToday===tk)return;
+  const di=studyDayNum();
+  if(di<0||di>=days.length)return;
+  const tks=Object.values(days[di].tasks).flat();
+  if(!tks.length)return;
+  const done=tks.filter(t=>gs(t.id)===S.D).length;
+  const skipped=tks.filter(t=>gs(t.id)===S.X).length;
+  const pct=Math.round(done/tks.length*100);
+  if(pct<100)return; // only show on full day complete
+  _eodShownToday=tk;
+  setTimeout(()=>showEOD(done,skipped,pct),1800); // slight delay after victory screen
+}
+function showEOD(done,skipped,pct){
+  const panel=document.getElementById("eod-panel");if(!panel)return;
+  const studySecs=todayStudySecs();
+  const grade=pct===100&&skipped===0?"S+":pct>=90&&skipped===0?"S":pct>=75?"A":pct>=60?"B":pct>=40?"C":"D";
+  const gradeColor=grade==="S+"?"#ffd700":grade==="S"?"#fbbf24":grade==="A"?"#34d399":grade==="B"?"#60a5fa":grade==="C"?"#fb923c":"#ef4444";
+  const streak=streakCount();
+  const combo=getComboMultiplier();
+  const noSkipDays=getNoSkipStreak();
+  const todayXP=done*2+10+(combo.mul>1?Math.round(done*2*(combo.mul-1)):0);
+  document.getElementById("eod-title").textContent=grade==="S+"?"✨ PERFECT DAY! ✨":grade==="S"?"⚔️ EXCELLENT DAY!":"DAY COMPLETE ⚓";
+  const gradeEl=document.getElementById("eod-grade");
+  gradeEl.textContent=grade;gradeEl.style.color=gradeColor;
+  gradeEl.style.textShadow=`0 0 30px ${gradeColor}, 0 0 60px ${gradeColor}55`;
+  document.getElementById("eod-rows").innerHTML=`
+    <div class="eod-row"><span class="eod-row-lbl">Tasks Completed</span><span class="eod-row-val">${done} ✅</span></div>
+    <div class="eod-row"><span class="eod-row-lbl">Skipped</span><span class="eod-row-val" style="color:${skipped?'#ef4444':'#34d399'}">${skipped} ${skipped?"😞":"🎉"}</span></div>
+    <div class="eod-row"><span class="eod-row-lbl">Study Time</span><span class="eod-row-val">${fmtMin(studySecs)||"0m"} ⏱</span></div>
+    <div class="eod-row"><span class="eod-row-lbl">Streak</span><span class="eod-row-val">${streak} 🔥</span></div>
+    <div class="eod-row"><span class="eod-row-lbl">No-Skip Combo</span><span class="eod-row-val" style="color:${noSkipDays>=7?"#f472b6":noSkipDays>=3?"#fbbf24":"var(--txt3)"}">${noSkipDays>=7?"🔥🔥 "+noSkipDays+"d · 2×XP":noSkipDays>=3?"🔥 "+noSkipDays+"d · 1.5×XP":noSkipDays+"d"}</span></div>
+    ${combo.mul>1?`<div class="eod-row"><span class="eod-row-lbl">Combo Bonus Active</span><span class="eod-row-val" style="color:${combo.color}">⚡ ${combo.label}</span></div>`:""}
+    <div class="eod-row" style="border-bottom:none;"><span class="eod-row-lbl">XP Earned Today</span><span class="eod-row-val" style="color:#ffd700;font-size:13px;">≈ ${todayXP} XP 💰</span></div>
+  `;
+  panel.classList.add("active");
+  // Launch confetti when perfect day
+  if(grade==="S+"){launchConfetti();spawnImpact("PERFECT! ⭐",26,50,40,600);}
+}
+function closeEOD(){document.getElementById("eod-panel").classList.remove("active");}
+
+// ════════════════════════════════════════════
+// ISLAND PREP RING (% complete toward exam)
+// ════════════════════════════════════════════
+function getIslandPrepPct(isl){
+  // Count all tasks from start until exam date
+  const sdt=new Date(meta.startDate);sdt.setHours(0,0,0,0);
+  const examDate=new Date(isl.date);examDate.setHours(0,0,0,0);
+  const examDayIdx=Math.round((examDate-sdt)/86400000);
+  let total=0,done=0;
+  for(let di=0;di<=Math.min(examDayIdx,days.length-1);di++){
+    const tks=Object.values(days[di].tasks).flat();
+    total+=tks.length;
+    done+=tks.filter(t=>gs(t.id)===S.D).length;
+  }
+  return total?Math.round(done/total*100):0;
+}
+function buildPrepRingSVG(pct,color,size=36){
+  const r=14,circ=2*Math.PI*r,offset=circ*(1-pct/100);
+  const col=pct>=80?"#34d399":pct>=50?color||"#fbbf24":"#ef4444";
+  return`<svg width="${size}" height="${size}" viewBox="0 0 36 36"><circle cx="18" cy="18" r="${r}" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="3"/><circle cx="18" cy="18" r="${r}" fill="none" stroke="${col}" stroke-width="3" stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}" stroke-linecap="round" transform="rotate(-90 18 18)"/><text x="18" y="22" text-anchor="middle" fill="${col}" font-size="8" font-weight="700" font-family="DM Mono">${pct}%</text></svg>`;
+}
+
+// ════════════════════════════════════════════
+// CREW MEMBER → SUBJECT MAPPING
+// ════════════════════════════════════════════
+const CREW_MAP={
+  "Maths":    {name:"Nami",    emoji:"🌀", color:"#FF9F43", quote:"Even if you lose your navigator, draw your own map."},
+  "N.S":      {name:"Usopp",   emoji:"🎯", color:"#d97706", quote:"I never run from battle!"},
+  "G.S":      {name:"Robin",   emoji:"📖", color:"#A78BFA", quote:"I want to live!"},
+  "Reasoning":{name:"Law",     emoji:"⚕️", color:"#3dc9e0", quote:"Those in fear never know true strength."},
+  "English":  {name:"Brook",   emoji:"💀", color:"#d0d0d0", quote:"Laugh and live! YOHOHOHO!"},
+  "Science / C.A":{name:"Chopper",emoji:"🦌",color:"#FF6EB4",quote:"Even if you fall, keep moving forward."},
+};
+function getCrewForSub(sub){
+  if(CREW_MAP[sub])return CREW_MAP[sub];
+  // Auto-assign deterministically for unknown subjects
+  const all=Object.values(CREW_MAP);
+  let h=0;for(let i=0;i<sub.length;i++)h=(h*31+sub.charCodeAt(i))&0xff;
+  return all[h%all.length];
+}
+
+// ════════════════════════════════════════════
+// DEVIL FRUIT POWER SYSTEM (per-fruit effects)
+// ════════════════════════════════════════════
+const DF_EFFECTS={
+  "Gomu Gomu no Mi": {cls:"df-gomu-active", label:"RUBBER BODY", color:"#FF6B6B",
+    onTick:(el)=>{el.classList.add("tick-anim");el.style.borderRadius="50%";setTimeout(()=>el.style.borderRadius="",800);}},
+  "Mera Mera no Mi": {cls:"df-mera-active", label:"FIRE FIST", color:"#FF6B00",
+    onTick:(el)=>{const p=document.createElement("div");p.style.cssText=`position:fixed;left:${el.getBoundingClientRect().left}px;top:${el.getBoundingClientRect().top}px;font-size:22px;pointer-events:none;z-index:850;animation:xp-float .6s ease-out forwards;`;p.textContent="🔥";document.body.appendChild(p);setTimeout(()=>p.remove(),700);}},
+  "Hie Hie no Mi":   {cls:"df-hie-active",  label:"ICE POWER",  color:"#7dd3fc",
+    onTick:(el)=>{el.style.boxShadow="0 0 12px rgba(125,211,252,.8)";setTimeout(()=>el.style.boxShadow="",800);}},
+  "Ope Ope no Mi":   {cls:"df-ope-active",  label:"ROOM",       color:"#3dc9e0",
+    onTick:()=>{spawnImpact("ROOM!",20,50,55,0);}},
+  "Gura Gura no Mi": {cls:"",              label:"TREMOR",     color:"#A78BFA",
+    onTick:()=>{document.body.style.transform="translateX(3px)";setTimeout(()=>{document.body.style.transform="translateX(-3px)";setTimeout(()=>document.body.style.transform="",80);},80);}},
+  "Yami Yami no Mi": {cls:"",              label:"DARKNESS",   color:"#6b21a8",
+    onTick:()=>{const f=document.createElement("div");f.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.35);pointer-events:none;z-index:799;animation:screen-flash-anim .4s forwards;";document.body.appendChild(f);setTimeout(()=>f.remove(),450);}},
+  "Pika Pika no Mi": {cls:"",              label:"LIGHT SPEED", color:"#fde68a",
+    onTick:()=>{const f=document.createElement("div");f.style.cssText="position:fixed;inset:0;background:rgba(255,255,200,.3);pointer-events:none;z-index:799;animation:screen-flash-anim .25s forwards;";document.body.appendChild(f);setTimeout(()=>f.remove(),300);}},
+  "Magu Magu no Mi": {cls:"",              label:"MAGMA",      color:"#dc2626",
+    onTick:(el)=>{el.style.background="rgba(220,38,38,.25)";setTimeout(()=>el.style.background="",600);}},
+};
+function applyDFEffect(chipEl){
+  if(!buffData.active||Date.now()>=buffData.expiresAt)return;
+  const fx=DF_EFFECTS[buffData.fruitName];
+  if(fx&&fx.onTick)fx.onTick(chipEl);
+}
+
+// ════════════════════════════════════════════
+// DYNAMIC DAY THEME (Mon=East Blue, Fri=Grand Line etc.)
+// ════════════════════════════════════════════
+const DAY_SCENES=["eb","op","sky","gl","wno","mf","ngt"]; // Mon-Sun
+function applyDayTheme(){
+  if(cfg.pinnedBg)return; // respect pinned scene
+  const h=new Date().getHours();
+  // Only apply day theme in daytime (6am–10pm), else use hour-based
+  if(h>=6&&h<22){
+    const dow=new Date().getDay(); // 0=Sun
+    const idx=dow===0?6:dow-1;    // Mon=0...Sun=6
+    setScene(DAY_SCENES[idx],false);
+  }
+}
+
+// ════════════════════════════════════════════
+// MAP WEATHER SYSTEM
+// ════════════════════════════════════════════
+function getMapWeather(){
+  // Based on days until next unconquered island
+  const today=new Date();today.setHours(0,0,0,0);
+  const upcoming=(seaChartData.islands||[])
+    .filter(i=>!i.conquered)
+    .map(i=>{const d=new Date(i.date);d.setHours(0,0,0,0);return Math.round((d-today)/86400000);})
+    .filter(d=>d>=0).sort((a,b)=>a-b);
+  if(!upcoming.length)return"sunny";
+  const next=upcoming[0];
+  if(next<=3)return"lightning";
+  if(next<=10)return"stormy";
+  if(next<=30)return"cloudy";
+  return"sunny";
+}
+function buildWeatherOverlay(weather,W,OCEAN_H){
+  let html=`<div class="map-weather-overlay ${weather==="sunny"?"weather-sunny":weather==="stormy"||weather==="cloudy"?"weather-stormy":""}">`;
+  if(weather==="lightning"){
+    // Multiple lightning bolt SVG overlays
+    for(let i=0;i<3;i++){
+      const lx=20+i*30;
+      html+=`<svg style="position:absolute;left:${lx}%;top:0;width:60px;height:120px;pointer-events:none;animation:weather-lightning ${1.8+i*.7}s ${i*.4}s ease-in-out infinite;" viewBox="0 0 30 80"><polyline points="15,0 8,40 18,40 5,80" stroke="rgba(200,200,255,.85)" stroke-width="2.5" fill="none" stroke-linejoin="round"/></svg>`;
+    }
+  }
+  if(weather==="stormy"||weather==="lightning"){
+    html+=`<div style="position:absolute;inset:0;background:rgba(20,20,60,.18);"></div>`;
+  }
+  html+="</div>";
+  return html;
+}
+
+// ════════════════════════════════════════════
+// SEA CREATURES
+// ════════════════════════════════════════════
+function spawnSeaCreature(mapEl,W,OCEAN_H){
+  const creatures=[
+    {emoji:"🐠",size:22,speed:12,y:.75},
+    {emoji:"🐟",size:18,speed:9,y:.82},
+    {emoji:"🦈",size:32,speed:16,y:.7},
+    {emoji:"🐋",size:40,speed:22,y:.65},
+    {emoji:"🐙",size:26,speed:8,y:.78},
+    {emoji:"🦑",size:28,speed:10,y:.72},
+  ];
+  const c=creatures[Math.floor(Math.random()*creatures.length)];
+  const goRight=Math.random()>.5;
+  const el=document.createElement("div");
+  el.className="sea-creature";
+  el.textContent=c.emoji;
+  el.style.cssText=`font-size:${c.size}px;top:${OCEAN_H*c.y}px;
+    animation:${goRight?"fish-swim-right":"fish-swim-left"} ${c.speed+Math.random()*6}s linear forwards;
+    filter:drop-shadow(0 2px 4px rgba(0,0,0,.4));`;
+  mapEl.appendChild(el);
+  setTimeout(()=>el.remove(),(c.speed+8)*1000);
+}
+
+// ════════════════════════════════════════════
+// SHIP UPGRADE SYSTEM
+// ════════════════════════════════════════════
+function getShipLevel(){
+  const xp=xpData.total;
+  if(xp>=6500)return 5; // Emperor — Oro Jackson
+  if(xp>=2500)return 4; // First Mate — Thousand Sunny
+  if(xp>=1200)return 3; // Helmsman — Going Merry v2
+  if(xp>=500) return 2; // Deckhand — Going Merry
+  return 1;             // Cabin Boy — Dinghy
+}
+function buildShipSVG(level){
+  const ships=[
+    // Level 1 — Tiny dinghy
+    `<svg width="56" height="45" viewBox="0 0 70 45"><polygon points="10,30 60,30 52,38 18,38" fill="rgba(255,255,255,.22)"/><rect x="33" y="12" width="2" height="18" fill="rgba(255,255,255,.5)"/><polygon points="35,12 52,20 35,26" fill="rgba(255,200,50,.45)"/></svg>`,
+    // Level 2 — Going Merry
+    `<svg width="70" height="52" viewBox="0 0 90 52"><polygon points="8,38 82,38 72,48 18,48" fill="rgba(255,255,255,.25)"/><polygon points="36,10 52,10 58,38 30,38" fill="rgba(255,255,255,.28)"/><rect x="44" y="4" width="2.5" height="34" fill="rgba(255,255,255,.55)"/><polygon points="46.5,4 68,18 46.5,28" fill="rgba(255,200,50,.5)"/><circle cx="20" cy="35" r="4" fill="rgba(255,255,255,.2)"/></svg>`,
+    // Level 3 — Going Merry upgraded
+    `<svg width="78" height="56" viewBox="0 0 100 56"><polygon points="6,42 94,42 82,52 18,52" fill="rgba(255,255,255,.27)"/><polygon points="34,10 54,10 60,42 28,42" fill="rgba(255,255,255,.3)"/><rect x="44" y="2" width="3" height="38" fill="rgba(255,255,255,.6)"/><polygon points="47,2 72,16 47,30" fill="rgba(255,210,60,.55)"/><polygon points="47,30 62,38 47,42" fill="rgba(255,190,40,.35)"/><rect x="70" y="20" width="2" height="22" fill="rgba(255,255,255,.4)"/><polygon points="72,20 86,26 72,32" fill="rgba(255,200,50,.4)"/></svg>`,
+    // Level 4 — Thousand Sunny
+    `<svg width="88" height="60" viewBox="0 0 110 60"><polygon points="5,44 105,44 90,55 20,55" fill="rgba(255,255,255,.28)"/><polygon points="32,10 56,10 62,44 26,44" fill="rgba(255,255,255,.32)"/><rect x="44" y="2" width="3" height="40" fill="rgba(255,255,255,.65)"/><polygon points="47,2 76,15 47,30" fill="rgba(255,220,60,.6)"/><polygon points="47,30 66,40 47,44" fill="rgba(255,190,40,.4)"/><rect x="74" y="16" width="2.5" height="28" fill="rgba(255,255,255,.45)"/><polygon points="76.5,16 95,24 76.5,34" fill="rgba(255,210,50,.45)"/><circle cx="88" cy="44" r="5" fill="rgba(255,220,80,.3)" stroke="rgba(255,200,50,.5)" stroke-width="1.5"/><circle cx="15" cy="44" r="4" fill="rgba(255,255,255,.18)"/></svg>`,
+    // Level 5 — Oro Jackson
+    `<svg width="100" height="65" viewBox="0 0 125 65"><polygon points="4,48 121,48 104,60 21,60" fill="rgba(255,215,0,.22)"/><polygon points="30,10 58,10 65,48 23,48" fill="rgba(255,215,0,.28)"/><rect x="44" y="1" width="3.5" height="45" fill="rgba(255,215,0,.7)"/><polygon points="47.5,1 80,14 47.5,32" fill="rgba(255,220,50,.7)"/><polygon points="47.5,32 70,42 47.5,48" fill="rgba(255,190,30,.45)"/><rect x="78" y="14" width="3" height="34" fill="rgba(255,215,0,.5)"/><polygon points="81,14 104,24 81,36" fill="rgba(255,215,0,.55)"/><rect x="98" y="28" width="2" height="20" fill="rgba(255,215,0,.4)"/><polygon points="100,28 112,33 100,40" fill="rgba(255,215,0,.4)"/><circle cx="106" cy="48" r="6" fill="rgba(255,215,0,.35)" stroke="rgba(255,200,30,.7)" stroke-width="2"/><circle cx="12" cy="48" r="5" fill="rgba(255,215,0,.2)"/><text x="62" y="36" text-anchor="middle" fill="rgba(255,215,0,.6)" font-size="9" font-family="serif">⚓</text></svg>`,
+  ];
+  return ships[Math.min(level-1,ships.length-1)];
+}
+
+// ════════════════════════════════════════════
+// CHARACTER UNLOCK ANIMATION (replaces old crew popup)
+// ════════════════════════════════════════════
+function showCharUnlockAnimation(ch){
+  const screen=document.getElementById("char-unlock-screen");if(!screen)return;
+  document.getElementById("cu-emoji").textContent=ch.emoji;
+  document.getElementById("cu-name").textContent=ch.name;
+  document.getElementById("cu-quote").textContent=`"${ch.quote}"`;
+  screen.classList.add("active");
+  // Speed lines burst
+  launchConfetti();
+  spawnImpact("NEW NAKAMA!",28,50,35,300);
+  setTimeout(()=>{screen.classList.remove("active");},3200);
+}
+
+// ════ ANIME TASK COMPLETE EFFECTS ════
+const ANIME_SHOUTS=[
+  "GOMU GOMU!","PIRATE KING!","NAKAMA!","YOSH!","ZORO STYLE!",
+  "NAMI-SWAN!","SOGEKING!","SUPER!","METEOR SHOWER!","I'M LUFFY!"
+];
+function showAnimeTaskComplete(chipEl){
+  const rect=chipEl?chipEl.getBoundingClientRect():{top:window.innerHeight/2,left:window.innerWidth/2,width:60,height:30};
+  const cx=rect.left+rect.width/2;
+  const cy=rect.top+rect.height/2;
+  const overlay=document.getElementById("anime-overlay");
+
+  // 1. Chip burst ring (local, expands from chip)
+  const burst=document.createElement("div");
+  burst.className="chip-burst-ring";
+  burst.style.cssText=`left:${cx}px;top:${cy}px;width:${rect.width}px;height:${rect.height+10}px;border-radius:8px;`;
+  document.body.appendChild(burst);
+  setTimeout(()=>burst.remove(),950);
+
+  // 2. Speed lines radiating from chip — short, punchy
+  for(let i=0;i<8;i++){
+    const line=document.createElement("div");
+    line.className="speed-line";
+    const angle=i*(360/8);
+    const len=30+Math.random()*40;
+    line.style.cssText=`
+      left:${cx}px;top:${cy}px;
+      width:${len}px;
+      transform:rotate(${angle}deg);
+      animation-delay:${i*20}ms;
+    `;
+    overlay.appendChild(line);
+    setTimeout(()=>line.remove(),800);
+  }
+
+  // 3. Shout text — appears just ABOVE the chip, stays readable
+  const shout=document.createElement("div");
+  shout.className="anime-shout";
+  shout.textContent=ANIME_SHOUTS[Math.floor(Math.random()*ANIME_SHOUTS.length)];
+  // Position above chip, clamp to screen
+  const sx=Math.max(80,Math.min(cx,window.innerWidth-80));
+  const sy=Math.max(80,cy-55);
+  shout.style.cssText=`left:${sx}px;top:${sy}px;`;
+  document.body.appendChild(shout);
+  setTimeout(()=>shout.remove(),2000);
+
+  // 4. Faint impact star behind shout (decorative, very subtle)
+  const star=document.createElement("div");
+  star.className="impact-star";
+  star.textContent="✦";
+  star.style.cssText=`left:${sx}px;top:${sy}px;`;
+  document.body.appendChild(star);
+  setTimeout(()=>star.remove(),2100);
+}
+
 function gear5Flash(){
   const el=document.getElementById("gear5-flash");
   if(!el)return;
@@ -3379,7 +4967,453 @@ document.addEventListener("DOMContentLoaded", function(){
 
 document.addEventListener("DOMContentLoaded",init);
 
-// ════ SWIPE TO COMPLETE ════
+// ════════════════════════════════════════════
+// 🌊 SEA WEATHER SYSTEM
+// ════════════════════════════════════════════
+const WEATHER_TYPES=[
+  {id:"storm",   icon:"⛈️",  title:"GRAND LINE STORM",  desc:"Rough seas ahead — XP gains reduced!",  effect:"-15% XP today",  xpMul:0.85, cls:"weather-storm"},
+  {id:"calm",    icon:"🌤️",  title:"CALM BELT WINDS",   desc:"Clear skies! Bonus XP on all tasks.",   effect:"+20% XP today",  xpMul:1.2,  cls:"weather-calm"},
+  {id:"treasure",icon:"🏴‍☠️", title:"TREASURE ISLAND!",  desc:"Legendary island spotted — bonus XP waiting!", effect:"+30 XP BONUS",xpMul:1.0, cls:"weather-treasure",bonus:30},
+  {id:"fog",     icon:"🌫️",  title:"FOG OF THE SEA",    desc:"Visibility low. No change to XP.",     effect:"No effect",      xpMul:1.0,  cls:"weather-fog"},
+  {id:"monsoon", icon:"🌧️",  title:"MONSOON SEASON",    desc:"Heavy rain. Skipped tasks cost more.",  effect:"Skips cost 2× XP",xpMul:1.0, cls:"weather-monsoon"},
+];
+function getDailyWeather(){
+  const today=todayKey();
+  if(weatherData&&weatherData.date===today)return WEATHER_TYPES.find(w=>w.id===weatherData.id)||WEATHER_TYPES[3];
+  // Seed random by date string
+  let h=0;for(const c of today)h=(h*31+c.charCodeAt(0))&0xffff;
+  const weights=[15,25,10,35,15];// storm,calm,treasure,fog,monsoon
+  let sum=0;const roll=h%100;const cumul=[];let acc=0;weights.forEach(w=>{acc+=w;cumul.push(acc);});
+  let idx=cumul.findIndex(c=>roll<c);if(idx<0)idx=3;
+  weatherData={date:today,id:WEATHER_TYPES[idx].id};
+  saveWeather();
+  // Give treasure bonus XP once per day
+  if(WEATHER_TYPES[idx].id==="treasure"&&!tasks["weather_treasure_"+today]){
+    tasks["weather_treasure_"+today]="claimed";
+    setTimeout(()=>{addXP(30);toast("🏴‍☠️ TREASURE ISLAND! +30 XP bonus! 💰");spawnImpact("💰+30 XP",22,50,35,200);launchConfetti();},1500);
+  }
+  return WEATHER_TYPES[idx];
+}
+function getWeatherXPMul(){const w=getDailyWeather();return w.xpMul||1;}
+function renderWeatherBanner(){
+  const el=document.getElementById("weather-banner");if(!el)return;
+  const w=getDailyWeather();
+  el.className=w.cls;
+  el.style.display="flex";
+  el.innerHTML=`<div class="weather-icon">${w.icon}</div>
+  <div class="weather-info">
+    <div class="weather-title">${w.title}</div>
+    <div class="weather-desc">${w.desc}</div>
+  </div>
+  <div class="weather-effect">${w.effect}</div>`;
+}
+
+// ════════════════════════════════════════════
+// 📝 SMART REVIEW — WEAK SPOTS
+// ════════════════════════════════════════════
+function getWeakSpotTasks(){
+  // Return task objects skipped 2+ times across all days
+  const result=[];
+  const seen=new Set();
+  days.forEach(d=>{
+    Object.entries(d.tasks||{}).forEach(([sub,tks])=>{
+      tks.forEach(tk=>{
+        if(seen.has(tk.id))return;
+        const cnt=skipCountData[tk.id]||0;
+        if(cnt>=2){seen.add(tk.id);result.push({id:tk.id,label:tk.l,sub,count:cnt});}
+      });
+    });
+  });
+  return result.sort((a,b)=>b.count-a.count).slice(0,8);
+}
+function renderWeakSpots(){
+  const el=document.getElementById("weak-spots-panel");if(!el)return;
+  const spots=getWeakSpotTasks();
+  if(!spots.length){el.innerHTML="";return;}
+  el.innerHTML=`<div class="weak-spot-card">
+    <div class="weak-spot-head">⚠️ WEAK SPOTS — ${spots.length} task${spots.length>1?"s":""} need revision</div>
+    <div>${spots.map(s=>`<span class="weak-chip" onclick="reviveWeakTask('${s.id}','${s.sub.replace(/'/g,"\\'")}','${s.label.replace(/'/g,"\\'")}')">
+      ❌ ${s.label} <span class="weak-chip-count">×${s.count}</span>
+    </span>`).join("")}</div>
+    <div style="font-size:8px;color:var(--txt5);margin-top:8px;">Tap to add to today's revision list</div>
+  </div>`;
+}
+function reviveWeakTask(id,sub,label){
+  // Add to today's day if not already there
+  const today=studyDayNum();if(today<0||today>=days.length)return;
+  const day=days[today];
+  if(!day.tasks[sub])day.tasks[sub]=[];
+  // Check if already present
+  if(day.tasks[sub].some(t=>t.id===id||t.l===label)){toast("📋 Already in today's tasks!");return;}
+  const newId=uid();
+  day.tasks[sub].push({id:newId,l:"📌 "+label});
+  save();render();renderWeakSpots();
+  toast(`📌 "${label}" added to ${sub} for today's revision!`);
+  soundDone();
+}
+
+// ════════════════════════════════════════════
+// 🎴 DEVIL FRUIT COLLECTION
+// ════════════════════════════════════════════
+const ALL_DF_FRUITS=[
+  {name:"Gomu Gomu no Mi",  icon:"🟡", buff:"Rubber bounce on task complete",    color:"#FF6B6B"},
+  {name:"Mera Mera no Mi",  icon:"🔴", buff:"Fire particles on completion",       color:"#FF6B00"},
+  {name:"Hie Hie no Mi",    icon:"🔵", buff:"Ice glow on chips",                  color:"#7dd3fc"},
+  {name:"Ope Ope no Mi",    icon:"🟣", buff:"ROOM! impact text",                  color:"#3dc9e0"},
+  {name:"Gura Gura no Mi",  icon:"⚪", buff:"Screen tremor on task complete",     color:"#A78BFA"},
+  {name:"Yami Yami no Mi",  icon:"⚫", buff:"Darkness flash effect",              color:"#6b21a8"},
+  {name:"Pika Pika no Mi",  icon:"🟡", buff:"Light speed flash on completion",   color:"#fde68a"},
+  {name:"Magu Magu no Mi",  icon:"🔴", buff:"Magma glow on chips",               color:"#dc2626"},
+];
+function renderDFCollection(container){
+  if(!container)return;
+  const activeNow=buffData.active&&Date.now()<buffData.expiresAt?buffData.fruitName:"";
+  container.innerHTML=`<div style="font-size:9px;color:var(--ac);letter-spacing:2px;margin-bottom:4px;">🎴 DEVIL FRUIT COLLECTION — ${dfCollectionData.owned.length}/${ALL_DF_FRUITS.length} OWNED</div>
+  <div style="font-size:8px;color:var(--txt5);margin-bottom:10px;">Buy fruits from the shop to unlock them in your collection</div>
+  <div class="df-collection-grid">
+  ${ALL_DF_FRUITS.map(f=>{
+    const owned=dfCollectionData.owned.includes(f.name);
+    const isActive=f.name===activeNow;
+    return`<div class="df-card ${isActive?"active-now":owned?"owned":"locked"}" title="${f.name}">
+      <div class="df-emoji">${owned?f.icon:"🔒"}</div>
+      <div class="df-card-name" style="color:${owned?f.color:"var(--txt5)"};">${f.name.replace(" no Mi","")}</div>
+      <div class="df-card-buff">${owned?f.buff:"???"}</div>
+      ${isActive?`<div style="font-size:7px;color:${f.color};margin-top:3px;font-weight:700;">▶ ACTIVE</div>`:""}
+    </div>`;
+  }).join("")}
+  </div>`;
+}
+
+// ════════════════════════════════════════════
+// 🏆 RIVAL / LEADERBOARD
+// ════════════════════════════════════════════
+function renderRivalPanel(container){
+  if(!container)return;
+  const myXP=xpData.total;
+  const myStreak=streakCount();
+  const myTasks=getTotalDone();
+  const hasRival=!!rivalData.name;
+  const xpDiff=myXP-rivalData.xp;
+  const streakDiff=myStreak-rivalData.streak;
+  let statusClass="tied",statusMsg="⚔️ Evenly matched!";
+  if(hasRival){
+    const score=(xpDiff>0?1:xpDiff<0?-1:0)+(streakDiff>0?1:streakDiff<0?-1:0);
+    if(score>0){statusClass="winning";statusMsg=`🏆 You're AHEAD of ${rivalData.name}!`;}
+    else if(score<0){statusClass="losing";statusMsg=`⚠️ ${rivalData.name} is winning! Push harder!`;}
+    else{statusClass="tied";statusMsg=`⚔️ Neck and neck with ${rivalData.name}!`;}
+  }
+  container.innerHTML=`<div style="font-size:9px;color:var(--ac);letter-spacing:2px;margin-bottom:10px;">🏆 RIVAL SYSTEM</div>
+  ${hasRival?`
+  <div class="rival-vs-wrap">
+    <div class="rival-card you">
+      <div style="font-size:10px;color:var(--ac);letter-spacing:1px;margin-bottom:6px;">YOU</div>
+      <div class="rival-stat" style="color:var(--ac);">${myXP}</div>
+      <div class="rival-label">XP</div>
+      <div class="rival-stat" style="color:var(--teal);margin-top:6px;">${myStreak}🔥</div>
+      <div class="rival-label">STREAK</div>
+      <div class="rival-stat" style="color:var(--green);margin-top:6px;">${myTasks}</div>
+      <div class="rival-label">TASKS ✅</div>
+    </div>
+    <div class="rival-vs-badge">VS</div>
+    <div class="rival-card rival">
+      <div style="font-size:10px;color:#ef4444;letter-spacing:1px;margin-bottom:6px;">${rivalData.name.toUpperCase()}</div>
+      <div class="rival-stat" style="color:${myXP>=rivalData.xp?"rgba(255,255,255,.4)":"#ef4444"};">${rivalData.xp}</div>
+      <div class="rival-label">XP</div>
+      <div class="rival-stat" style="color:${myStreak>=rivalData.streak?"rgba(255,255,255,.4)":"#ef4444"};margin-top:6px;">${rivalData.streak}🔥</div>
+      <div class="rival-label">STREAK</div>
+      <div class="rival-stat" style="color:${myTasks>=rivalData.tasks?"rgba(255,255,255,.4)":"#ef4444"};margin-top:6px;">${rivalData.tasks}</div>
+      <div class="rival-label">TASKS ✅</div>
+    </div>
+  </div>
+  <div class="rival-ahead ${statusClass}">${statusMsg}</div>
+  <button onclick="clearRival()" style="width:100%;margin-top:8px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:rgba(239,68,68,.7);border-radius:8px;padding:7px;cursor:pointer;font-family:var(--font);font-size:9px;">🗑 Remove Rival</button>
+  `:`
+  <div style="font-size:10px;color:var(--txt4);margin-bottom:12px;line-height:1.5;">Enter your rival's stats to track your progress against them. Update manually or ask them!</div>
+  `}
+  <div style="font-size:8px;color:var(--txt5);letter-spacing:1px;margin-top:${hasRival?"10":"0"}px;margin-bottom:6px;">${hasRival?"🔄 UPDATE RIVAL STATS":"⚔️ SET YOUR RIVAL"}</div>
+  <div class="rival-input-row">
+    <input class="rival-input" id="rival-name-input" placeholder="Rival name" value="${rivalData.name||""}"/>
+    <input class="rival-input" id="rival-xp-input" type="number" placeholder="Their XP" value="${rivalData.xp||""}" style="max-width:80px;"/>
+  </div>
+  <div class="rival-input-row" style="margin-top:6px;">
+    <input class="rival-input" id="rival-streak-input" type="number" placeholder="Their streak" value="${rivalData.streak||""}"/>
+    <input class="rival-input" id="rival-tasks-input" type="number" placeholder="Their tasks" value="${rivalData.tasks||""}"/>
+    <button class="rival-set-btn" onclick="saveRivalFromInputs()">⚔️ SET</button>
+  </div>`;
+}
+function saveRivalFromInputs(){
+  const name=document.getElementById("rival-name-input")?.value.trim();
+  const xp=parseInt(document.getElementById("rival-xp-input")?.value)||0;
+  const streak=parseInt(document.getElementById("rival-streak-input")?.value)||0;
+  const tasks2=parseInt(document.getElementById("rival-tasks-input")?.value)||0;
+  if(!name){toast("Enter rival name!");return;}
+  rivalData={name,xp,streak,tasks:tasks2};
+  saveRival();
+  renderRivalPanel(document.getElementById("rival-panel"));
+  toast(`⚔️ Rival "${name}" saved! Time to surpass them!`);
+  spawnImpact("RIVAL SET!",22,50,38,0);
+  soundRankUp();
+}
+function clearRival(){
+  rivalData={name:"",xp:0,streak:0,tasks:0};
+  saveRival();
+  renderRivalPanel(document.getElementById("rival-panel"));
+  toast("Rival cleared.");
+}
+
+// ════════════════════════════════════════════
+// 🏴‍☠️ ENHANCED BOSS BATTLE
+// ════════════════════════════════════════════
+function renderEnhancedBoss(container){
+  if(!container)return;
+  const boss=getCurrentBoss();
+  if(!boss){
+    container.innerHTML=`<div style="text-align:center;padding:20px;">
+      <div style="font-size:40px;margin-bottom:8px;">👑</div>
+      <div style="font-size:12px;color:var(--teal);font-weight:700;">ALL BOSSES DEFEATED!</div>
+      <div style="font-size:9px;color:var(--txt5);margin-top:4px;">You are unstoppable, Pirate King!</div>
+    </div>`;
+    return;
+  }
+  const prog=getBossProgress(boss);
+  const pct=Math.min(100,Math.round(prog/boss.target*100));
+  const isDefeated=bossData.defeated.includes(boss.name);
+  const hpPct=isDefeated?0:100-pct;
+  const hpColor=hpPct>60?"#ef4444":hpPct>30?"#f97316":"#fbbf24";
+  const hpBarWidth=Math.max(0,hpPct);
+  const phase=pct>=80?"ENRAGED":pct>=50?"WEAKENED":pct>=20?"DAMAGED":"FULL POWER";
+  const phaseColor=pct>=80?"#fbbf24":pct>=50?"#f97316":pct>=20?"#ef4444":"#ffffff";
+  container.innerHTML=`
+  <div style="font-size:9px;color:#ef4444;letter-spacing:2px;margin-bottom:10px;">⚔️ WEEKLY BOSS BATTLE — WEEK ${boss.week}</div>
+  <div class="boss-arena" id="boss-arena-inner">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+      <div>
+        <div class="boss-name">${boss.emoji} ${boss.name}</div>
+        <div style="font-size:8px;color:${phaseColor};letter-spacing:1.5px;margin-top:2px;font-weight:700;">${isDefeated?"⚓ DEFEATED":phase}</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:9px;color:var(--txt4);">MISSION REWARD</div>
+        <div style="font-size:13px;color:var(--ac);font-weight:700;">+${boss.reward} XP</div>
+      </div>
+    </div>
+    <div class="boss-emoji-wrap" id="boss-emoji-display">${boss.emoji}</div>
+    <!-- HP BAR -->
+    <div style="font-size:8px;color:var(--txt4);letter-spacing:1px;margin-bottom:4px;">BOSS HP — ${hpPct}%</div>
+    <div class="boss-hp-bar-wrap">
+      <div class="boss-hp-bar" style="width:${hpBarWidth}%;background:linear-gradient(90deg,${hpColor},${hpColor}aa);box-shadow:0 0 10px ${hpColor}66;"></div>
+    </div>
+    <!-- YOUR PROGRESS -->
+    <div style="font-size:8px;color:var(--txt4);letter-spacing:1px;margin:8px 0 4px;">YOUR ATTACK POWER — ${pct}%</div>
+    <div style="height:8px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;margin-bottom:8px;">
+      <div style="height:100%;width:${pct}%;background:${pct>=80?"var(--green)":pct>=40?"var(--ac)":"var(--teal)"};border-radius:4px;transition:width .5s;box-shadow:0 0 8px currentColor;"></div>
+    </div>
+    <div style="font-size:9px;color:var(--txt4);margin-bottom:8px;">${boss.desc} · ${boss.type==="weekly_timer"?fmtMin(prog)+"/"+fmtMin(boss.target):prog+"/"+boss.target}</div>
+    ${isDefeated?`<div class="boss-defeated-badge">✅ DEFEATED! Reward claimed!</div>`:
+      pct>=100?`<button onclick="claimBossReward()" style="width:100%;background:rgba(52,211,153,.15);border:2px solid var(--green);color:var(--green);border-radius:10px;padding:10px;cursor:pointer;font-family:var(--font);font-size:12px;font-weight:700;letter-spacing:1px;">⚔️ FINISH THEM! CLAIM ${boss.reward} XP</button>`:
+      `<div style="font-size:9px;color:var(--txt5);text-align:center;">Keep studying to deal damage! 🗡️</div>`}
+  </div>`;
+}
+function claimBossReward(){
+  const boss=getCurrentBoss();if(!boss)return;
+  const prog=getBossProgress(boss);
+  if(prog<boss.target){toast("Not yet! Keep fighting!");return;}
+  if(bossData.defeated.includes(boss.name)){toast("Already claimed!");return;}
+  bossData.defeated.push(boss.name);saveBoss();
+  addXP(boss.reward);
+  toast(`🎉 ${boss.name} DEFEATED! +${boss.reward} XP!`);
+  launchConfetti();
+  soundRankUp();
+  spawnImpact(`${boss.emoji} DEFEATED!`,30,50,38,0);
+  // Shake animation
+  const arena=document.getElementById("boss-emoji-display");
+  if(arena){arena.parentElement.classList.add("shake");setTimeout(()=>arena.parentElement.classList.remove("shake"),500);}
+  setTimeout(()=>renderMissions(),600);
+}
+
+// ════════════════════════════════════════════
+// ⚓ PIRATE NAME & ONBOARDING
+// ════════════════════════════════════════════
+function savePirateName(name){pirateName=name.trim();try{localStorage.setItem("sp_pirate_name",pirateName);}catch(e){}updatePirateNameBadge();}
+function updatePirateNameBadge(){
+  const badge=document.getElementById("pirate-name-badge");if(!badge)return;
+  if(pirateName){badge.textContent="☠️ "+pirateName;badge.style.display="inline-block";}
+  else{badge.style.display="none";}
+  // Update wanted poster too
+  const wp=document.getElementById("wanted-poster-panel");if(wp&&wp.innerHTML)renderWantedPoster(wp);
+}
+function completeOnboarding(){
+  const name=(document.getElementById("onboard-name")?.value||"").trim();
+  const date=document.getElementById("onboard-date")?.value||"";
+  if(!name){const inp=document.getElementById("onboard-name");if(inp){inp.style.borderColor="#ef4444";inp.placeholder="Enter your name!";setTimeout(()=>{inp.style.borderColor="";inp.placeholder="e.g. Monkey D. Luffy";},1500);}return;}
+  savePirateName(name);
+  if(date){meta.examDate=date;save();}
+  document.getElementById("onboard-overlay").style.display="none";
+  toast(`⚓ Welcome, ${name}! Your voyage begins!`);
+  spawnImpact("SET SAIL! 🏴‍☠️",28,50,40,200);
+  launchConfetti();
+  soundRankUp();
+  render();
+}
+function promptRenamePirate(){
+  const newName=prompt("Enter your pirate name:","");
+  if(newName&&newName.trim()){savePirateName(newName.trim());toast("⚓ Name updated: "+newName.trim());}
+}
+function checkOnboarding(){
+  if(!pirateName){
+    const ov=document.getElementById("onboard-overlay");
+    if(ov){
+      ov.style.display="flex";
+      // Set default date to 90 days from now
+      const d=new Date();d.setDate(d.getDate()+90);
+      const dateEl=document.getElementById("onboard-date");
+      if(dateEl)dateEl.value=d.toISOString().slice(0,10);
+    }
+  }
+}
+
+// ════════════════════════════════════════════
+// 🌅 ANIMATED LOADING BAR
+// ════════════════════════════════════════════
+function runLoadingBar(onComplete){
+  const bar=document.getElementById("loading-bar-fill");
+  const msg=document.getElementById("loading-msg");
+  const msgs=["SETTING SAIL…","LOADING CHARTS…","ASSEMBLING CREW…","PREPARING BOUNTY…","ALL HANDS ON DECK…","READY!"];
+  let pct=0,step=0;
+  const iv=setInterval(()=>{
+    pct+=Math.random()*18+6;
+    if(pct>=100){pct=100;clearInterval(iv);setTimeout(onComplete,300);}
+    if(bar)bar.style.width=pct+"%";
+    const msgIdx=Math.min(Math.floor(pct/20),msgs.length-1);
+    if(msg)msg.textContent=msgs[msgIdx];
+  },120);
+}
+
+// ════════════════════════════════════════════
+// ⚔️ BATTLE PLAN CARD
+// ════════════════════════════════════════════
+function renderBattlePlan(){
+  const el=document.getElementById("battle-plan-slot");if(!el)return;
+  const di=studyDayNum();if(di<0||di>=days.length){el.innerHTML="";return;}
+  const day=days[di];
+  const allT=Object.values(day.tasks).flat();
+  const done=allT.filter(t=>gs(t.id)===S.D).length;
+  const left=allT.length-done-allT.filter(t=>gs(t.id)===S.X).length;
+  const pct=allT.length?Math.round(done/allT.length*100):0;
+  if(!allT.length){el.innerHTML="";return;}
+  // Battle plan messaging
+  let icon,title,desc,badge;
+  if(pct===100){icon="🏆";title="DAY COMPLETE!";desc="You crushed it today, Nakama!";badge="LEGEND";}
+  else if(pct>=75){icon="⚔️";title="ALMOST THERE!";desc=`${left} task${left>1?"s":""} left — finish strong!`;badge=pct+"%";}
+  else if(pct>=50){icon="🌊";title="HALFWAY THROUGH!";desc=`${left} more task${left>1?"s":""} to complete today.`;badge=left+" LEFT";}
+  else if(done>0){icon="🔥";title="BATTLE IN PROGRESS";desc=`${done} done, ${left} remaining. Keep sailing!`;badge=pct+"%";}
+  else{icon="⚓";title="TODAY'S BATTLE PLAN";desc=`${allT.length} task${allT.length>1?"s":""} await. Begin the voyage!`;badge=allT.length+" TASKS";}
+  el.innerHTML=`<div class="battle-plan">
+    <div class="battle-plan-icon">${icon}</div>
+    <div class="battle-plan-txt">
+      <div class="battle-plan-title">${title}</div>
+      <div class="battle-plan-desc">${desc}</div>
+    </div>
+    <div class="battle-plan-badge">${badge}</div>
+  </div>`;
+}
+
+// ════════════════════════════════════════════
+// 🏴‍☠️ NAKAMA REACTIONS
+// ════════════════════════════════════════════
+const NAKAMA_REACTIONS={
+  task_done:[
+    {name:"Luffy",emoji:"🍖",msg:"YOSH! That's my nakama!"},
+    {name:"Zoro",emoji:"⚔️",msg:"Nothing happened."},
+    {name:"Nami",emoji:"🌀",msg:"Keep the pace — we have more islands!"},
+    {name:"Usopp",emoji:"🎯",msg:"Ha! I knew you could do it!"},
+    {name:"Sanji",emoji:"🔥",msg:"Smooth as a perfect dish!"},
+    {name:"Chopper",emoji:"🦌",msg:"You're amazing!! (not that I care)"},
+    {name:"Robin",emoji:"📖",msg:"Fufufu… well done."},
+    {name:"Brook",emoji:"💀",msg:"YOHOHO! Soul cannot be crushed!"},
+  ],
+  streak_hit:[
+    {name:"Luffy",emoji:"🍖",msg:"You're on FIRE! Just like me when I'm hungry!"},
+    {name:"Zoro",emoji:"⚔️",msg:"A thousand cuts, each one perfect."},
+    {name:"Shanks",emoji:"🦅",msg:"That kid's going to surpass us all."},
+  ],
+  day_complete:[
+    {name:"Luffy",emoji:"🍖",msg:"I knew you'd do it!! Let's eat!!"},
+    {name:"Nami",emoji:"🌀",msg:"Full completion! I'm updating the map!"},
+    {name:"Robin",emoji:"📖",msg:"History will remember this day."},
+  ],
+  skip:[
+    {name:"Chopper",emoji:"🦌",msg:"It's okay… we all struggle sometimes."},
+    {name:"Usopp",emoji:"🎯",msg:"Even great warriors have bad days!"},
+    {name:"Robin",emoji:"📖",msg:"Every void has a reason. Rest. Return."},
+  ]
+};
+let _lastNakamaTime=0;
+function showNakamaReaction(type){
+  if(Date.now()-_lastNakamaTime<8000)return; // throttle
+  _lastNakamaTime=Date.now();
+  const pool=NAKAMA_REACTIONS[type]||NAKAMA_REACTIONS.task_done;
+  const r=pool[Math.floor(Math.random()*pool.length)];
+  const el=document.createElement("div");
+  el.className="nakama-reaction";
+  el.innerHTML=`<div class="nakama-reaction-emoji">${r.emoji}</div>
+  <div class="nakama-reaction-bubble">
+    <div class="nakama-reaction-name">${r.name.toUpperCase()}</div>
+    <div class="nakama-reaction-msg">${r.msg}</div>
+  </div>`;
+  // Position: bottom right, above combo bar
+  el.style.cssText+=`bottom:${100+Math.random()*60}px;right:14px;`;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),3800);
+}
+
+// ════════════════════════════════════════════
+// 🏆 GRAND FINALE — Day 90 Completion
+// ════════════════════════════════════════════
+function checkGrandFinale(){
+  const day=studyDayNum();
+  if(day<89)return; // Only from day 90+
+  const finaleKey="finale_shown_"+day;
+  if(tasks[finaleKey])return;
+  // Check if today is complete
+  const di=Math.min(day,days.length-1);
+  const allT=Object.values(days[di].tasks).flat();
+  if(!allT.length)return;
+  const done=allT.filter(t=>gs(t.id)===S.D).length;
+  if(done<allT.length)return;
+  tasks[finaleKey]="shown";save();
+  setTimeout(()=>showGrandFinale(),2000);
+}
+function showGrandFinale(){
+  const ov=document.getElementById("finale-overlay");if(!ov)return;
+  const totalDone=getTotalDone();
+  const totalStudy=Math.round(Object.entries(timerData.totals||{}).filter(([k])=>!k.startsWith("day_")).reduce((a,[,v])=>a+v,0)/3600);
+  const streak=streakCount();
+  const ridx=getCurrentRankIdx(xpData.total);
+  const rank=RANKS[ridx];
+  document.getElementById("finale-name").textContent=(pirateName||"Pirate")+" — "+rank.emoji+" "+rank.name;
+  document.getElementById("finale-title").textContent="VOYAGE COMPLETE!";
+  document.getElementById("finale-sub").textContent=studyDayNum()+" DAYS — PIRATE LEGEND";
+  document.getElementById("finale-quote").textContent=`"${xpData.total} XP earned. ${totalDone} tasks conquered. The One Piece… it's real."`;
+  document.getElementById("finale-stats").innerHTML=`
+    <div class="finale-stat"><div class="finale-stat-val">${studyDayNum()}</div><div class="finale-stat-lbl">DAYS</div></div>
+    <div class="finale-stat"><div class="finale-stat-val">${totalDone}</div><div class="finale-stat-lbl">TASKS ✅</div></div>
+    <div class="finale-stat"><div class="finale-stat-val">${xpData.total}</div><div class="finale-stat-lbl">XP 💰</div></div>
+    <div class="finale-stat"><div class="finale-stat-val">${streak}🔥</div><div class="finale-stat-lbl">STREAK</div></div>
+    <div class="finale-stat"><div class="finale-stat-val">${totalStudy}h</div><div class="finale-stat-lbl">STUDIED ⏱</div></div>
+    <div class="finale-stat"><div class="finale-stat-val">${rank.emoji}</div><div class="finale-stat-lbl">${rank.name.toUpperCase()}</div></div>
+  `;
+  ov.classList.add("active");
+  launchConfetti();launchConfetti();
+  setTimeout(launchConfetti,800);
+  soundRankUp();
+  setTimeout(soundRankUp,1200);
+}
+function closeFinale(){
+  const ov=document.getElementById("finale-overlay");if(ov)ov.classList.remove("active");
+}
+
+// ════════════════════════════════════════════
+// SWIPE TO COMPLETE ════
 (function(){
   let sx=0,sy=0,tid=null,el=null,dx=0;
   const THRESH=60;
@@ -3420,7 +5454,7 @@ document.addEventListener("DOMContentLoaded",init);
       // Swipe left → SKIP
       el.style.transition="transform .25s ease,opacity .25s";
       el.style.transform="translateX(-120%)";el.style.opacity="0";
-      setTimeout(()=>{const prev=gs(tid);if(prev!==S.X){if(prev===S.D){addXP(-2);}tasks[tid]=S.X;soundSkip();triggerSeaKingAttack();checkDayComplete();save();render();updateWaveProgress();}},250);
+      setTimeout(()=>{const prev=gs(tid);if(prev!==S.X){if(prev===S.D){addXP(-2);}tasks[tid]=S.X;soundSkip();triggerSeaKingAttack();checkDayComplete();save();render();updateWaveProgress();requestAnimationFrame(()=>{const _skipEl2=document.querySelector(`.chip[data-tid="${tid}"]`);showZoroSlash(_skipEl2);});}},250);
     } else {
       el.classList.remove("swiping");
       el.style.transform="";
