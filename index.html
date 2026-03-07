@@ -1237,7 +1237,7 @@ main{max-width:980px;margin:0 auto;padding:16px 16px 60px;position:relative;z-in
       </div>
 
       <div class="ring-wrap"><svg width="50" height="50" viewBox="0 0 56 56"><circle cx="28" cy="28" r="22" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle id="ring-circle" cx="28" cy="28" r="22" fill="none" stroke="var(--ac)" stroke-width="6" stroke-dasharray="138.23" stroke-dashoffset="138.23" stroke-linecap="round" transform="rotate(-90 28 28)" style="transition:stroke-dashoffset .5s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 0 4px var(--ac));"/><text id="ring-text" x="28" y="32" text-anchor="middle" fill="var(--ac)" font-size="10" font-weight="700" font-family="DM Mono">0%</text></svg><span class="ring-label">OVERALL</span></div>
-      <button class="icon-btn" id="sound-btn" onclick="toggleSound()">🔊</button>
+
       <button class="icon-btn" id="dark-btn" onclick="toggleDark()">🌙</button>
       <button class="edit-btn" id="edit-btn" onclick="toggleEdit()">✏️ EDIT</button>
     </div>
@@ -1683,7 +1683,7 @@ let ambienceNode=null,ambiencePlaying=false,ambienceType="";
 let activeDay=0,editMode=false,currentSection="tasks",statsRange=7;
 let editingTask=null,editingSub=null,editingLbl=null,addingTask=null,addingSub=null;
 let timerRunning=false,timerSub=null,timerStart=null,timerAccum=0,timerInterval=null;
-let soundEnabled=true,focusSub=null,focusActive=false;
+let focusSub=null,focusActive=false;
 let pomodoroMode=false,pomoRunning=false,pomoPhase="work",pomoSecsLeft=25*60,pomoCycle=0,pomoSet=0,pomoInterval=null;
 let notesOpen={},quoteIdx=0,buffInterval=null,scEditMode=false,currentIslandId=null,arcPopupTimer=null;
 let crewPopupQueue=[],crewPopupShowing=false;
@@ -1802,23 +1802,13 @@ let toastT=null;
 function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove("show"),2200);}
 
 // ════ AUDIO ════
-let audioCtx=null;
-function getAudioCtx(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx;}
-function playTone(freq,type,dur,vol=0.3,delay=0){
-  if(!soundEnabled)return;
-  try{const ctx=getAudioCtx();const osc=ctx.createOscillator();const gain=ctx.createGain();osc.connect(gain);gain.connect(ctx.destination);osc.type=type;osc.frequency.value=freq;gain.gain.setValueAtTime(vol,ctx.currentTime+delay);gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+delay+dur);osc.start(ctx.currentTime+delay);osc.stop(ctx.currentTime+delay+dur+0.05);}catch(e){}
-}
-function soundDone(){playTone(523,"sine",.18,.25,0);playTone(659,"sine",.18,.22,.08);playTone(784,"sine",.22,.28,.16);}
-function soundSkip(){playTone(220,"sine",.12,.6,0);playTone(185,"sine",.08,.5,.15);playTone(160,"sine",.06,.4,.35);}// Sad descending tones
-function soundRankUp(){
-  const ci=currentCharIdx();const tune=CHAR_TUNES[Math.min(ci,CHAR_TUNES.length-1)];
-  tune.forEach((n,i)=>playTone(n.f,n.t,n.d,.35,i*.12));
-  setTimeout(()=>[784,988,1175].forEach((f,i)=>playTone(f,"sine",.5,.3,i*.08)),tune.length*120+200);
-}
-function soundUnlock(){[523,659,784,1047,1319].forEach((f,i)=>playTone(f,"sine",.4,.3,i*.07));}
-function soundDevilFruit(){[392,523,659,784,1047].forEach((f,i)=>playTone(f,"sine",.35,.35,i*.1));setTimeout(()=>playTone(1568,"sine",.8,.4,0),700);}
-function soundBell(){playTone(880,"sine",.8,.4,0);playTone(1108,"sine",.6,.35,.05);playTone(880,"sine",.5,.3,.9);}
-function toggleSound(){soundEnabled=!soundEnabled;document.getElementById("sound-btn").textContent=soundEnabled?"🔊":"🔇";toast(soundEnabled?"🔊 Sound ON":"🔇 Sound OFF");}
+function soundDone(){}
+function soundSkip(){}
+function soundRankUp(){}
+function soundUnlock(){}
+function soundDevilFruit(){}
+function soundBell(){}
+function toggleSound(){}
 
 // ════ CONFETTI ════
 function launchConfetti(){
@@ -2074,11 +2064,7 @@ function cycleQuote(){
   renderQuote();
   playCharVoice(ci);
 }
-function playCharVoice(ci){
-  if(!soundEnabled)return;
-  const tune=CHAR_TUNES[ci%CHAR_TUNES.length];
-  tune.forEach((n,i)=>playTone(n.f,n.t,n.d,.18,i*.08));
-}
+function playCharVoice(ci){}
 function startAutoQuote(){
   clearInterval(autoQuoteInterval);
   autoQuoteInterval=setInterval(()=>{cycleQuote();},60000);
@@ -2564,7 +2550,7 @@ function toggleConquer(){
   isl.conquered=!isl.conquered;
   const cb=document.getElementById("iml-conquer-btn");
   if(isl.conquered){
-    cb.textContent="✅ CONQUERED";cb.classList.add("conquered");if(soundEnabled)soundBell();toast("🏴‍☠️ Island Conquered!");
+    cb.textContent="✅ CONQUERED";cb.classList.add("conquered");soundBell();toast("🏴‍☠️ Island Conquered!");
     // Conquest burst animation
     launchConfetti();
     const bursts=["🏴‍☠️","⭐","💥","✨","🔥"];
@@ -5179,10 +5165,12 @@ document.addEventListener("DOMContentLoaded", function(){
   const url=URL.createObjectURL(blob);
   document.getElementById("pwa-manifest").href=url;
 
-  // Service worker for offline caching
+  // ── Service Worker: offline cache + live timer notifications ──
   if("serviceWorker" in navigator){
     const swCode=`
-      const CACHE="study-pro-v5";
+      const CACHE="study-pro-v6";
+
+      // ── Install & Activate ──
       self.addEventListener("install",e=>{
         self.skipWaiting();
         e.waitUntil(caches.open(CACHE).then(c=>c.addAll([self.location.href])));
@@ -5194,12 +5182,116 @@ document.addEventListener("DOMContentLoaded", function(){
           )).then(()=>self.clients.claim())
         );
       });
-      self.addEventListener("fetch",e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{const clone=res.clone();caches.open(CACHE).then(c=>c.put(e.request,clone));return res;}))));
+      self.addEventListener("fetch",e=>e.respondWith(
+        caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{
+          const clone=res.clone();
+          caches.open(CACHE).then(c=>c.put(e.request,clone));
+          return res;
+        }))
+      ));
+
+      // ── Timer state ──
+      let _sub="Study", _start=0, _accum=0, _running=false, _tickId=null;
+
+      function fmtSW(secs){
+        const h=Math.floor(secs/3600),m=Math.floor((secs%3600)/60),s=secs%60;
+        if(h>0)return h+"h "+String(m).padStart(2,"0")+"m "+String(s).padStart(2,"0")+"s";
+        return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+      }
+
+      function elapsed(){return _accum+(_running?Math.floor((Date.now()-_start)/1000):0);}
+
+      function showNotif(){
+        const t=elapsed();
+        const body=_sub.toUpperCase()+" — "+fmtSW(t)+"\\nTap ▶ to open app";
+        self.registration.showNotification("⏱ Study Timer Running",{
+          body,
+          tag:"study-timer",
+          requireInteraction:true,
+          silent:true,
+          icon:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%230f172a' rx='24'/%3E%3Ctext x='96' y='130' text-anchor='middle' font-size='120'%3E⚓%3C/text%3E%3C/svg%3E",
+          badge:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23C9A84C' rx='12'/%3E%3Ctext x='48' y='68' text-anchor='middle' font-size='60'%3E⏱%3C/text%3E%3C/svg%3E",
+          actions:[
+            {action:"pause", title:"⏸ Pause Timer"},
+            {action:"open",  title:"📱 Open App"}
+          ]
+        });
+      }
+
+      function clearNotif(){
+        self.registration.getNotifications({tag:"study-timer"}).then(ns=>ns.forEach(n=>n.close()));
+      }
+
+      function startTick(){
+        clearInterval(_tickId);
+        _tickId=setInterval(()=>{if(_running)showNotif();},30000); // refresh every 30s
+      }
+      function stopTick(){clearInterval(_tickId);_tickId=null;}
+
+      // ── Messages from page ──
+      self.addEventListener("message",e=>{
+        const d=e.data||{};
+        if(d.type==="TIMER_START"){
+          _sub=d.sub||"Study";_start=d.start;_accum=d.accum||0;_running=true;
+          showNotif();startTick();
+        }
+        if(d.type==="TIMER_UPDATE"){
+          _sub=d.sub||_sub;_start=d.start;_accum=d.accum||0;_running=d.running!==false;
+          if(_running)showNotif();
+        }
+        if(d.type==="TIMER_STOP"){
+          _running=false;stopTick();clearNotif();
+        }
+        if(d.type==="CLEAR_TIMER_NOTIF"){
+          clearNotif();
+        }
+      });
+
+      // ── Notification button clicks ──
+      self.addEventListener("notificationclick",e=>{
+        e.notification.close();
+        if(e.action==="pause"){
+          // Tell all open tabs to pause
+          e.waitUntil(
+            self.clients.matchAll({type:"window",includeUncontrolled:true}).then(clients=>{
+              clients.forEach(c=>c.postMessage({type:"SW_PAUSE_TIMER"}));
+            })
+          );
+          _running=false;stopTick();
+        } else {
+          // Focus or open the app
+          e.waitUntil(
+            self.clients.matchAll({type:"window",includeUncontrolled:true}).then(clients=>{
+              const match=clients.find(c=>c.url&&c.url.includes(self.location.origin));
+              if(match)return match.focus();
+              return self.clients.openWindow(self.location.origin);
+            })
+          );
+        }
+      });
     `;
     const swBlob=new Blob([swCode],{type:"text/javascript"});
     const swUrl=URL.createObjectURL(swBlob);
-    navigator.serviceWorker.register(swUrl).catch(()=>{});
+    navigator.serviceWorker.register(swUrl).then(reg=>{
+      window._swReg=reg;
+      // Listen for SW→page messages (e.g. pause from notification)
+      navigator.serviceWorker.addEventListener("message",e=>{
+        if(e.data&&e.data.type==="SW_PAUSE_TIMER"){
+          if(typeof timerRunning!=="undefined"&&timerRunning){
+            timerStartStop();
+            toast("⏸ Timer paused from notification");
+          }
+        }
+      });
+    }).catch(()=>{});
   }
+
+  // Helper: send message to active SW
+  window.swPost=function(msg){
+    if(navigator.serviceWorker&&navigator.serviceWorker.controller){
+      navigator.serviceWorker.controller.postMessage(msg);
+    }
+  };
 
   // Show install prompt banner
   let deferredPrompt=null;
@@ -5720,6 +5812,161 @@ function closeFinale(){
   });
 })();
 
+
+// ════════════════════════════════════════════
+// 🎬 FLOATING TIMER PiP — YouTube-style overlay
+// ════════════════════════════════════════════
+
+// ════════════════════════════════════════════
+// 🔔 SW-POWERED TIMER NOTIFICATIONS + PiP PILL
+// ════════════════════════════════════════════
+
+// Request notification permission once
+function requestNotifPermission(cb){
+  if(!("Notification" in window)){cb&&cb(false);return;}
+  if(Notification.permission==="granted"){cb&&cb(true);return;}
+  if(Notification.permission==="denied"){cb&&cb(false);return;}
+  Notification.requestPermission().then(p=>cb&&cb(p==="granted"));
+}
+
+// Tell SW timer started
+function swTimerStart(){
+  requestNotifPermission(()=>{
+    swPost({type:"TIMER_START",sub:timerSub||"Study",start:timerStart,accum:timerAccum});
+  });
+}
+// Tell SW timer stopped/paused
+function swTimerStop(){
+  swPost({type:"TIMER_STOP"});
+}
+// Periodic sync to SW so notification time stays fresh (every 30s from page)
+let _swSyncInterval=null;
+function startSwSync(){
+  clearInterval(_swSyncInterval);
+  _swSyncInterval=setInterval(()=>{
+    if(timerRunning) swPost({type:"TIMER_UPDATE",sub:timerSub||"Study",start:timerStart,accum:timerAccum,running:true});
+    else stopSwSync();
+  },30000);
+}
+function stopSwSync(){clearInterval(_swSyncInterval);_swSyncInterval=null;}
+
+// ── Floating PiP Pill (inside app) ──
+function updatePipPill(){
+  const pill=document.getElementById("timer-pip-pill");
+  if(!pill)return;
+  if(timerRunning&&timerStart){
+    const el=timerAccum+Math.floor((Date.now()-timerStart)/1000);
+    const sub=timerSub||"STUDY";
+    pill.querySelector("#pip-time").textContent=fmtSecsLong(el);
+    pill.querySelector("#pip-sub").textContent=sub.length>14?sub.substring(0,12)+"…":sub;
+    pill.style.display="flex";
+  } else {
+    pill.style.display="none";
+  }
+}
+setInterval(updatePipPill,1000);
+
+// ── Return reminder banner (shows when switching back from another app) ──
+document.addEventListener("visibilitychange",()=>{
+  if(document.visibilityState==="visible"&&timerRunning) showReturnReminder();
+});
+function showReturnReminder(){
+  const el=document.getElementById("timer-return-reminder");
+  if(!el||!timerRunning)return;
+  const elapsed=timerAccum+Math.floor((Date.now()-timerStart)/1000);
+  el.querySelector("#reminder-time").textContent=fmtSecsLong(elapsed);
+  el.querySelector("#reminder-sub").textContent=(timerSub||"Study").toUpperCase();
+  el.classList.add("show");
+  clearTimeout(el._hideTimer);
+  el._hideTimer=setTimeout(()=>el.classList.remove("show"),6000);
+}
+
+// ── Patch timerStartStop to drive SW + pill ──
+(function(){
+  const orig=window.timerStartStop;
+  window.timerStartStop=function(){
+    orig();
+    if(timerRunning){ swTimerStart(); startSwSync(); }
+    else { swTimerStop(); stopSwSync(); }
+    updatePipPill();
+  };
+})();
+
+// ── Patch playSubTimer too ──
+(function(){
+  const orig=window.playSubTimer;
+  window.playSubTimer=function(sub){
+    orig(sub);
+    setTimeout(()=>{
+      if(timerRunning){ swTimerStart(); startSwSync(); }
+      else { swTimerStop(); stopSwSync(); }
+      updatePipPill();
+    },120);
+  };
+})();
+
+// Init pill visibility on load
+setTimeout(updatePipPill,1500);
+
 </script>
+
+<!-- ⏱ FLOATING TIMER PiP PILL -->
+<div id="timer-pip-pill" style="display:none;position:fixed;bottom:90px;right:14px;z-index:9999;
+  background:rgba(10,10,24,.92);border:1.5px solid var(--ac);border-radius:50px;
+  padding:9px 16px 9px 12px;display:flex;align-items:center;gap:10px;
+  box-shadow:0 4px 24px rgba(201,168,76,.35),0 2px 8px rgba(0,0,0,.6);
+  cursor:pointer;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  animation:pip-pulse 2.5s ease-in-out infinite;
+  transition:transform .2s,box-shadow .2s;max-width:200px;"
+  onclick="switchSec('timer',document.querySelector('.nav-tab[onclick*=timer]'));this.style.transform='scale(.95)';setTimeout(()=>this.style.transform='',200);">
+  <div style="position:relative;flex-shrink:0;">
+    <div style="width:34px;height:34px;border-radius:50%;background:rgba(201,168,76,.18);border:1.5px solid var(--ac);display:flex;align-items:center;justify-content:center;font-size:16px;">⏱</div>
+    <div style="position:absolute;top:-2px;right:-2px;width:9px;height:9px;border-radius:50%;background:#26de81;border:1.5px solid rgba(10,10,24,.9);animation:pulse 1.2s infinite;"></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:1px;min-width:0;">
+    <div id="pip-sub" style="font-size:8px;color:var(--ac);letter-spacing:1.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:110px;"></div>
+    <div id="pip-time" style="font-family:var(--head);font-size:17px;font-weight:900;color:#fff;letter-spacing:1px;line-height:1.1;"></div>
+    <div style="font-size:7px;color:rgba(255,255,255,.35);letter-spacing:1px;">TAP TO RETURN</div>
+  </div>
+  <div style="flex-shrink:0;font-size:9px;color:rgba(255,255,255,.4);padding-left:2px;">›</div>
+</div>
+
+<!-- 👁 RETURN REMINDER OVERLAY (shows when you come back from another app) -->
+<div id="timer-return-reminder" style="position:fixed;top:0;left:0;right:0;z-index:10001;
+  background:linear-gradient(90deg,rgba(10,10,24,.97),rgba(20,15,5,.97));
+  border-bottom:2px solid var(--ac);padding:13px 18px;
+  display:flex;align-items:center;gap:14px;
+  transform:translateY(-100%);transition:transform .35s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 4px 24px rgba(0,0,0,.5);">
+  <div style="width:40px;height:40px;border-radius:50%;background:rgba(201,168,76,.18);border:1.5px solid var(--ac);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;animation:pulse 1.2s infinite;">⏱</div>
+  <div style="flex:1;">
+    <div style="font-size:9px;color:var(--ac);letter-spacing:2px;margin-bottom:1px;">TIMER STILL RUNNING</div>
+    <div style="display:flex;align-items:baseline;gap:6px;">
+      <span id="reminder-sub" style="font-size:10px;color:var(--txt3);letter-spacing:1px;"></span>
+      <span id="reminder-time" style="font-family:var(--head);font-size:22px;font-weight:900;color:#fff;"></span>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <button onclick="timerStartStop();document.getElementById('timer-return-reminder').classList.remove('show');"
+      style="background:rgba(239,68,68,.18);border:1px solid rgba(239,68,68,.5);color:#FF6B6B;border-radius:8px;padding:7px 12px;cursor:pointer;font-family:var(--font);font-size:10px;letter-spacing:.8px;">
+      ⏸ PAUSE
+    </button>
+    <button onclick="switchSec('timer',document.querySelector('.nav-tab[onclick*=&quot;timer&quot;]'));document.getElementById('timer-return-reminder').classList.remove('show');"
+      style="background:rgba(201,168,76,.18);border:1px solid var(--ac);color:var(--ac);border-radius:8px;padding:7px 12px;cursor:pointer;font-family:var(--font);font-size:10px;letter-spacing:.8px;">
+      GO TO TIMER
+    </button>
+    <button onclick="document.getElementById('timer-return-reminder').classList.remove('show');"
+      style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.4);border-radius:8px;padding:7px 10px;cursor:pointer;font-family:var(--font);font-size:10px;">
+      ✕
+    </button>
+  </div>
+</div>
+
+<style>
+@keyframes pip-pulse{0%,100%{box-shadow:0 4px 24px rgba(201,168,76,.35),0 2px 8px rgba(0,0,0,.6);}50%{box-shadow:0 4px 32px rgba(201,168,76,.6),0 2px 12px rgba(0,0,0,.7),0 0 0 4px rgba(201,168,76,.12);}}
+#timer-pip-pill:hover{transform:scale(1.04);box-shadow:0 6px 32px rgba(201,168,76,.5),0 2px 12px rgba(0,0,0,.7);}
+#timer-return-reminder.show{transform:translateY(0);}
+</style>
+
 </body>
 </html>
